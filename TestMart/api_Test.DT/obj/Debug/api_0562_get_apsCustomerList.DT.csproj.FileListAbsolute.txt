@@ -1,0 +1,5 @@
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DT\bin\Debug\api_0562_get_apsCustomerList.DT.dll
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DT\bin\Debug\api_0562_get_apsCustomerList.DT.pdb
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DT\obj\Debug\api_0562_get_apsCustomerList.DT.dll
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DT\obj\Debug\api_0562_get_apsCustomerList.DT.pdb
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DT\obj\Debug\api_0562_get_apsCustomerList.DT.csprojResolveAssemblyReference.cache

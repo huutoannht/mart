@@ -1,0 +1,4 @@
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\bin\Release\api_0562_get_apsCustomerList.CM.dll
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\bin\Release\api_0562_get_apsCustomerList.CM.pdb
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\obj\Release\api_0562_get_apsCustomerList.CM.dll
+D:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\obj\Release\api_0562_get_apsCustomerList.CM.pdb

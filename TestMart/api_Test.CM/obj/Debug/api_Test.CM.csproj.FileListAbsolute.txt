@@ -1,0 +1,10 @@
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\bin\Debug\api_Test.CM.dll
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\bin\Debug\api_Test.CM.pdb
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\obj\Debug\api_Test.CM.csprojResolveAssemblyReference.cache
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\obj\Debug\api_Test.CM.dll
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.CM\obj\Debug\api_Test.CM.pdb
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.CM\bin\Debug\api_Test.CM.dll
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.CM\bin\Debug\api_Test.CM.pdb
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.CM\obj\Debug\api_Test.CM.csprojResolveAssemblyReference.cache
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.CM\obj\Debug\api_Test.CM.dll
+E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.CM\obj\Debug\api_Test.CM.pdb

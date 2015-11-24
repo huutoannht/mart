@@ -1,0 +1,10 @@
+2015-11-18 08:45:01 [15] ERROR  FUTAI_TEMPO_CD
+2015-11-18 08:45:01 [15] ERROR     at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 330
+2015-11-18 08:45:31 [16] ERROR  FUTAI_TEMPO_CD
+2015-11-18 08:45:31 [16] ERROR     at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 330

@@ -1,0 +1,51 @@
+2015-11-04 10:56:46 [6] ERROR  O_HAMBAI_TEMPO_CD
+2015-11-04 10:56:46 [6] ERROR     at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 333
+2015-11-04 10:57:08 [11] ERROR  O_HAMBAI_TEMPO_CD
+2015-11-04 10:57:08 [11] ERROR     at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 333
+2015-11-04 10:58:15 [12] ERROR  O_HAMBAI_TEMPO_CD
+2015-11-04 10:58:15 [12] ERROR     at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 333
+2015-11-04 11:06:26 [9] ERROR  HAMBAI_SHODAN_KANRI_EDA_NO
+2015-11-04 11:06:26 [9] ERROR     at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at System.Data.SqlClient.SqlDataReader.get_Item(String name)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 335
+2015-11-04 11:07:03 [10] ERROR  HAMBAI_SHODAN_KANRI_EDA_NO
+2015-11-04 11:08:07 [8] ERROR  Input string was not in a correct format.
+2015-11-04 11:08:07 [8] ERROR     at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 336
+2015-11-04 11:09:08 [7] ERROR  Input string was not in a correct format.
+2015-11-04 11:09:35 [7] ERROR     at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 336
+2015-11-04 11:09:47 [9] ERROR  Input string was not in a correct format.
+2015-11-04 11:09:47 [9] ERROR     at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 336
+2015-11-04 11:10:00 [9] ERROR  Input string was not in a correct format.
+2015-11-04 11:10:00 [9] ERROR     at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 336
+2015-11-04 11:12:14 [9] ERROR  Input string was not in a correct format.
+2015-11-04 11:12:14 [9] ERROR     at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 336
+2015-11-04 11:12:29 [7] ERROR  Input string was not in a correct format.
+2015-11-04 11:12:29 [7] ERROR     at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Int32.Parse(String s)
+   at api_0562_get_apsCustomerList.CM.Info3333DA.GetInfo(RequestDTO info33333InputDT) in d:\Task21\GLV_DNL\SourceCode\01.Development\SaleConnect\3.Webservice\Taps\33333\api_0562_get_apsCustomerList\api_0562_get_apsCustomerList.DA\Info33333DA.cs:line 336
