@@ -15,6 +15,6 @@ namespace api_Test.DT
         /// <summary>
         /// 候補顧客リスト
         /// </summary>
-        public List<ResponseDTO> O_CANDIDATE_CUSTOMER_LIST { get; set; }
+        public List<Product> O_CANDIDATE_CUSTOMER_LIST { get; set; }
     }
 }

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Product.cs" />
     <Compile Include="ResponseDTO.cs" />
     <Compile Include="Info33333OutputFaDT.cs" />
     <Compile Include="Info33333OutputScDT.cs" />

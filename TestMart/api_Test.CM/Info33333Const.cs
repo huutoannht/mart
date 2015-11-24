@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace api_Test.CM
 {
-    public class Product3Const
+    public class ProductConst
     {
-        public const string CONSTRTAPS = "ConStrTaps";
+        public const string CONSTRMART = "ConStrMart";
     }
 }

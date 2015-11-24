@@ -9,14 +9,15 @@ using System.Web.Http;
 
 namespace api_Test.Controllers
 {
-    public class GetApsCustomerListController : ApiController
+    public class ProductController : ApiController
     {
         #region Variables
         static protected log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         #endregion
         
-        [HttpPost]
-        public object Post(RequestDTO requestDTO)
+        [HttpGet]
+        [ActionName("GetProduct")]
+        public object GetProduct(RequestDTO requestDTO)
         {
             Product3BS ProductBS = new Product3BS();
             return ProductBS.GetInfo(requestDTO);     

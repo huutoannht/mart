@@ -28,8 +28,7 @@ namespace api_Test.BS
             List<ResponseDTO> lstResponse = new List<ResponseDTO>();
             try
             {
-                CheckParameter(ProductInputDT);
-                Product3OutputScDT.O_CANDIDATE_CUSTOMER_LIST =ProductDA.GetInfo(ProductInputDT);
+                Product3OutputScDT.O_CANDIDATE_CUSTOMER_LIST = ProductDA.GetAllProduct(ProductInputDT);
                 Product3OutputScDT.O_RETURN_CD = ItemIdCS.O_RETURN_CD_SUCCESS;    
             }
             catch (Exception ex)
@@ -73,95 +72,7 @@ namespace api_Test.BS
             }
             return Product3OutputScDT;
         }
-        /// <summary>
-        /// Function check validate parameter input
-        /// </summary>
-        /// <param name="ProductInputDT"></param>
-        private void CheckParameter(RequestDTO ProductInputDT)
-        {
-            //Check validate max length
-            if (ProductInputDT.I_TEMPO_CD !=null && ProductInputDT.I_TEMPO_CD.Length > 6)
-            { 
-                throw  new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            if (ProductInputDT.I_KANJI_SEI !=null && ProductInputDT.I_KANJI_SEI.Length > 50)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            if (ProductInputDT.I_KANJI_MEI !=null && ProductInputDT.I_KANJI_MEI.Length > 50)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            if (ProductInputDT.I_KANA_SEI!=null && ProductInputDT.I_KANA_SEI.Length > 50)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            if (ProductInputDT.I_KANA_MEI !=null && ProductInputDT.I_KANA_MEI.Length > 50)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            //if (ProductInputDT.I_ZIP!=null && ProductInputDT.I_ZIP.Length > 7)
-            //{
-            //    throw new SqlExceptionAPI(ItemIdCS.E003);
-            //}
-            if (ProductInputDT.I_JUSHO1 !=null && ProductInputDT.I_JUSHO1.Length > 100)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            if (ProductInputDT.I_JUSHO2 !=null && ProductInputDT.I_JUSHO2.Length > 100)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            if (ProductInputDT.I_TEL !=null && ProductInputDT.I_TEL.Length > 13)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            if (ProductInputDT.I_TEL_KEITAI !=null && ProductInputDT.I_TEL_KEITAI.Length > 13)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            //if (ProductInputDT.I_FAX !=null && ProductInputDT.I_FAX.Length > 13)
-            //{
-            //    throw new SqlExceptionAPI(ItemIdCS.E003);
-            //}
-            if (ProductInputDT.I_MAIL !=null && ProductInputDT.I_MAIL.Length > 100)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            if (ProductInputDT.I_MAIL_KEITAI!=null && ProductInputDT.I_MAIL_KEITAI.Length > 100)
-            {
-                throw new SqlExceptionAPI(ItemIdCS.E003);
-            }
-            //Check validate datetime 
-            DateTime dateTime;
-            if (!string.IsNullOrEmpty(ProductInputDT.I_SEINENGAPPI)&&!DateTime.TryParse(ProductInputDT.I_SEINENGAPPI,out dateTime)){
-                DateTime result;
-                if (!DateTime.TryParseExact(
-                     ProductInputDT.I_SEINENGAPPI,
-                     "yyyyMMdd",
-                     CultureInfo.InvariantCulture,
-                     DateTimeStyles.AssumeUniversal,
-                     out result))
-                {
-                    throw new SqlExceptionAPI(ItemIdCS.E003);
-                };
-            }
-            //try
-            //{
-            //    if (!string.IsNullOrEmpty(ProductInputDT.I_SEX))
-            //    {
-            //        Int32.Parse(ProductInputDT.I_SEX.ToString());
-            //    }
-            //    if (!string.IsNullOrEmpty(ProductInputDT.I_TODOFUKEN_CD))
-            //    {
-            //        Int32.Parse(ProductInputDT.I_TODOFUKEN_CD.ToString());
-            //    }
-            //}
-            //catch (Exception)
-            //{
-            //    throw new SqlExceptionAPI(ItemIdCS.E003);
-            //}
-        }
+        
         #endregion
         
     }

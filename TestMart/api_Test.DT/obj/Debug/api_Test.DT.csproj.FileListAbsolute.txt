@@ -8,3 +8,8 @@ E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.DT\bin\Debug\api_Te
 E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.DT\obj\Debug\api_Test.DT.csprojResolveAssemblyReference.cache
 E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.DT\obj\Debug\api_Test.DT.dll
 E:\DoTask\NewTask\Mart\api_0562_get_apsCustomerList\api_Test.DT\obj\Debug\api_Test.DT.pdb
+E:\DoTask\NewTask\Mart\TestMart\api_Test.DT\bin\Debug\api_Test.DT.dll
+E:\DoTask\NewTask\Mart\TestMart\api_Test.DT\bin\Debug\api_Test.DT.pdb
+E:\DoTask\NewTask\Mart\TestMart\api_Test.DT\obj\Debug\api_Test.DT.csprojResolveAssemblyReference.cache
+E:\DoTask\NewTask\Mart\TestMart\api_Test.DT\obj\Debug\api_Test.DT.dll
+E:\DoTask\NewTask\Mart\TestMart\api_Test.DT\obj\Debug\api_Test.DT.pdb
