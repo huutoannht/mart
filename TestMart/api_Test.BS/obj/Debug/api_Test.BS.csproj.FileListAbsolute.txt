@@ -34,3 +34,15 @@ E:\DoTask\NewTask\Mart\TestMart\api_Test.BS\bin\Debug\api_Test.DT.pdb
 E:\DoTask\NewTask\Mart\TestMart\api_Test.BS\obj\Debug\api_Test.BS.csprojResolveAssemblyReference.cache
 E:\DoTask\NewTask\Mart\TestMart\api_Test.BS\obj\Debug\api_Test.BS.dll
 E:\DoTask\NewTask\Mart\TestMart\api_Test.BS\obj\Debug\api_Test.BS.pdb
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\api_Test.BS.dll
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\api_Test.BS.pdb
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\api_Test.CM.dll
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\api_Test.DA.dll
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\api_Test.DT.dll
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\log4net.dll
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\api_Test.CM.pdb
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\api_Test.DA.pdb
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\bin\Debug\api_Test.DT.pdb
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\obj\Debug\api_Test.BS.csprojResolveAssemblyReference.cache
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\obj\Debug\api_Test.BS.dll
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.BS\obj\Debug\api_Test.BS.pdb

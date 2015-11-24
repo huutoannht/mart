@@ -93,37 +93,54 @@ namespace api_Test.CM
             }
             return lstProduct;
         }
-        /// <summary>
-        /// Get ken name from ken cd
-        /// </summary>
-        /// <param name="ken_CD"></param>
-        /// <returns></returns>
-        private string GetKen_Name(int? ken_CD)
+        public List<Product> GetProductById(int  productId)
         {
-            if (ken_CD==null)
-            {
-                return "";
-            }
             #region Variables
-            string query = @"SELECT KEN_NAME
-                           FROM TM_KEN (NOLOCK)
-                           WHERE KEN_CD='" + ken_CD + "'";
-
-            string KenName ="" ;
-            SqlConnection connection=null;
-            #endregion
             try
             {
-                connection = DBManager.Connection(ProductConst.CONSTRMART);
+                timeout = Int32.Parse(ConfigurationManager.AppSettings.Get("CommandTimeout"));
+            }
+            catch
+            {
+                timeout = 300;
+            }
+            SqlConnection connection = DBManager.Connection(ProductConst.CONSTRMART);
+            List<Product> lstProduct = new List<Product>();
+            #endregion
+            #region GetSQL
+            String query = @"  select  *
+                                from Products 
+
+                                WHERE ProductId = @ProductId";
+            #endregion
+
+            try
+            {
                 connection.Open();
-                 var temp_kenname = DBManager.ExecuteScalar(query, connection);
-                 if (temp_kenname != null)
-                 {
-                     KenName = temp_kenname.ToString();
-                 }
+                SqlParameter[] parameters = new SqlParameter[] {
+                    new SqlParameter("@ProductId",productId)
+                };
+
+                IDataReader dataReader = DBManager.GetData(query: query, parameter: parameters, conn: connection, connectTimeout: timeout);
+                while (dataReader.Read())
+                {
+                    Product product = new Product();
+                    product.CategoryID = DBNull.Value.Equals(dataReader["CategoryID"]) ? null : dataReader["CategoryID"].ToString();
+                    product.Description = DBNull.Value.Equals(dataReader["Description"]) ? null : dataReader["Description"].ToString();
+                    product.ImagePath = DBNull.Value.Equals(dataReader["ImagePath"]) ? null : dataReader["ImagePath"].ToString();
+                    product.MetaKeywords = DBNull.Value.Equals(dataReader["MetaKeywords"]) ? null : dataReader["MetaKeywords"].ToString();
+                    product.ProductID = DBNull.Value.Equals(dataReader["ProductID"]) ? (int?)null : Int32.Parse(dataReader["ProductID"].ToString());
+                    product.ProductName = DBNull.Value.Equals(dataReader["ProductName"]) ? null : dataReader["ProductName"].ToString();
+                    product.Rating = DBNull.Value.Equals(dataReader["Rating"]) ? null : dataReader["Rating"].ToString();
+                    product.UnitPrice = DBNull.Value.Equals(dataReader["UnitPrice"]) ? null : dataReader["UnitPrice"].ToString();
+                    product.UnitPriceNew = DBNull.Value.Equals(dataReader["UnitPriceNew"]) ? null : dataReader["UnitPriceNew"].ToString();
+                    lstProduct.Add(product);
+                }
             }
             catch (SqlException ex)
             {
+                logger.Error(ex.Message);
+                logger.Error(ex.StackTrace);
                 if (ex.Number == -2)
                 {
                     throw new SqlExceptionAPI(ItemIdCS.E001);
@@ -137,15 +154,17 @@ namespace api_Test.CM
                     throw new SqlExceptionAPI(ItemIdCS.E004);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                logger.Error(ex.Message);
+                logger.Error(ex.StackTrace);
                 throw new SqlExceptionAPI(ItemIdCS.E999);
             }
             finally
             {
                 connection.Close();
             }
-            return KenName;
+            return lstProduct;
         }
 
         #endregion

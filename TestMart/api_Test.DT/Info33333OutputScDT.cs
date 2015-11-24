@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace api_Test.DT
 {
-    public class Product3OutputScDT
+    public class ProductOutputScDT
     {
         /// <summary>
         /// リターンコード
@@ -15,6 +15,6 @@ namespace api_Test.DT
         /// <summary>
         /// 候補顧客リスト
         /// </summary>
-        public List<Product> O_CANDIDATE_CUSTOMER_LIST { get; set; }
+        public List<Product> O_PRODUCT_LIST { get; set; }
     }
 }

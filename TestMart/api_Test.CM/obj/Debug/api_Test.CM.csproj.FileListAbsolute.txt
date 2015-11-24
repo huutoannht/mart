@@ -13,3 +13,8 @@ E:\DoTask\NewTask\Mart\TestMart\api_Test.CM\bin\Debug\api_Test.CM.pdb
 E:\DoTask\NewTask\Mart\TestMart\api_Test.CM\obj\Debug\api_Test.CM.csprojResolveAssemblyReference.cache
 E:\DoTask\NewTask\Mart\TestMart\api_Test.CM\obj\Debug\api_Test.CM.dll
 E:\DoTask\NewTask\Mart\TestMart\api_Test.CM\obj\Debug\api_Test.CM.pdb
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.CM\bin\Debug\api_Test.CM.dll
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.CM\bin\Debug\api_Test.CM.pdb
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.CM\obj\Debug\api_Test.CM.csprojResolveAssemblyReference.cache
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.CM\obj\Debug\api_Test.CM.dll
+E:\DoTask\NewTask\Mart1\TestMart\api_Test.CM\obj\Debug\api_Test.CM.pdb
