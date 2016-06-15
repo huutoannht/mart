@@ -1,0 +1,1090 @@
+//---------------------------------------------------------------------------
+// Version			: 
+// Designer			: 
+// Programmer		:
+// Date				: 
+// Comment			:
+//---------------------------------------------------------------------------
+
+namespace SalesConnect.DataAccess.Framework
+{
+	using System;
+	using System.Collections.Generic;
+	using System.Configuration;
+	using System.Data;
+	using System.Data.SqlClient;
+	using System.Web;
+
+	using MySql.Data.MySqlClient;
+
+	/// <summary>
+	/// Summary description for DBManager
+	/// </summary>
+	public class MySqlDBManager : IDisposable
+	{
+		#region Private variable
+		/// <summary>
+		/// The connection string.
+		/// </summary>
+		private static string connectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+		#endregion
+
+		#region Constructor ( 2+ overloads)
+
+		public MySqlDBManager()
+		{
+			this.SetMySqlCommand();
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MySqlDBManager"/> class. 
+		/// MySqlDBManager constructor
+		/// </summary>
+		/// <param name="DbConnection">
+		/// name of connection string in web config
+		/// </param>
+		/// <param name="CommandText">
+		/// string to be executed
+		/// </param>
+		public MySqlDBManager( string DbConnection, string CommandText )
+		{
+			connectionString = ConfigurationManager.ConnectionStrings[DbConnection].ConnectionString;
+			this.CommandText = CommandText;
+			this.SetMySqlCommand();
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MySqlDBManager"/> class. 
+		/// MySqlDBManager constructor
+		/// </summary>
+		/// <param name="CommandText">
+		/// string to be executed
+		/// </param>
+		public MySqlDBManager( string CommandText )
+		{
+			this.CommandText = CommandText;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MySqlDBManager"/> class. 
+		/// MySqlDBManager constructor
+		/// </summary>
+		/// <param name="CommandText">
+		/// string to be executed
+		/// </param>
+		/// <param name="CurrentCommandType">
+		/// CommandType
+		/// </param>
+		public MySqlDBManager( string CommandText, CommandType CurrentCommandType )
+			: this( CommandText )
+		{
+			this.CurrentCommandType = CurrentCommandType;
+		}
+
+		/// <summary>
+		/// Finalizes an instance of the <see cref="MySqlDBManager"/> class. 
+		/// Finalizer
+		/// </summary>
+		~MySqlDBManager()
+		{
+			this.Dispose( false );
+		}
+
+		#endregion Constructor ( 2+ overloads)
+
+		#region Dispose
+
+		/// <summary>
+		/// Releases the resources used by the Component.
+		/// </summary>
+		/// <param name="disposing">Send true value when Dispose Method is called by the program</param>
+		public void Dispose( bool disposing )
+		{
+			if (disposing)
+			{
+				GC.SuppressFinalize( this );
+			}
+
+			if (this._oMySqlCommand != null)
+			{
+				this._oMySqlCommand.Parameters.Clear();
+				this._oMySqlCommand.Dispose();
+			}
+		}
+
+		/// <summary>
+		/// Releases the resources used by the Component.
+		/// </summary>
+		public void Dispose()
+		{
+			this.Dispose( true );
+		}
+
+		#region IDisposable Members
+
+		/// <summary>
+		/// Releases the resources used by the Component.
+		/// </summary>
+		void IDisposable.Dispose()
+		{
+			this.Dispose( true );
+		}
+
+		#endregion IDisposable Members
+
+		#endregion Dispose
+
+		#region SetMySqlCommand
+
+		/// <summary>
+		/// Sets up the sql Command
+		/// </summary>
+		private void SetMySqlCommand()
+		{
+			if (this._oMySqlCommand == null)
+			{
+				this._oMySqlCommand = new MySqlCommand( this._CommandText );
+			}
+			else
+			{
+				this._oMySqlCommand.CommandText = this._CommandText;
+			}
+
+			this._oMySqlCommand.CommandType = this.DefaultCommandType;
+			this._oMySqlCommand.CommandTimeout = 120;
+		}
+
+		#endregion SetMySqlCommand
+
+		#region Add Method
+
+		/// <summary>
+		/// Adds parameter name and value for the stored procedures. Parameter name will be same as found in stored procedures
+		/// </summary>
+		/// <param name="parameterName">Name of the parameter used in stored procedures</param>
+		/// <param name="value">Value to be passed in stored procedures</param>
+		/// <returns>Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.</returns>
+		public MySqlParameter Add( string parameterName, object value )
+		{
+			return this.Add( new MySqlParameter( parameterName, value ?? DBNull.Value ) );
+		}
+
+		/// <summary>
+		/// Adds parameter name ,value and direction for the stored procedures. Parameter name will be same as found in stored procedures
+		/// </summary>
+		/// <param name="parameterName">Name of the parameter used in stored procedures</param>
+		/// <param name="value">Value to be passed in stored procedures</param>
+		/// <param name="direction">One of the value of ParameterDirection for the parameter</param>
+		/// <returns>Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.</returns>
+		public MySqlParameter Add( string parameterName, object value, System.Data.ParameterDirection direction )
+		{
+			return this.Add( new MySqlParameter( parameterName, value ?? DBNull.Value ), direction );
+		}
+
+		/// <summary>
+		/// Adds parameter name, datatype and direction for the stored procedures. Parameter name will be same as found in stored procedures
+		/// </summary>
+		/// <param name="parameterName">Name of the parameter used in stored procedures</param>
+		/// <param name="sqlDbType">One of the SqlDbType values used in stored procedures</param>
+		/// <param name="direction">One of the ParameterDirection values</param>
+		/// <returns>Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.</returns>
+		public MySqlParameter Add( string parameterName, MySqlDbType sqlDbType, System.Data.ParameterDirection direction )
+		{
+			return this.Add( new MySqlParameter( parameterName, sqlDbType ), direction );
+		}
+
+		/// <summary>
+		/// Adds parameter name, datatype and direction for the stored procedures. Parameter name will be same as found in stored procedures
+		/// </summary>
+		/// <param name="parameterName">
+		/// Name of the parameter used in stored procedures
+		/// </param>
+		/// <param name="sqlDbType">
+		/// One of the SqlDbType values used in stored procedures
+		/// </param>
+		/// <param name="value">
+		/// Value to be passed in stored procedures
+		/// </param>
+		/// <returns>
+		/// Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.
+		/// </returns>
+		public MySqlParameter Add( string parameterName, MySqlDbType sqlDbType, object value )
+		{
+			return this.Add( new MySqlParameter( parameterName, sqlDbType ), ParameterDirection.Input, value ?? DBNull.Value );
+		}
+
+		/// <summary>
+		/// Adds parameter name, datatype and direction for the stored procedures. Parameter name will be same as found in stored procedures
+		/// </summary>
+		/// <param name="parameterName">Name of the parameter used in stored procedures</param>
+		/// <param name="sqlDbType">One of the SqlDbType values used in stored procedures</param>
+		/// <param name="direction">One of the ParameterDirection values</param>
+		/// <param name="value">Value to be passed in stored procedures</param>
+		/// <returns>Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.</returns>
+		public MySqlParameter Add( string parameterName, MySqlDbType sqlDbType, System.Data.ParameterDirection direction, object value )
+		{
+			return this.Add( new MySqlParameter( parameterName, sqlDbType ), direction, value ?? DBNull.Value );
+		}
+
+		/// <summary>
+		/// Adds parameter name, datatype, size and direction for the stored procedures. Parameter name will be same as found in stored procedures
+		/// </summary>
+		/// <param name="parameterName">Name of the parameter used in stored procedures</param>
+		/// <param name="sqlDbType">One of the SqlDbType values used in stored procedures</param>
+		/// <param name="size">The length of the column.</param>
+		/// <param name="direction">One of the ParameterDirection values</param>
+		/// <returns>Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.</returns>
+		public MySqlParameter Add( string parameterName, MySqlDbType sqlDbType, int size, System.Data.ParameterDirection direction )
+		{
+			return this.Add( new MySqlParameter( parameterName, sqlDbType, size ), direction );
+		}
+
+		/// <summary>
+		/// Adds parameter name, datatype, size and direction for the stored procedures. Parameter name will be same as found in stored procedures
+		/// </summary>
+		/// <param name="parameterName">
+		/// Name of the parameter used in stored procedures
+		/// </param>
+		/// <param name="sqlDbType">
+		/// One of the SqlDbType values used in stored procedures
+		/// </param>
+		/// <param name="size">
+		/// The length of the column. 
+		/// </param>
+		/// <param name="value">
+		/// Value to be passed in stored procedures
+		/// </param>
+		/// <returns>
+		/// Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.
+		/// </returns>
+		public MySqlParameter Add( string parameterName, MySqlDbType sqlDbType, int size, object value )
+		{
+			return this.Add( new MySqlParameter( parameterName, sqlDbType, size ), ParameterDirection.Input, value ?? DBNull.Value );
+		}
+
+		/// <summary>
+		/// Adds parameter name, datatype, size and direction for the stored procedures. Parameter name will be same as found in stored procedures
+		/// </summary>
+		/// <param name="parameterName">Name of the parameter used in stored procedures</param>
+		/// <param name="sqlDbType">One of the SqlDbType values used in stored procedures</param>
+		/// <param name="size">The length of the column. </param>
+		/// <param name="direction">One of the ParameterDirection values</param>
+		/// <param name="value">Value to be passed in stored procedures</param>
+		/// <returns>Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.</returns>
+		public MySqlParameter Add( string parameterName, MySqlDbType sqlDbType, int size, System.Data.ParameterDirection direction, object value )
+		{
+			return this.Add( new MySqlParameter( parameterName, sqlDbType, size ), direction, value ?? DBNull.Value );
+		}
+
+		public MySqlParameter Add( string parameterName, MySqlDbType sqlDbType, int size, System.Data.ParameterDirection direction, bool isNullable )
+		{
+			MySqlParameter sParam = new MySqlParameter( parameterName, sqlDbType, size )
+										{
+											Direction = direction,
+											IsNullable = isNullable
+										};
+			return this.Add( sParam );
+		}
+
+		/// <summary>
+		///  Adds MySqlParameter object
+		/// </summary>
+		/// <param name="SqlPar">The MySqlParameter to add to the collection.</param>
+		/// <returns>Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.</returns>
+		public MySqlParameter Add( MySqlParameter SqlPar )
+		{
+			this._oMySqlCommand.CommandType = CommandType.StoredProcedure;
+			return this._oMySqlCommand.Parameters.Add( SqlPar );
+		}
+
+		/// <summary>
+		/// Adds MySqlParameter object
+		/// </summary>
+		/// <param name="SqlPar">The MySqlParameter to add to the collection.</param>
+		/// <param name="direction">One of the value of ParameterDirection for the parameter</param>
+		/// <returns>Initializes a new instance of the MySqlParameter class that uses the parameter name and a value of the new MySqlParameter.</returns>
+		private MySqlParameter Add( MySqlParameter SqlPar, System.Data.ParameterDirection direction )
+		{
+			this._oMySqlCommand.CommandType = CommandType.StoredProcedure;
+			SqlPar.Direction = direction;
+			return this._oMySqlCommand.Parameters.Add( SqlPar );
+		}
+
+		/// <summary>
+		/// Add parameter
+		/// </summary>
+		/// <param name="SqlPar"></param>
+		/// <param name="direction"></param>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		private MySqlParameter Add( MySqlParameter SqlPar, System.Data.ParameterDirection direction, object value )
+		{
+			this._oMySqlCommand.CommandType = CommandType.StoredProcedure;
+			SqlPar.Value = value ?? DBNull.Value;
+			SqlPar.Direction = direction;
+			return this._oMySqlCommand.Parameters.Add( SqlPar );
+		}
+
+		#endregion Add Method
+
+		#region Clear Method
+
+		/// <summary>
+		/// Removes all Parameter added.
+		/// </summary>
+		public void Clear()
+		{
+			this._oMySqlCommand.Parameters.Clear();
+		}
+
+		#endregion Clear Method
+
+		#region Contains
+
+		/// <summary>
+		/// Gets a value indicating whether a MySqlParameter exists in the collection
+		/// </summary>
+		/// <param name="value">The value of the MySqlParameter object to find</param>
+		/// <returns>true if the collection contains the parameter; otherwise, false.</returns>
+		public bool Contains( object value )
+		{
+			return this._oMySqlCommand.Parameters.Contains( value );
+		}
+
+		/// <summary>
+		/// Gets a value indicating whether a MySqlParameter with the specified parameter name exists in the collection.
+		/// </summary>
+		/// <param name="value">The name of the MySqlParameter object to find. </param>
+		/// <returns>true if the collection contains the parameter; otherwise, false.</returns>
+		public bool Contains( string value )
+		{
+			return this._oMySqlCommand.Parameters.Contains( value );
+		}
+
+		#endregion Contains
+
+		#region GetEnumerator
+
+		public System.Collections.IEnumerator GetEnumerator()
+		{
+			return this._oMySqlCommand.Parameters.GetEnumerator();
+		}
+
+		#endregion GetEnumerator
+
+		#region IndexOf Method
+
+		/// <summary>
+		/// Gets the location of a MySqlParameter in the collection.
+		/// </summary>
+		/// <param name="value">The MySqlParameter object to locate. </param>
+		/// <returns>The zero-based location of the MySqlParameter in the collection.</returns>
+		public int IndexOf( object value )
+		{
+			return this._oMySqlCommand.Parameters.IndexOf( value );
+		}
+
+		/// <summary>
+		/// Gets the location of the MySqlParameter in the collection with a specific parameter name.
+		/// </summary>
+		/// <param name="parameterName">The name of the MySqlParameter object to retrieve. </param>
+		/// <returns>The zero-based location of the MySqlParameter in the collection.</returns>
+		public int IndexOf( string parameterName )
+		{
+			return this._oMySqlCommand.Parameters.IndexOf( parameterName );
+		}
+
+		#endregion IndexOf Method
+
+		#region Insert Method
+
+		/// <summary>
+		/// Inserts a MySqlParameter into the collection at the specified index.
+		/// </summary>
+		/// <param name="index">The zero-based index where the parameter is to be inserted within the collection.</param>
+		/// <param name="value">The MySqlParameter to add to the collection. </param>
+		public void Insert( int index, object value )
+		{
+			this._oMySqlCommand.Parameters.Insert( index, value );
+		}
+
+		#endregion Insert Method
+
+		#region Remove Method
+
+		/// <summary>
+		/// Removes the specified MySqlParameter from the collection.
+		/// </summary>
+		/// <param name="value">A MySqlParameter object to remove from the collection. </param>
+		public void Remove( object value )
+		{
+			this._oMySqlCommand.Parameters.Remove( value );
+		}
+
+		#endregion Remove Method
+
+		#region RemoveAt Method
+
+		/// <summary>
+		/// Removes the specified MySqlParameter from the collection using the parameter name.
+		/// </summary>
+		/// <param name="parameterName">The name of the MySqlParameter object to retrieve.</param>
+		public void RemoveAt( string parameterName )
+		{
+			this._oMySqlCommand.Parameters.RemoveAt( parameterName );
+		}
+
+		/// <summary>
+		/// Removes the specified MySqlParameter from the collection using a specific index.
+		/// </summary>
+		/// <param name="index">The zero-based index of the parameter.</param>k
+		public void RemoveAt( int index )
+		{
+			this._oMySqlCommand.Parameters.RemoveAt( index );
+		}
+
+		#endregion RemoveAt Method
+
+		#region ReturnValue
+
+		/// <summary>
+		/// Returns the value from Stored Procedures
+		/// </summary>
+		public int ReturnValue
+		{
+			get
+			{
+				if (this["@ReturnValue"].Value == DBNull.Value)
+				{
+					return int.MinValue;
+				}
+
+				return (int)this["@ReturnValue"].Value;
+			}
+		}
+
+		#endregion ReturnValue
+
+		#region SQL Execution By Return Object
+
+		private MySqlConnection PrepareExecution( string commandText )
+		{
+			if (this._oMySqlCommand == null)
+			{
+				this._oMySqlCommand = new MySqlCommand();
+			}
+
+			if (this._oMySqlCommand.Connection == null)
+			{
+				if (GetShortLiveCache( "DbConnection" ) == null)
+				{
+					SaveShortLiveCache( "DbConnection", new MySqlConnection( connectionString ) );
+				}
+
+				this._oMySqlCommand.Connection = (MySqlConnection)GetShortLiveCache( "DbConnection" );
+			}
+
+			if (this._oMySqlCommand.Connection.ConnectionString.Length == 0)
+			{
+				this._oMySqlCommand.Connection.ConnectionString = connectionString;
+			}
+
+			if (this._oMySqlCommand.Connection.State != ConnectionState.Open)
+			{
+				this._oMySqlCommand.Connection.Open();
+			}
+
+			this._oMySqlCommand.Transaction = MySqlDBManager.BeginTransaction();
+			this._oMySqlCommand.CommandText = commandText;
+			if (this._oMySqlCommand.CommandType == CommandType.StoredProcedure)
+			{
+				// this.Add( "@ReturnValue", SqlDbType.Int, ParameterDirection.ReturnValue );
+			}
+
+			return this._oMySqlCommand.Connection;
+		}
+
+		#endregion SQL Execution By Return Object
+
+		#region Property of ExecuteNonQuery
+
+		/// <summary>
+		/// Executes a Transact-SQL statement against the connection and returns the number of rows affected.
+		/// </summary>
+		/// <returns>
+		/// The number of rows affected.
+		/// </returns>
+		public int ExecuteNonQuery()
+		{
+			this.PrepareExecution( this.CommandText );
+			try
+			{
+				return this._oMySqlCommand.ExecuteNonQuery();
+			}
+			catch (SqlException ex)
+			{
+				RollbackTransaction();
+				if (ex.Number == -2)
+				{
+					HttpContext.Current.Session["GLV_SYS_SQLTimeOut"] = "1";
+					return 0;
+				}
+
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+			catch (Exception ex)
+			{
+				RollbackTransaction();
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+		}
+
+		#endregion Property of ExecuteNonQuery
+
+		#region public object ExecuteScalar
+
+		/// <summary>
+		/// Executes a Transact-SQL statement against the connection and returns the first column of the first row in the result set returned by the query. Extra columns or rows are ignored.
+		/// </summary>
+		/// <returns>
+		/// The first column of the first row in the result set, or a null reference if the result set is empty.
+		/// </returns>
+		public object ExecuteScalar()
+		{
+			this.PrepareExecution( this.CommandText );
+			try
+			{
+				return this._oMySqlCommand.ExecuteScalar();
+			}
+			catch (SqlException ex)
+			{
+				RollbackTransaction();
+				if (ex.Number == -2)
+				{
+					HttpContext.Current.Session["GLV_SYS_SQLTimeOut"] = "1";
+					return null;
+				}
+
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+			catch (Exception ex)
+			{
+				RollbackTransaction();
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+		}
+
+		#endregion public object ExecuteScalar
+
+		#region public SqlDataReader ExecuteReader ( 1+ overloads)
+
+		/// <summary>
+		/// Executes a Transact-SQL statement against the connection and returns a stream of (reading & forward-only) rows from a SQL Server database.
+		/// </summary>
+		/// <returns>A SqlDataReader object.</returns>
+		public MySqlDataReader ExecuteReader()
+		{
+			this.PrepareExecution( this.CommandText );
+			try
+			{
+				return this._oMySqlCommand.ExecuteReader();
+			}
+			catch (SqlException ex)
+			{
+				RollbackTransaction();
+				if (ex.Number == -2)
+				{
+					HttpContext.Current.Session["GLV_SYS_SQLTimeOut"] = "1";
+					return null;
+				}
+
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+			catch (Exception ex)
+			{
+				RollbackTransaction();
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+		}
+
+		/// <summary>
+		/// Executes a Transact-SQL statement against the connection and returns a stream of (reading & forward-only) rows from a SQL Server database.
+		/// </summary>
+		/// <param name="behavior">One of the CommandBehavior values.</param>
+		/// <returns>A SqlDataReader object.</returns>
+		public MySqlDataReader ExecuteReader( CommandBehavior behavior )
+		{
+			this.PrepareExecution( this.CommandText );
+			return this._oMySqlCommand.ExecuteReader( behavior );
+		}
+
+		#endregion public SqlDataReader ExecuteReader ( 1+ overloads)
+
+		#region DataTable GetDataTable
+
+		/// <summary>
+		/// Executes a Transact-SQL statement against the connection and returns represents one table of in-memory data
+		/// </summary>
+		/// <returns>
+		/// An DataTable object
+		/// </returns>
+		public DataTable GetDataTable()
+		{
+			this.PrepareExecution( this.CommandText );
+			MySqlDataAdapter SqlAdp = new MySqlDataAdapter( this._oMySqlCommand );
+			DataTable dataTable = new DataTable();
+			try
+			{
+				SqlAdp.Fill( dataTable );
+			}
+			catch (MySqlException ex)
+			{
+				RollbackTransaction();
+				if (ex.Number == -2)
+				{
+					HttpContext.Current.Session["GLV_SYS_SQLTimeOut"] = "1";
+					return new DataTable();
+				}
+
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+			catch (Exception ex)
+			{
+				RollbackTransaction();
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+
+			return dataTable;
+		}
+
+		#endregion DataTable GetDataTable
+
+		#region DataSet GetDataSet
+
+		/// <summary>
+		/// Executes a Transact-SQL statement against the connection and returns dataset of in-memory data
+		/// </summary>
+		/// <returns>
+		/// A Dataset object
+		/// </returns>
+		public DataSet GetDataSet()
+		{
+			this.PrepareExecution( this.CommandText );
+			MySqlDataAdapter SqlAdp = new MySqlDataAdapter( this._oMySqlCommand );
+			System.Data.DataSet dataSet = new System.Data.DataSet();
+			try
+			{
+				SqlAdp.Fill( dataSet );
+			}
+			catch (SqlException ex)
+			{
+				RollbackTransaction();
+				if (ex.Number == -2)
+				{
+					HttpContext.Current.Session["GLV_SYS_SQLTimeOut"] = "1";
+					return new DataSet();
+				}
+
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+			catch (Exception ex)
+			{
+				RollbackTransaction();
+				throw new Exception( "GLV_SYS_DBException", ex );
+			}
+
+			if (dataSet.Tables.Count > 0)
+			{
+				return dataSet;
+			}
+
+			return new DataSet();
+		}
+
+		#endregion DataSet GetDataSet
+
+		#region Get Values
+
+		public T GetValue<T>( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				return (T)this[columnName].Value;
+			}
+
+			return default( T );
+		}
+
+		/// <summary>
+		/// GetValueInString
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public string GetValueInString( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				return this[columnName].Value as string;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// GetValueInInt
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public int? GetValueInInt( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				int i = Convert.ToInt32( this[columnName].Value );
+				return i;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// GetValueInLong
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public long? GetValueInLong( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				long i = Convert.ToInt64( this[columnName].Value );
+				return i;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// GetValueInChar
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public char? GetValueInChar( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				if (this[columnName].Value.GetType() == typeof( string ))
+				{
+					if (this[columnName].Value.ToString().Length > 0)
+					{
+						return this[columnName].Value.ToString()[0];
+					}
+
+					return null;
+				}
+
+				return (char)this[columnName].Value;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// GetValueInByte
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public byte? GetValueInByte( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				return (byte)this[columnName].Value;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// GetValueInDateTime
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public DateTime? GetValueInDateTime( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				return (DateTime)this[columnName].Value;
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// GetValueInBool
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public bool GetValueInBool( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				return (bool)this[columnName].Value;
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// GetValueInDecimal
+		/// </summary>
+		/// <param name="columnName"></param>
+		/// <returns></returns>
+		public decimal? GetValueInDecimal( string columnName )
+		{
+			if (this[columnName].Value != DBNull.Value)
+			{
+				return (decimal)this[columnName].Value;
+			}
+
+			return null;
+		}
+
+		#endregion Get Values
+
+		#region Properties
+
+		#region public string CommandText
+
+		private string _CommandText;
+
+		/// <summary>
+		/// CommandText
+		/// </summary>
+		public string CommandText
+		{
+			get
+			{
+				return this._CommandText;
+			}
+
+			set
+			{
+				this._CommandText = value;
+				this.SetMySqlCommand();
+			}
+		}
+
+		#endregion public string CommandText
+
+		#region CommandType DefaultCommandType
+
+		private CommandType _DefaultCommandType = CommandType.StoredProcedure;
+
+		public CommandType DefaultCommandType
+		{
+			get { return this._DefaultCommandType; }
+			set { this._DefaultCommandType = value; }
+		}
+
+		#endregion CommandType DefaultCommandType
+
+		#region CommandType CurrentCommandType
+
+		public CommandType CurrentCommandType
+		{
+			get { return this._oMySqlCommand.CommandType; }
+			set { this._oMySqlCommand.CommandType = value; }
+		}
+
+		#endregion CommandType CurrentCommandType
+
+		#region public MySqlCommand oMySqlCommand
+
+		private MySqlCommand _oMySqlCommand;
+
+		/// <summary>
+		/// oMySqlCommand
+		/// </summary>
+		public MySqlCommand oMySqlCommand
+		{
+			get { return this._oMySqlCommand; }
+			set { this._oMySqlCommand = value; }
+		}
+
+		#endregion public MySqlCommand oMySqlCommand
+
+		#region Count Property
+
+		/// <summary>
+		/// Gets the number of MySqlParameter objects in the collection.
+		/// </summary>
+		public int Count
+		{
+			get
+			{
+				return this._oMySqlCommand.Parameters.Count;
+			}
+		}
+
+		#endregion Count Property
+
+		#region Indexers Property
+
+		/// <summary>
+		/// The parameters of the Transact-SQL statement or stored procedure. The default is an empty collection.
+		/// </summary>
+		public MySqlParameter this[int index]
+		{
+			get { return this._oMySqlCommand.Parameters[index]; }
+			set { this._oMySqlCommand.Parameters[index] = value; }
+		}
+
+		/// <summary>
+		/// The parameters of the Transact-SQL statement or stored procedure. The default is an empty collection.
+		/// </summary>
+		public MySqlParameter this[string parameterName]
+		{
+			get { return this._oMySqlCommand.Parameters[parameterName]; }
+			set { this._oMySqlCommand.Parameters[parameterName] = value; }
+		}
+
+		#endregion Indexers Property
+
+		public static MySqlTransaction BeginTransaction()
+		{
+			if (GetShortLiveCache( "DbConnection" ) == null)
+			{
+				return null;
+			}
+
+			MySqlConnection MySqlConnection = (MySqlConnection)GetShortLiveCache( "DbConnection" );
+			if (MySqlConnection.State != ConnectionState.Open
+					|| (GetShortLiveCache( "DbTransaction" ) != null && ((MySqlTransaction)GetShortLiveCache( "DbTransaction" )).Connection != null))
+			{
+				return (MySqlTransaction)GetShortLiveCache( "DbTransaction" );
+			}
+
+			MySqlTransaction MySqlTransaction = MySqlConnection.BeginTransaction();
+			SaveShortLiveCache( "DbTransaction", MySqlTransaction );
+
+			return MySqlTransaction;
+		}
+
+		public static bool CommitTransaction()
+		{
+			if (GetShortLiveCache( "DbConnection" ) == null)
+			{
+				return false;
+			}
+
+			MySqlConnection MySqlConnection = (MySqlConnection)GetShortLiveCache( "DbConnection" );
+			if (MySqlConnection.State != ConnectionState.Open
+					|| GetShortLiveCache( "DbTransaction" ) == null)
+			{
+				return false;
+			}
+
+			MySqlTransaction MySqlTransaction = (MySqlTransaction)GetShortLiveCache( "DbTransaction" );
+
+			MySqlTransaction.Commit();
+
+			SaveShortLiveCache( "DbTransaction", null );
+
+			return true;
+		}
+
+		public static bool RollbackTransaction()
+		{
+			if (GetShortLiveCache( "DbConnection" ) == null)
+			{
+				return false;
+			}
+
+			MySqlConnection MySqlConnection = (MySqlConnection)GetShortLiveCache( "DbConnection" );
+			if (MySqlConnection.State != ConnectionState.Open
+					|| GetShortLiveCache( "DbTransaction" ) == null)
+			{
+				return false;
+			}
+
+			MySqlTransaction MySqlTransaction = (MySqlTransaction)GetShortLiveCache( "DbTransaction" );
+
+			MySqlTransaction.Rollback();
+
+			SaveShortLiveCache( "DbTransaction", null );
+
+			return true;
+		}
+
+		public static void CloseConnection()
+		{
+			if (GetShortLiveCache( "DbConnection" ) == null)
+			{
+				return;
+			}
+
+			MySqlConnection MySqlConnection = (MySqlConnection)GetShortLiveCache( "DbConnection" );
+			if (MySqlConnection.State == ConnectionState.Open)
+			{
+				MySqlConnection.Close();
+			}
+
+			SaveShortLiveCache( "DbConnection", null );
+			SaveShortLiveCache( "DbTransaction", null );
+		}
+
+		#endregion Properties
+
+		#region CacheUtil
+		/// <summary>
+		/// Short Live Cache is cache that existed during live of a request
+		/// After server response to client, the Short Live Cache will be clear
+		/// </summary>
+		/// <param name="key">key string</param>
+		/// <returns>object value</returns>
+		private static object GetShortLiveCache( string key )
+		{
+			Dictionary<string, Dictionary<string, object>> cachedDictionary
+				= (Dictionary<string, Dictionary<string, object>>)HttpContext.Current.Application["shortLiveCache"];
+			if (cachedDictionary.ContainsKey( HttpContext.Current.Session.SessionID ))
+			{
+				Dictionary<string, object> sessionCachedDictionary = cachedDictionary[HttpContext.Current.Session.SessionID];
+				if (sessionCachedDictionary.ContainsKey( key ))
+				{
+					return sessionCachedDictionary[key];
+				}
+			}
+
+			return null;
+		}
+
+		/// <summary>
+		/// Short Live Cache is cache that existed during live of a request
+		/// After server response to client, the Short Live Cache will be clear
+		/// </summary>
+		/// <param name="key">key string</param>
+		/// <param name="value">object value</param>
+		private static void SaveShortLiveCache( string key, object value )
+		{
+			Dictionary<string, Dictionary<string, object>> cachedDictionary
+				= (Dictionary<string, Dictionary<string, object>>)HttpContext.Current.Application["shortLiveCache"];
+			Dictionary<string, object> sessionCachedDictionary;
+			if (cachedDictionary.ContainsKey( HttpContext.Current.Session.SessionID ))
+			{
+				sessionCachedDictionary = cachedDictionary[HttpContext.Current.Session.SessionID];
+				if (sessionCachedDictionary.ContainsKey( key ))
+				{
+					sessionCachedDictionary[key] = value;
+				}
+				else
+				{
+					sessionCachedDictionary.Add( key, value );
+				}
+			}
+			else
+			{
+				sessionCachedDictionary = new Dictionary<string, object> { { key, value } };
+				cachedDictionary.Add( HttpContext.Current.Session.SessionID, sessionCachedDictionary );
+			}
+		}
+		#endregion
+	}
+}
