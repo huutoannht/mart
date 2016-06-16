@@ -1,0 +1,17 @@
+unilities
+
+public Model Search( Info info )
+		{
+			const string storeName = "namestore";
+			using (var conn = new MySqlDBManager( storeName ))
+			{
+				conn.Add( "@",  );
+                conn.Add("@",info.info1);
+			
+				DataTable dtReturn = conn.GetDataTable();
+
+
+				// convert table result to List object and return
+				return EntityHelper<SM2010RecommendSearchModel>.GetListObject( dtReturn ).FirstOrDefault();
+			}
+		}
