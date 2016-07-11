@@ -1,0 +1,118 @@
+﻿@model IEnumerable<LamNghiep.DTO.KeHoachCT>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/stylepage-ct-canhan.css" rel="stylesheet" />
+
+<style>
+    table td {
+        white-space: pre-wrap;
+    }
+    thead tr {
+        background-color: #4CAF50;
+        color: white;
+    }
+    span.dtr-data {
+        white-space: pre-wrap;
+    }
+</style>
+
+
+<div class="panel with-nav-tabs panel-success">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1success" data-toggle="tab"><i class="fa fa-home fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Lập danh sách CT cá nhân</a></li>
+            <li class=""><a href="#tab2success" data-toggle="tab"><i class="fa fa-calendar fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Lập danh sách CT cho cán bộ khác</a></li>
+
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab1success">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a class="btn btn-default" href="/CTCaNhan/Create">  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tạo mới danh sách công tác</a>
+                            </div>
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-horizontal">
+                                        <div class="form-group has-success">
+
+                                            <div class="col-md-2">
+                                                <input type="text" class="form-control" placeholder="Ngày bắt đầu" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="text" class="form-control" placeholder="Ngày kết thúc" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="submit" value="Tìm kiếm" class="btn btn-default" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <table id="list" class="display responsive nowrap" cellspacing="0" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên sự kiện</th>
+                                            <th>Ngày</th>
+                                            <th>Thời gian</th>
+                                            <th>Mức độ </th>
+                                            <th>Cán bộ lập</th>
+                                            <th>Cán bộ tham gia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4" class="dataTables_empty">Loading data from server</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab2success">dfd</div>
+        </div>
+    </div>
+    <script>
+
+        $(document).ready(function () {
+            loadData();
+            function loadData() {
+                listTable = $("#list").dataTable({
+                    "bProcessing": true,
+                    "bServerSide": true,
+                    "scrollX": false,
+                    "autoWidth": true,
+                    "sAjaxSource": '@Url.Action("GetJson", "CTCaNhan")',
+                    "fnDrawCallback": function (oSettings) { },
+                    "sPaginationType": "full_numbers",
+                    "bStateSave": true,
+                    "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                    "aoColumns": [
+                            { sTitle: 'Tên sự kiện', mData: 'TenKeHoach', sWidth: '20%' },
+                            { sTitle: 'Ngày ', mData: 'TuNgay', sWidth: '10%', className: "dt-center" },
+                            { sTitle: 'Thời gian', mData: 'GioView', sWidth: '10%' },
+                            { sTitle: 'Mức độ', mData: 'MucDoView', sWidth: '10%' },
+                            { sTitle: 'Cán bộ lập', mData: 'HoTen', sWidth: '10%' },
+                             { sTitle: 'Cán bộ tham gia', mData: 'ThamDu', sWidth: '30%' },
+                    ],
+                    "order": [[2, "desc"]],
+                    "aoColumnDefs": [
+                        { 'bSortable': false, 'aTargets': [1, 2] }
+                    ],
+                    "language": {
+                        "searchPlaceholder": "Quick search"
+                    }
+                });
+            }
+        });
+    </script>

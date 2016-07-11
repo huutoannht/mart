@@ -1,0 +1,77 @@
+﻿<div class="panel with-nav-tabs panel-success">
+    <div class="panel-heading  panel-heading-index">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1success" data-toggle="tab"><i class="fa fa-home fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Trang cá nhân</a></li>
+            <li class=""><a href="#tab2success" data-toggle="tab"><i class="fa fa-calendar fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Kế hoạch công tác</a></li>
+            <li class=""><a href="#tab3success" data-toggle="tab"><i class="fa fa-bell fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Tin tức thông tin</a></li>
+
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab1success">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i> Tin nhắn mới
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>Chương trình nghỉ hè</li>
+                                        <li><i>Từ abc ngày 8/6/2016</i></li>
+                                    </ul>
+                                    <ul>
+                                        <li>Chương trình nghỉ hè</li>
+                                        <li><i>Từ abc ngày 8/6/2016</i></li>
+                                    </ul>
+                                    <ul>
+                                        <li>Chương trình nghỉ hè</li>
+                                        <li><i>Từ abc ngày 8/6/2016</i></li>
+                                    </ul>
+                                </div>
+                                <div class="panel-footer">
+                                    Xem thêm ...
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-5">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <i class="fa fa-bullhorn" aria-hidden="true"></i> Lịch/Sự kiện của tôi
+                                </div>
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>Anh/Chị hôm này không có Lịch/Sự kiện nào!</li>
+                                    </ul>
+                                </div>
+                                <div class="panel-footer">
+                                    Xem thêm ...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-5">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <i class="fa fa-folder-open-o" aria-hidden="true"></i> Văn bản xử lý
+                                </div>
+                                <div class="panel-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                </div>
+                                <div class="panel-footer">
+                                    Xem thêm ...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab2success">@{Html.RenderAction("Index", "KeHoachCT");}</div>
+            <div class="tab-pane fade" id="tab3success">Success 3</div>
+          
+        </div>
+    </div>
+</div>
