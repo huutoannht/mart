@@ -1,0 +1,241 @@
+
+@model Binder.BinderOnline.Website.App_Base.CurrentUser
+
+@{
+    ViewBag.Title = "Agencys";
+    Layout = "~/Views/Shared/_BinderMaster.cshtml";
+}
+
+
+<style>
+    table.dataTable.nowrap td {
+        white-space: pre-wrap;
+    }
+</style>
+
+<div class="col-xs-12 content">
+    <h4>
+        <a href="#alertschedule" data-toggle="collapse">Alert &amp; Schedule<i class="fa fa-caret-up"></i></a>
+    </h4>
+    <div id="alertschedule" class="collapse in">
+        <div class="row">
+            <div class="col-xs-12 col-md-6" id="alert-panel">
+                <div class="col-xs-12 panel-border">
+                    <h4>alerts</h4>
+                    <!--Alerts Edit Inside-->
+                    <p>Training course about treatment - 05/Jul/2016</p>
+                    <p>New update for security at CA</p>
+                    <p>New facility open event - 20:00 15/Jul/2016</p>
+                    <p>New rule for medication 2016</p>
+                    <!--Alerts Edit Inside-->
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6" id="schedule-panel">
+                <div class="col-xs-12 panel-border">
+                    <h4 style="display: inline-block;">schedule</h4>
+                    <span style="display: inline-block;" class="pull-right"><a href="#" style="display: inline-block; line-height: 20px; padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">Open Schedule Page</a></span>
+                    <!--Schedule Edit Inside-->
+
+                    <div class="row">
+
+                        <label class="control-label col-xs-12 col-sm-6">Take care for Mr. Kanary at his home</label>
+
+                        <div class="col-xs-12 col-sm-6 text-right">
+
+                            <p>Next 30 mins</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <label class="control-label col-xs-12 col-sm-6">Meeting with administrator in office #CA #12122</label>
+
+                        <div class="col-xs-12 col-sm-6 text-right">
+
+                            <p>Today 10:00 AM</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <label class="control-label col-xs-12 col-sm-6">Training course CPR</label>
+
+                        <div class="col-xs-12 col-sm-6 text-right">
+
+                            <p>05/04/2016 10:00 AM</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <label class="control-label col-xs-12 col-sm-6">Weekly Report</label>
+
+                        <div class="col-xs-12 col-sm-6 text-right">
+
+                            <p>06/04/2016 9:00 PM</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <label class="control-label col-xs-12 col-sm-6">Patients report</label>
+
+                        <div class="col-xs-12 col-sm-6 text-right">
+
+                            <p>05/04/2016 10:00 AM</p>
+
+                        </div>
+
+                    </div>
+                    <!--Schedule Edit Inside-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 content">
+    <!--Edit Inside-->
+    <ol class="breadcrumb">
+        <li><a href="#">System Settings</a></li>
+        <li class="active">Organizations/Agencies List  &nbsp;<a href="#"><i class="fa fa-level-up"></i></a></li>
+    </ol>
+    <div class="panel-noborder">
+        @if (Model.UserType == 0)
+        {
+            <a class="btn btn-default" href="/Agency/Create"><i class="fa fa-plus white"></i>Add New</a>
+        }
+
+
+        <table id="list" class="display responsive nowrap" cellspacing="0" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name#</th>
+                    <th>Description</th>
+                    <th>Code </th>
+                    <th>Creation Date</th>
+                   
+                        <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="dataTables_empty">Loading data from server</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="clearfix"></div>
+    </div>
+    <!--Edit Inside-->
+</div>
+
+
+
+<script type="text/javascript">
+    var listTable = null;
+
+    function deleteData(data_id) {
+        console.log(data_id);
+        swal({
+            title: "",
+            text: "Are you sure you want to delete this organization/agency ?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "OK",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: false
+        }, function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    url: "@Url.Action("DeleteJson", "Agency")",
+                    data: { id: data_id },
+                    success: function (data) {
+                        console.log(data);
+                        if (data.Result) {
+                            swal("Deleted!", "The organization/agency has been deleted.", "success");
+                            listTable.fnReloadAjax();
+                        } else {
+                            swal("Error!");
+                        }
+                    },
+                    error: function () {
+                        swal("Error!");
+                    }
+                });
+            } else {
+                swal("Cancelled", "Your imaginary file is safe :)", "error");
+            }
+        });
+
+    }
+
+    $(document).ready(function () {
+        loadData();
+
+        function loadData() {
+            listTable = $("#list").dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "scrollX": false,
+                "autoWidth": true,
+                "sAjaxSource": '@Url.Action("GetJson", "Agency")',
+                "fnDrawCallback": function (oSettings) { },
+                "sPaginationType": "full_numbers",
+                "bStateSave": true,
+                "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                "aoColumns": [
+                        { sTitle: 'Name', mData: 'Name', sWidth: '30%' },
+                        { sTitle: 'Code', mData: 'Code', sWidth: '10%', className: "dt-center" },
+                        { sTitle: 'Description', mData: 'Description', sWidth: '40%' },
+                        {
+                            sTitle: 'Creation Date', mData: 'CreateDate', sWidth: '10%',
+                            mRender: function (data, type, full) {
+                                console.log(full);
+                                var date = new Date(parseInt(full.CreateDate.substr(6)));
+                                var formatted = date.getFullYear() + "-" +
+                                      ("0" + (date.getMonth() + 1)).slice(-2) + "-" +
+                                      ("0" + date.getDate()).slice(-2) + " " + date.getHours() + ":" +
+                                      date.getMinutes();
+                                return formatted;
+                            }
+                        },
+                        {
+                            sTitle: 'Action', mData: 'idAgency', sWidth: '10%', className: "dt-center",
+                            mRender: function (data, type, full) {
+                                var result = "";
+                                if (full.UserType == 0) {
+                                    result += "<a href='/Agency/Edit?IdAgency=" + full.IdAgency + "&AttributeName=" + full.AttributeName + "' class='text-delete'>Edit</a>  ";
+                                    if (full.AttributeName == null) {
+                                        result += "| <a onclick=deleteData('" + full.IdAgency + "')	&lsquo; data-id='" + full.IdAgency + "' class='text-delete'>Delete</a>";
+                                    } else {
+                                        result += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+                                    }
+                                }
+
+                                return result;
+                            }
+                        }
+                ],
+                "order": [[3, "desc"]],
+                "aoColumnDefs": [
+                    { 'bSortable': false, 'aTargets': [1, 4] }
+                ],
+                "language": {
+                    "searchPlaceholder": "Quick search"
+                }
+            });
+        }
+
+
+    });
+
+</script>
