@@ -49,6 +49,7 @@
     <Compile Include="JQueryDataTableParamModel.cs" />
     <Compile Include="KeHoachCongTacModel.cs" />
     <Compile Include="KeHoachCongTac.cs" />
+    <Compile Include="Phong.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

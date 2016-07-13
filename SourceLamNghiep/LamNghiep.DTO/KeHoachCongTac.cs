@@ -27,6 +27,8 @@ namespace LamNghiep.DTO
         public bool LapLai { get; set; }
         public string UserName { get; set; }
 
+        public string NguoiTao { get; set; }
+
         public string GioView { set; get; }
         public string MucDoView { get; set; }
 

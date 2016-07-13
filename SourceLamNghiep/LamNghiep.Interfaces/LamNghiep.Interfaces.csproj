@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IKeHoachCTDataService.cs" />
+    <Compile Include="PhongDataService.cs" />
     <Compile Include="ILoginDataService.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -47,11 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="KetHoachCTBussinessService.cs" />
+    <Compile Include="PhongBussinessService.cs" />
     <Compile Include="LoginBussinessService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LamNghiep.Common\LamNghiep.Common.csproj">

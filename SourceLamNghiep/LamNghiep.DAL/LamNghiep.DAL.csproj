@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AdoHelper.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="DataServices\PhongDataService.cs" />
     <Compile Include="DataServices\KetHoachCTDataService.cs" />
     <Compile Include="DataServices\LoginDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

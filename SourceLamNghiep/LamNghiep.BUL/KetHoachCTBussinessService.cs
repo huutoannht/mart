@@ -1,4 +1,5 @@
-﻿using LamNghiep.DTO;
+﻿using LamNghiep.DAL.DataServices;
+using LamNghiep.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LamNghiep.DAL.DataServices
+namespace LamNghiep.BUL.Bussiness
 {
     public class KetHoachCTBussinessService 
     {
@@ -104,7 +105,12 @@ namespace LamNghiep.DAL.DataServices
         public List<KeHoachCT> GetKeHoachCaNhan(string userName) {
             KetHoachCTDataService ketHoachCTDataService = new KetHoachCTDataService();
             return ketHoachCTDataService.GetKeHoachCaNhan(userName);
-        
+        }
+
+        public List<KeHoachCT> GetKeHoachCanBo(string userName)
+        {
+            KetHoachCTDataService ketHoachCTDataService = new KetHoachCTDataService();
+            return ketHoachCTDataService.GetKeHoachCanBo(userName);
         }
     }
 }

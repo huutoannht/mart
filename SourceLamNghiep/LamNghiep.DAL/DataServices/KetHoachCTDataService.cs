@@ -73,5 +73,19 @@ namespace LamNghiep.DAL.DataServices
                 return DataReaderExtensions.DataReaderToObjectList<KeHoachCT>(reader);
             }
         }
+
+        public List<KeHoachCT> GetKeHoachCanBo(string userName)
+        {
+            const string storeName = "st_getKeHoachCanBo";
+            using (var conn = new AdoHelper())
+            {
+                SqlParameter[] objectParam = new SqlParameter[]{
+                     new SqlParameter("@UserName",userName),
+                };
+                SqlDataReader reader = conn.ExecDataReaderProc(storeName, objectParam);
+                // convert table result to List object and return
+                return DataReaderExtensions.DataReaderToObjectList<KeHoachCT>(reader);
+            }
+        }
     }
 }
