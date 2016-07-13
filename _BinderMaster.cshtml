@@ -1,0 +1,113 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../favicon.ico">-->
+
+    <title>Binders Online</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Open Sans CSS -->
+    <link href="~/Content/css/font-css.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Animation CSS -->
+    <link href="~/Content/css/animate.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/Style.css" rel="stylesheet">
+    <!-- Jquery Datatable -->
+    <link href="~/Content/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="~/Content/css/responsive.dataTables.min.css" rel="stylesheet">
+    <!-- Alert css -->
+    <link href="~/Content/css/sweetalert.css" rel="stylesheet">
+    <link href="~/Content/css/jquery-ui.css" rel="stylesheet">
+
+    <!-- JS core -->
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+
+    <!-- js datatable -->
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/fnReloadAjax.js"></script>
+
+
+    <script type="text/javascript">
+        var $msg = '@((TempData["Message"] != null) ? TempData["Message"].ToString() : "")',
+            $msgtype = '@((TempData["MessageType"] != null) ? TempData["MessageType"].ToString(): "")';
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            @{Html.RenderPartial("Header"); }
+            <!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+    <content>
+        <div class="search-mb col-xs-12">
+            <input type="text" class="input-lg" placeholder="Search" />
+        </div>
+        <div class="col-xs-12 container">
+            <div class="tabs-left">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#daskboard-panel" data-toggle="tab">Daskboard</a>
+                    </li>
+                    <li>
+                        <a href="#mynotes-panel" data-toggle="tab">My Notes</a>
+                    </li>
+                </ul>
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active" id="daskboard-panel">
+                        <!--Edit Here-->
+                        @RenderBody()
+                        <!--Edit Here-->
+                    </div>
+                    <div class="tab-pane" id="mynotes-panel">
+                        under construction
+                        @ViewBag.Message
+                    </div>
+                </div>
+            </div><!-- /col -->
+        </div>
+    </content>
+    <!-- /container -->
+    <footer class="text-center">
+        <div class="clearfix"></div>
+        <div style="padding: 20px;">
+            Copyright 2016 by
+            <a href="#">Binders Online</a>. All Rights Reserved.
+        </div>
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap3-typeahead.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/fileinput.min.js"></script>
+    <script src="~/Scripts/custom-messages.js"></script>
+    <script src="~/Scripts/custom-validator.js"></script>
+    <script src="~/Scripts/startupjs.js"></script>
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    <script src="~/Scripts/bootstrap-growl.min.js"></script>
+    <script src="~/Scripts/jquery-dateFormat.min.js"></script>
+    <script src="~/Scripts/utilities.js"></script>
+</body>
+</html>
