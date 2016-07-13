@@ -1,0 +1,152 @@
+﻿@model IEnumerable<LamNghiep.DTO.Phong>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Content/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<link href="~/Content/datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+<link href="~/Content/css/stylepage-ct-canhan.css" rel="stylesheet" />
+
+<style>
+    table td {
+        white-space: pre-wrap;
+    }
+
+    thead tr {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    span.dtr-data {
+        white-space: pre-wrap;
+    }
+
+    .rom {
+        margin: 15px;
+        background-color: #7cb97c;
+        color: #fff;
+        height: 100px;
+    }
+
+    .rom-booking {
+        background-color: gray;
+        color: #fff;
+    }
+
+    .rom button {
+        background-color: #7cb97c;
+        color: #fff;
+        border: none;
+    }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Đặt phòng họp</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+
+                    <div class="form-horizontal">
+                        <div class="form-group has-success">
+                            <div class="col-md-3 control-label">Tên phòng</div>
+                            <div class="col-md-5">
+                                <input type="text" id="tenphong" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <div class="col-md-3 control-label">Từ ngày</div>
+                            <div class="col-md-5">
+                                <input type="text" id="tungay" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group has-success">
+                            <div class="col-md-3 control-label">Đến ngày</div>
+                            <div class="col-md-5">
+                                <input type="text" id="denngay" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel with-nav-tabs panel-success">
+    <div class="panel-heading">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1success" data-toggle="tab"><i class="fa fa-home fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Đặt phòng họp</a></li>
+            <li class=""><a href="#tab2success" data-toggle="tab"><i class="fa fa-calendar fa-3x" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp; Xem theo ngày</a></li>
+
+        </ul>
+    </div>
+    <div class="panel-body">
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="tab1success">
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a class="btn btn-default" href="/PhongHop/Create">  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tạo mới danh sách công tác</a>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    @foreach (var item in Model)
+                                    {
+
+                                        if (item.TrangThai == false)
+                                        {
+                                            <div class="col-md-3 rom ">
+                                                <button data-id="@item.Id" class="bookingroom" value="@item.Id" data-toggle="modal" data-target="#myModal">
+                                                    <i class=" fa fa-pencil-square-o fa-3x" aria-hidden="true">
+                                                    </i>&nbsp;&nbsp;&nbsp;Đặt phòng họp
+                                                </button><br /><span style="float: left; padding-top: 20px;">@item.TenPhong</span><span style="float: right; padding-top: 20px;">phòng trỗng</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-3 rom rom-booking">
+                                                <button data-id="@item.Id" class="bookingroom" value="@item.Id" data-toggle="modal" data-target="#myModal">
+                                                    <i class="fa fa-users fa-3x" aria-hidden="true">
+                                                    </i>&nbsp;&nbsp;&nbsp;Đặt phòng họp
+                                                </button><br /><span style="float: left; padding-top: 20px;">@item.TenPhong</span>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tab2success"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+<script>
+    $.datetimepicker.setLocale('vi');
+    $('#tungay').datetimepicker({
+
+    });
+    $('#denngay').datetimepicker({
+
+    });
+    $('.rom button').click(function (a) {
+        $('#tenphong').val($(this).text());
+        alert($(this).data("id"));
+    })
+
+</script>
