@@ -1,0 +1,26 @@
+﻿<div class="panel panel-danger-alt">
+    <div class="panel-heading">
+        <h3 class="panel-title error-title"><i class="fa fa-fw fa-warning fa-lg text-danger"></i></h3>
+    </div>
+    <div class="panel-body">
+        <div class="error-content">
+            @TempData[NotifyType.Error.ToString()].ToStr()
+        </div>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-primary" href="@Url.Action("Index", "Home")">@BackendMessage.BackToHomepage</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Authen", new { area = string.Empty })">@BackendMessage.GotoLoginPage</a>
+    </div>
+</div>
+
+@section Head{
+    <link href="~/Content/styles/error-custom.css" rel="stylesheet" />
+}
+
+@{
+    TempData[ConstKeys.HasNotification] = null;
+    TempData[NotifyType.Error.ToString()] = null;
+    TempData[NotifyType.Warning.ToString()] = null;
+    TempData[NotifyType.Information.ToString()] = null;
+    TempData[NotifyType.Success.ToString()] = null;
+}

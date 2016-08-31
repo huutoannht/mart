@@ -1,0 +1,36 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerIndexModel
+@Scripts.Render("~/js/customer")
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToStr();
+}
+
+@Html.Partial("BaseView/GoogleMap/_scripts")
+@Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+<script src="~/content/theme/vendors/jstree/dist/jstree.min.js"></script>
+<script src="~/Content/scripts/plug-in/multiple-select-master/jquery.multiple.select.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        customer.initIndex({
+            companyAddress: "@Html.Raw(SiteUtils.GetCompanyInfo(ConstKeys.CompanyInfoAddress))",
+            getDataLogsUrl: "@Url.Action("GetDataLogs", controller)",
+            getVisitsUrl: "@Url.Action("GetVisits", controller)",
+            viewCustomerUrl: "@Url.Action("ViewCustomer", controller)",
+            updateCustomerTypeUrl: "@Url.Action("UpdateCustomerType", controller)",
+            getChangeCustomerFormUrl: "@Url.Action("GetChangeCustomerForm", controller)",
+            exportCustomersUrl: "@Url.Action("ExportCustomers", controller)",
+            getImportFormUrl: "@Url.Action("GetImportForm", controller)",
+            importCustomersUrl: "@Url.Action("ImportCustomers", controller)",
+            getListCustomerUrl: "@Url.Action("GetListCustomer", controller)",
+            deleteCustomerUrl: "@Url.Action("DeleteCustomer", controller)",
+            deleteCustomersUrl: "@Url.Action("DeleteCustomers", controller)",
+            getDropDownDistrictsForFilterIndexUrl: "@Url.Action("GetDropDownDistrictsForFilterIndex", controller)",
+            mustSelectAtLeast1CustomerToDeleteMsg: "@Html.Raw(CustomerRes.MustSelectAtLeast1CustomerToDelete)",
+            getCityNameDistrictNameUrl: "@Url.Action("GetCityNameDistrictName", controller)",
+            canNotLoadDirectionMsg: "@Html.Raw(CustomerRes.CanNotLoadDirection)",
+            canNotFindRouteMsg: "@Html.Raw(CustomerRes.CanNotFindRoute)"
+        });
+    });
+
+</script>

@@ -1,0 +1,17 @@
+﻿@model Models.Customer.CustomerModel
+@{
+    ViewBag.Title = Model.IsNew ? ViewBag.AddNewTitle : ViewBag.EditTitle;
+}
+
+@Html.Partial("BaseView/Customer/_edit")
+
+@section Head
+{
+    @Html.Partial("BaseView/Customer/_cssEdit")
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/Customer/_scriptEdit")
+}
+

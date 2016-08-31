@@ -1,0 +1,42 @@
+﻿@using Share.Messages.BeScreens.Files
+@model Models.File.FileIndexModel
+@{
+    ViewBag.Title = Files.PageTitle;
+}
+
+<div id="divNotifyMain">
+    @Html.Partial("EditorTemplates/_Notify")
+</div>
+
+@Html.Partial("_indexFilter")
+
+@Html.Partial("_list")
+
+<div id="divEdit"></div>
+
+@section Head
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_css")
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+    @Scripts.Render("~/js/file")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            file.init({
+                addUrl: "@Url.Action("Add")",
+                saveUrl: "@Url.Action("Save")",
+                editUrl: "@Url.Action("Edit")",
+                deleteUrl: "@Url.Action("Delete")",
+                verifyNameIsExistedUrl: "@Url.Action("VerifyNameIsExisted")",
+                fileIsRequiredMsg: "@Html.Raw(Files.FileIsRequired)",
+                fileExistedConfirmTitle: "@Html.Raw(Files.FileExistedConfirmTitle)",
+                fileExistedConfirm: "@Html.Raw(Files.FileExistedConfirm)",
+                fileNameInvalid: "@Html.Raw(Files.FileNameInvalid)",
+            });
+        });
+    </script>
+}

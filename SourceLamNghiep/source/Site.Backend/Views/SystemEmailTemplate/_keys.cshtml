@@ -1,0 +1,21 @@
+﻿@model Models.SystemEmailTemplate.SystemEmailTemplateModel
+
+@if (Model.Type == SystemEmailTemplateType.BeForgotPassword)
+{
+    <span class="content-key" onclick="ckeditorInserText(this, 'Content')">@ConstKeys.LinkRecoverPassword</span>
+    <span class="content-key" onclick="ckeditorInserText(this, 'Content')">@ConstKeys.Email</span>
+    <span class="content-key" onclick="ckeditorInserText(this, 'Content')">@ConstKeys.FullName</span>
+}
+
+@if (Model.Type == SystemEmailTemplateType.ExternalLoginIdConfirm)
+{
+    <span class="content-key" onclick="ckeditorInserText(this, 'Content')">@ConstKeys.ExternalTypeName</span>
+    <span class="content-key" onclick="ckeditorInserText(this, 'Content')">@ConstKeys.Link</span>
+}
+
+@if (Model.Type == SystemEmailTemplateType.HasNewOrder)
+{
+    <span class="content-key" onclick="ckeditorInserText(this, 'Content')">@ConstKeys.OrderCode</span>
+}
+
+

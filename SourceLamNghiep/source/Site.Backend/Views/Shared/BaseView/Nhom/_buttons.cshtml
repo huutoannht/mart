@@ -1,0 +1,24 @@
+﻿@model Models.Category.CategoryIndexModel
+@{
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+@if (sessionHelper.CanAdd(BePage.Roles))
+{
+    <button class="btn btn-info" type="button" onclick="category.addNewClick(null)">
+        <span class="glyphicon glyphicon-plus"></span>
+        @BackendMessage.AddNew
+    </button>
+}
+@if (Model.CategoryType == CategoryType.Product)
+{
+    <button class="btn btn-success" type="button" onclick="category.collapseAll()">
+        <span class="fa fa-compress"></span>
+        @BackendMessage.CollapseAll
+    </button>
+
+    <button class="btn btn-warning" type="button" onclick="category.expandAll()">
+        <span class="fa fa-expand"></span>
+        @BackendMessage.ExpandAll
+    </button>
+
+}

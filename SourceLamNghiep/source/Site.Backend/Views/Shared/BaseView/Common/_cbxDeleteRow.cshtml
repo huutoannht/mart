@@ -1,0 +1,8 @@
+﻿@model Guid
+<td class="text-center">
+    <div class="checkbox-list">
+        <label>
+            @Html.CustomCheckBox(Model.ToString(), new { cbxdelete = true, itemid = Model })
+        </label>
+    </div>
+</td>

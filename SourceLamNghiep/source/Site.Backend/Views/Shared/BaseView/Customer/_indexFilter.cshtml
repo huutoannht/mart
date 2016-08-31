@@ -1,0 +1,111 @@
+﻿@model Models.Customer.CustomerIndexModel
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToStr();
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+    var products = cache.GetProducts();
+    var beUsers = cache.GetAllBeUsers();
+}
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @BackendMessage.Filter
+                <div class="tools">
+                    <i class="fa @Html.FilterSlideControlClass(Model.FilterVisible)"></i>
+                </div>
+            </div>
+            <div class="panel-body @Html.FilterBodyClass(Model.FilterVisible)">
+                @using (Html.BeginForm("Index", controller, FormMethod.Post, new { id = "formFilter", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Pagination.CurrentPageIndex)
+                    @Html.HiddenFor(m => m.Pagination.PageSize)
+                    @Html.HiddenFor(m => m.SortBy)
+                    @Html.HiddenFor(m => m.SortDirection)
+                    @Html.HiddenFor(m => m.FilterVisible)
+                    @Html.HiddenFor(m => m.EventFiredFromSortButton)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClinicId, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.ClinicId, new { @class = "form-control" })
+                        </div>
+                        @Html.LabelFor(m => m.ClinicName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.ClinicName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ClinicPhone, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.ClinicPhone, new { @class = "form-control" })
+                        </div>
+                        @Html.LabelFor(m => m.DentistName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.DentistName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        </div>
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.City, SiteUtils.GetVietNamProvines().ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+                        </div>
+                        @Html.LabelFor(m => m.District, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4" id="divDistrictFilters">
+                            @Html.Partial("BaseView/Customer/_dropDownDistrict")
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                        @Html.CustomLabelFor(m => m.InterestingDevice, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.InterestingDevice, products.ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+                        </div>
+                        @Html.CustomLabelFor(m => m.AssignTo, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.AssignTo, beUsers.ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+                        </div>
+                    </div>*@
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.VisitFrom, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                @Html.TextBoxDateFor(m => m.VisitFrom, new { @class = "form-control" })
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                        @Html.CustomLabelFor(m => m.VisitTo, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                @Html.TextBoxDateFor(m => m.VisitTo, new { @class = "form-control" })
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UsingRC, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.UsingRC, cache.GetCategories(CategoryType.UsingRC).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button onclick="customer.goPage(1)" class="btn btn-success" type="button">@BackendMessage.Search</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

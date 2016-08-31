@@ -1,0 +1,61 @@
+﻿@using ML.Common
+@model PaginationModel
+@{
+    var disabledFirst = Model.CurrentPageIndex <= 1;
+    var disabledPrevious = Model.CurrentPageIndex - 1 < 1;
+    var disabledNext = Model.CurrentPageIndex + 1 > Model.PageCount;
+    var disabledLast = Model.CurrentPageIndex == Model.PageCount;
+    var paginationId = ViewData["paginationId"].ToStr();
+
+    var pageSizes = new List<int> { 10, 20, 50, 100 };
+}
+
+<div class="row">
+    <div class="col-xs-5">
+        @if (Model.TotalRecords > 0)
+        {   
+            <div class="dataTables_info" id="hidden-table-info_info">
+                <span>@BackendMessage.Showing @(Model.PageSize * Model.CurrentPageIndex - Model.PageSize + 1)
+                    @BackendMessage.To @(Model.CurrentPageIndex == Model.PageCount ? Model.TotalRecords : Model.PageSize * Model.CurrentPageIndex)
+                    @BackendMessage.Of <span style="font-weight: bold">@Model.TotalRecords</span> @BackendMessage.Entries</span>
+            </div>          
+        }
+    </div>
+    <div class="col-xs-7">
+        <div class="dataTables_paginate paging_simple_numbers" @(!string.IsNullOrEmpty(paginationId) ? "id=" + paginationId : string.Empty)>
+            <ul class="pagination">
+                <li class="paginate_button first @(disabledFirst ? "disabled" : string.Empty)"><a page="1" @Model.GetExecutePageClick(1, disabledFirst)>&lt;&lt; @BackendMessage.First</a></li>
+                <li class="paginate_button prev @(disabledPrevious ? "disabled" : string.Empty)"><a page="@(Model.CurrentPageIndex - 1)" @Model.GetExecutePageClick(Model.CurrentPageIndex - 1, disabledPrevious)>&lt; @BackendMessage.Prev</a></li>
+                @if (Model.DisplayedPageStartIndex > 1)
+                {
+                    if (Model.DisplayedPageStartIndex > 2)
+                    {
+                    <li class="paginate_button"><a page="@(Model.DisplayedPageStartIndex - 1)" @Model.GetExecutePageClick(Model.DisplayedPageStartIndex - 1)>...</a></li>
+                    }
+                }
+                @for (int i = Model.DisplayedPageStartIndex; i <= Model.DisplayedPageEndIndex; i++)
+                {
+                    <li class="paginate_button @(i == Model.CurrentPageIndex ? "active" : string.Empty)"><a page="@i" @Model.GetExecutePageClick(i, i == Model.CurrentPageIndex)>@i</a></li>
+                }
+                @if (Model.DisplayedPageEndIndex < Model.PageCount)
+                {
+                    if (Model.DisplayedPageEndIndex < Model.PageCount - 1)
+                    {
+                    <li class="paginate_button"><a page="@(Model.DisplayedPageEndIndex + 1)" @Model.GetExecutePageClick(Model.DisplayedPageEndIndex + 1)>...</a></li>
+                    }
+                }
+                <li class="paginate_button next @(disabledNext ? "disabled" : string.Empty)"><a page="@(Model.CurrentPageIndex + 1)" @Model.GetExecutePageClick(Model.CurrentPageIndex + 1, disabledNext)>@BackendMessage.Next &gt;</a></li>
+                <li class="paginate_button last @(disabledLast ? "disabled" : string.Empty)"><a page="@Model.PageCount" @Model.GetExecutePageClick(Model.PageCount, disabledLast)>@BackendMessage.Last &gt;&gt;</a></li>
+                @if (!string.IsNullOrEmpty(Model.PageSizeClickFunction))
+                {             
+                    <li class="paginate_button">
+                        @Html.DropDownList("hidden-table-info_length", pageSizes.ToSelectList(Model.PageSize), new { onchange = string.Format(Model.PageSizeClickFunction, "this") })
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div style="clear: both">
+</div>

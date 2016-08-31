@@ -1,0 +1,70 @@
+﻿@using Share.Messages.BeScreens.Role
+@model Models.Role.RoleModel
+<div class="grid-table">
+    <table class="table table-hover table-bordered">
+        <thead class="">
+            <tr role="row">
+                <th class="text-center">@Role.PageName</th>
+                <th class="text-center pl0 pr0">@Role.View
+                    <br />
+                    (<a href="javascript:role.selectAllRole('view');" class="cur-pointer">@Role.SelectAll</a> | <a href="javascript:role.deSelectAllRole('view');" class="cur-pointer">@Role.UnselectAll</a>)
+                </th>
+                <th class="text-center pl0 pr0">@Role.Add
+                    <br />
+                    (<a href="javascript:role.selectAllRole('add');" class="cur-pointer">@Role.SelectAll</a> | <a href="javascript:role.deSelectAllRole('add');" class="cur-pointer">@Role.UnselectAll</a>)
+                </th>
+                <th class="text-center pl0 pr0">@Role.Update
+                    <br />
+                    (<a href="javascript:role.selectAllRole('update');" class="cur-pointer">@Role.SelectAll</a> | <a href="javascript:role.deSelectAllRole('update');" class="cur-pointer">@Role.UnselectAll</a>)
+                </th>
+                <th class="text-center pl0 pr0">@Role.Delete
+                    <br />
+                    (<a href="javascript:role.selectAllRole('delete');" class="cur-pointer">@Role.SelectAll</a> | <a href="javascript:role.deSelectAllRole('delete');" class="cur-pointer">@Role.UnselectAll</a>)
+                </th>
+                <th class="text-center pl0 pr0">@Role.Print
+                    <br />
+                    (<a href="javascript:role.selectAllRole('print');" class="cur-pointer">@Role.SelectAll</a> | <a href="javascript:role.deSelectAllRole('print');" class="cur-pointer">@Role.UnselectAll</a>)
+                </th>
+                <th class="text-center pl0 pr0">@Role.ExportExcel
+                    <br />
+                    (<a href="javascript:role.selectAllRole('exportexcel');" class="cur-pointer">@Role.SelectAll</a> | <a href="javascript:role.deSelectAllRole('exportexcel');" class="cur-pointer">@Role.UnselectAll</a>)
+                </th>
+                <th class="text-center pl0 pr0">@Role.ImportExcel
+                    <br />
+                    (<a href="javascript:role.selectAllRole('importexcel');" class="cur-pointer">@Role.SelectAll</a> | <a href="javascript:role.deSelectAllRole('importexcel');" class="cur-pointer">@Role.UnselectAll</a>)
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tbodyRolePermission">
+            @foreach (var item in Model.Permissions)
+            {
+                var checkBoxName = "cbxRole" + item.PageId;
+                <tr role="row" id="@item.Id" roleid="@item.RoleId" pageid="@item.PageId">
+                    <td style="vertical-align: middle">@item.PageName</td>
+                    <td class="text-center">
+                        @Html.CheckBox(checkBoxName + "View", item.CanView, new { view = "true" })
+                    </td>
+                    <td class="text-center">
+                        @Html.CheckBox(checkBoxName + "Add", item.CanAdd, new { add = "true" })
+                    </td>
+                    <td class="text-center">
+                        @Html.CheckBox(checkBoxName + "Update", item.CanUpdate, new { update = "true" })
+                    </td>
+                    <td class="text-center">
+                        @Html.CheckBox(checkBoxName + "Delete", item.CanDelete, new { delete = "true" })
+                    </td>
+                    <td class="text-center">
+                        @Html.CheckBox(checkBoxName + "Print", item.CanPrint, new { print = "true" })
+                    </td>
+                    <td class="text-center">
+                        @Html.CheckBox(checkBoxName + "ExportExcel", item.CanExportExcel, new { exportexcel = "true" })
+                    </td>
+                    <td class="text-center">
+                        @Html.CheckBox(checkBoxName + "ImportExcel", item.CanImportExcel, new { importexcel = "true" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

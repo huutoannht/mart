@@ -1,0 +1,8 @@
+﻿@model Models.Artice.ArticeModel
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Content, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextAreaFor(m => m.Content, new { @class = "form-control" })
+    </div>
+</div>

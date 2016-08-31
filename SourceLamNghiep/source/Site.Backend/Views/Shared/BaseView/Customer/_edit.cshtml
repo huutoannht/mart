@@ -1,0 +1,119 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerModel
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                @(Model.IsNew ? ViewBag.AddNewTitle : ViewBag.EditTitle)
+            </div>
+            <div class="panel-body">
+
+                <div id="divNotifyEdit">
+                    @Html.Partial("EditorTemplates/_Notify")
+                </div>
+
+                @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.UsingDevices)
+                    @Html.HiddenFor(m => m.InterestingDevice)
+                    @Html.HiddenFor(m => m.VisitJsonString)
+                    @Html.HiddenFor(m => m.AssignTo)
+                    @Html.HiddenFor(m => m.CustomerType)
+
+                    @Html.HiddenFor(m => m.Lat)
+                    @Html.HiddenFor(m => m.Lng)
+                    
+                    @Html.ValidationSummary(string.Empty)
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a href="#divTabClinicInformation" data-toggle="tab">@CustomerRes.ClinicInformation</a>
+                                </li>
+                                <li>
+                                    <a href="#divTabDentistInfo" data-toggle="tab">@CustomerRes.DentistInfo</a>
+                                </li>
+                                <li>
+                                    <a href="#divTabWorkingHours" data-toggle="tab">@CustomerRes.WorkingHours</a>
+                                </li>
+                                <li>
+                                    <a href="#divTabVisit" data-toggle="tab">@CustomerRes.Visit</a>
+                                </li>
+                                @if (Model.CustomerType == CustomerType.Current)
+                                {
+                                    <li>
+                                        <a href="#divTabHistoryPurchase" data-toggle="tab">@CustomerRes.HistoryPurchase</a>
+                                    </li>
+                                }
+                                <li>
+                                    <a href="#divTabOther" data-toggle="tab">@CustomerRes.Other</a>
+                                </li>
+                                <li>
+                                    <a href="#divTabRemark" data-toggle="tab">@CustomerRes.Remark</a>
+                                </li>
+                                @if (Model.IsNew)
+                                {
+                                    <li>
+                                        <a href="#divTabImages" data-toggle="tab">@CustomerRes.Images</a>
+                                    </li>
+                                }
+                                <li>
+                                    <a href="#divTabMap" data-toggle="tab">@CustomerRes.Map</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="divTabClinicInformation" class="tab-pane fade in active">
+                                    @Html.Partial("BaseView/Customer/Edit/_clinicInfo")
+                                </div>
+                                <div id="divTabDentistInfo" class="tab-pane fade in">
+                                    @Html.Partial("BaseView/Customer/Edit/_dentistInfo")
+                                </div>
+                                <div id="divTabWorkingHours" class="tab-pane fade in">
+                                    @Html.Partial("BaseView/Customer/Edit/_workHours")
+                                </div>
+                                <div id="divTabVisit" class="tab-pane fade in">
+                                    @Html.Partial("BaseView/Customer/Edit/_visit", Model.VisitIndex)
+                                </div>
+                                @if (Model.CustomerType == CustomerType.Current)
+                                {
+                                    <div id="divTabHistoryPurchase" class="tab-pane fade in">
+                                        @Html.Partial("BaseView/Customer/Inc/_historyPurchase")
+                                    </div>
+                                }
+                                <div id="divTabOther" class="tab-pane fade in">
+                                    @Html.Partial("BaseView/Customer/Edit/_other")
+                                </div>
+                                <div id="divTabRemark" class="tab-pane fade in">
+                                    @Html.Partial("BaseView/Customer/Edit/_remark")
+                                </div>
+                                @if (Model.IsNew)
+                                {
+                                    <div id="divTabImages" class="tab-pane fade in">
+                                        @Html.Partial("BaseView/Customer/Edit/_images")
+                                    </div>
+                                }
+                                
+                                <div id="divTabMap" class="tab-pane fade in">
+                                    @Html.Partial("BaseView/Customer/Inc/_map")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div class="col-md-12">
+                            <button onclick="customer.saveCustomerClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                            <button onclick="customer.backToIndex()" class="btn btn-default" type="button">@BackendMessage.Cancel</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divEditVisit"></div>

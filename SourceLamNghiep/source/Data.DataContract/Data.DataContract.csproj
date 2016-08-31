@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81FCD4EA-9360-4193-9E7C-E6DE1EAA1602}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Data.DataContract</RootNamespace>
+    <AssemblyName>Data.DataContract</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ML.Common">
+      <HintPath>..\References\ML.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettingDC\AppSetting.cs" />
+    <Compile Include="AppSettingDC\FindRequest.cs" />
+    <Compile Include="AppSettingDC\FindResponse.cs" />
+    <Compile Include="AppSettingDC\SaveRequest.cs" />
+    <Compile Include="ArticeDC\Artice.cs" />
+    <Compile Include="ArticeDC\FindRequest.cs" />
+    <Compile Include="ArticeDC\FindResponse.cs" />
+    <Compile Include="ArticeDC\SaveRequest.cs" />
+    <Compile Include="ArticeDC\UpdateInfo.cs" />
+    <Compile Include="BaseResponse.cs" />
+    <Compile Include="BaseSaveRequest.cs" />
+    <Compile Include="BeUserDC\BeUser.cs" />
+    <Compile Include="BaseDC.cs" />
+    <Compile Include="BaseFindResponse.cs" />
+    <Compile Include="BaseFindRequest.cs" />
+    <Compile Include="BeUserDC\SaveRequest.cs" />
+    <Compile Include="BeUserDC\ChangePwdResquest.cs" />
+    <Compile Include="BeUserDC\CheckLoginResponse.cs" />
+    <Compile Include="BeUserDC\FindRequest.cs" />
+    <Compile Include="BeUserDC\FindResponse.cs" />
+    <Compile Include="CategoryDC\Category.cs" />
+    <Compile Include="CategoryDC\CategoryImage.cs" />
+    <Compile Include="CategoryDC\CategoryImageUpdateInfo.cs" />
+    <Compile Include="CategoryDC\FindRequest.cs" />
+    <Compile Include="CategoryDC\FindResponse.cs" />
+    <Compile Include="CategoryDC\SaveRequest.cs" />
+    <Compile Include="ContactUsDC\ContactUs.cs" />
+    <Compile Include="BaseDCNoId.cs" />
+    <Compile Include="CustomerDC\CustomerImage.cs" />
+    <Compile Include="CustomerDC\CustomerVisit.cs" />
+    <Compile Include="DataLogDC\DataLog.cs" />
+    <Compile Include="DataLogDC\FindRequest.cs" />
+    <Compile Include="DataLogDC\FindResponse.cs" />
+    <Compile Include="DataLogDC\SaveRequest.cs" />
+    <Compile Include="FileDC\File.cs" />
+    <Compile Include="FileDC\FindRequest.cs" />
+    <Compile Include="FileDC\FindResponse.cs" />
+    <Compile Include="FileDC\SaveRequest.cs" />
+    <Compile Include="HtmlContentDC\HtmlContent.cs" />
+    <Compile Include="HtmlContentDC\SaveRequest.cs" />
+    <Compile Include="ProductDC\FindRequest.cs" />
+    <Compile Include="ProductDC\FindResponse.cs" />
+    <Compile Include="ProductDC\Product.cs" />
+    <Compile Include="ProductDC\ProductImage.cs" />
+    <Compile Include="ProductDC\ProductImageUpdateInfo.cs" />
+    <Compile Include="ProductDC\ProductStatusCount.cs" />
+    <Compile Include="ProductDC\ProductUpdateInfo.cs" />
+    <Compile Include="ProductDC\SaveRequest.cs" />
+    <Compile Include="RequestPasswordDC\SubmitPasswordRequest.cs" />
+    <Compile Include="BeUserDC\UpdateUserLoginRequest.cs" />
+    <Compile Include="BeUserDC\CheckLoginRequest.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Inc\PageOption.cs" />
+    <Compile Include="Inc\Reference.cs" />
+    <Compile Include="Inc\SortOption.cs" />
+    <Compile Include="Inc\TextValue.cs" />
+    <Compile Include="Money.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestPasswordDC\RequestPassword.cs" />
+    <Compile Include="RequestPasswordDC\SaveRequest.cs" />
+    <Compile Include="RefreshTokenDC\RefreshToken.cs" />
+    <Compile Include="RoleDC\FindRequest.cs" />
+    <Compile Include="RoleDC\FindResponse.cs" />
+    <Compile Include="RoleDC\Role.cs" />
+    <Compile Include="RoleDC\SaveRequest.cs" />
+    <Compile Include="RoleDC\RolePermission.cs" />
+    <Compile Include="SystemEmailTemplateDC\SaveRequest.cs" />
+    <Compile Include="SystemEmailTemplateDC\SystemEmailTemplate.cs" />
+    <Compile Include="CustomerDC\ChangePwdResquest.cs" />
+    <Compile Include="CustomerDC\CheckLoginRequest.cs" />
+    <Compile Include="CustomerDC\CheckLoginResponse.cs" />
+    <Compile Include="CustomerDC\FindRequest.cs" />
+    <Compile Include="CustomerDC\FindResponse.cs" />
+    <Compile Include="CustomerDC\SaveRequest.cs" />
+    <Compile Include="CustomerDC\UpdateInfo.cs" />
+    <Compile Include="CustomerDC\UpdateUserLoginRequest.cs" />
+    <Compile Include="CustomerDC\Customer.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

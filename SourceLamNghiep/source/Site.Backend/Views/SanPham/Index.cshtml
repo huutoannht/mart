@@ -1,0 +1,80 @@
+﻿@using Share.Messages.BeScreens.ProductRes
+@model Models.Product.ProductIndexModel
+@{
+    ViewBag.Title = ProductRes.PageTitle; 
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+
+<div id="divNotifyTop">
+    @Html.Partial("EditorTemplates/_Notify")
+</div>
+
+@Html.Partial("_indexFilter")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @ProductRes.ProductList
+            </div>
+            <div class="panel-body grid-table">
+                <div class="mbm">
+                    @if (sessionHelper.CanAdd(BePage.Roles))
+                    {
+                        <button class="btn btn-info" type="button" onclick="sanPham.editProduct(null, null)">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            @BackendMessage.AddNew
+                        </button>
+                    }
+                </div>
+                <div id="divList">
+                    @Html.Partial("_list")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divEdit"></div>
+
+<div id="divModal" class="modal fade" tabindex="-1" role="dialog" style="display: none"></div>
+
+@section Head
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_css")
+    <link type="text/css" rel="stylesheet" href="~/content/theme/vendors/jstree/dist/themes/default/style.min.css">
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/ZeroClipboard/_script")
+    <script src="~/content/theme/vendors/jstree/dist/jstree.min.js"></script>
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+    @Html.Partial("BaseView/CkEditor/_scripts")
+
+    @Scripts.Render("~/js/sanPham")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            sanPham.init({
+                editProductUrl: "@Url.Action("EditProduct")",
+                getListProductUrl: "@Url.Action("GetListProduct")",
+                defaultLang: "@SiteUtils.GetDefaultLanguageIfNullOrEmpty()",
+                nameRequiredMsg: "@Html.Raw(ProductRes.NameRequired)",
+                categoryRequiredMsg: "@Html.Raw(ProductRes.CategoryRequired)",
+                saveProductUrl: "@Url.Action("SaveProduct")",
+                deleteProductUrl: "@Url.Action("DeleteProduct")",
+                getImageListUrl: "@Url.Action("GetImageList")",
+                getAddNewImageHtmlUrl: "@Url.Action("GetAddNewImageHtml")",
+                saveImageUrl: "@Url.Action("SaveImage")",
+                deleteImageUrl: "@Url.Action("DeleteImage")",
+                videoLinkRequiredMsg: "@Html.Raw(ProductRes.VideoLinkRequired)",
+                quantityRequiredMsg: "@Html.Raw(ProductRes.QuantityRequired)",
+                discountMustSmaller100Msg: "@Html.Raw(ProductRes.DiscountMustSmaller100)",
+                quantityIsExistedMsg: "@Html.Raw(ProductRes.QuantityIsExisted)",
+                updateImageVisibleUrl: "@Url.Action("UpdateImageVisible")",
+                imageIsRequiredMsg: "@Html.Raw(ProductRes.ImageIsRequired)"
+            });
+        });
+    </script>
+}

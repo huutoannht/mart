@@ -1,0 +1,97 @@
+﻿@using Data.DataContract.CategoryDC
+@using Share.Messages.BeScreens.ProductRes
+@model Models.Product.ProductIndexModel
+
+@{
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover tablesorter dataTable no-footer">
+        <thead>
+            <tr>
+                @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                <th>@ProductRes.Image</th>
+                <th class="@Html.ClassSort("Name", Model.SortBy, Model.SortDirection.Value)" onclick="sanPham.sort(this, 'Name', '@Model.SortDirection.Value')">@ProductRes.Name</th>
+                <th class="@Html.ClassSort("ProductCode", Model.SortBy, Model.SortDirection.Value) w30" onclick="sanPham.sort(this, 'ProductCode', '@Model.SortDirection.Value')">@ProductRes.ProductCode</th>
+                <th class="w20">@ProductRes.Cost</th>
+                <th>@ProductRes.Price</th>
+                <th class="w20">@ProductRes.Vat</th>
+                <th class="w20">@ProductRes.UOM</th>
+                <th class="w30">@ProductRes.Status</th>
+                <th>@ProductRes.Category</th>
+                <th>@BackendMessage.Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Results.Any())
+            {
+                foreach (var item in Model.Results)
+                {
+                    var cate = cache.GetCategory(item.CategoryId);
+                    var uom = item.UnitId.HasValue ? cache.GetCategory(item.UnitId.Value) ?? new Category() : new Category();
+                    <tr>
+                        @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                        <td>
+                            <a href="javascript:sanPham.getImages('@item.Id');">
+                                @if (item.ProductImages.Any())
+                                {
+                                    var img = item.ProductImages.First();
+                                    if (Url.ImageIsExist(img.ImagePath))
+                                    {
+                                        <img src="@Url.ImageThumbSmallLink(item.ProductImages.First().ImagePath)" alt="" class="img-line" />
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-picture-o"></i>
+                                    }
+                                }
+                                else
+                                {
+                                    <i class="fa fa-picture-o"></i>
+                                }
+                                @(string.Format("({0}) " + BackendMessage.EditImages, item.ProductImages.Count))
+                            </a>
+                        </td>
+                        <td>@item.Name</td>
+                        <td>@item.ProductCode</td>
+                        <td class="text-right">
+                            @item.Cost.ToLocalMoneyString()
+                        </td>
+                        <td class="text-right">
+                            @item.Price.ToLocalMoneyString()
+                        </td>
+                        <td class="text-right">
+                            @item.Vat.ToLocalMoneyString()
+                        </td>
+                        <td>@uom.Name</td>
+                        <td>@item.Status.GetEnumDesRes()</td>
+                        <td>
+                            @(cate != null ? cate.Name : string.Empty)
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                {
+                                    <button onclick="sanPham.editProduct('@item.Id',null)" class="btn btn-blue">@BackendMessage.Edit</button>
+                                }
+                                @if (sessionHelper.CanDelete(BePage.Roles))
+                                {
+                                    <button onclick="sanPham.deleteProduct('@item.Id')" class="btn btn-red">@BackendMessage.Delete</button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@Html.PaginationFor(m => m.Pagination, "sanPham.goPage({0})", "sanPham.changePageSize({0})")

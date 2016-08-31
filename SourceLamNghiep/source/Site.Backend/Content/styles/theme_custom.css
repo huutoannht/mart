@@ -1,0 +1,88 @@
+﻿.checkbox-list{}
+.btn-forgot-pwd{}
+.form-horizontal {
+    padding-top: 20px !important;
+}
+
+.form-group {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+}
+
+.panel-body {
+    padding: 0 !important;
+}
+
+.grid-table {
+    padding: 15px !important;
+}
+
+#topbar .navbar-header #logo span.logo-text {
+    font-size: 22px !important;
+}
+
+table.table-bordered th:last-child,
+table.table-bordered td:last-child {
+     border-right-width: 1px !important;
+}
+
+body {
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.jstree-clicked, .jstree-wholerow-clicked {
+    background: white !important;
+    color: #777777 !important;
+}
+
+.navbar-static-side ul li .nav-second-level li a {
+    color: #efefef !important;
+}
+
+.navbar-static-side ul li .nav-second-level li .active-a {
+    color: #e74c3c !important;
+}
+
+.logo-img {
+    max-width: 220px;
+    max-height: 50px;
+}
+
+#topbar .navbar-header {
+    background: #fff !important;
+}
+
+.panel > .panel-heading .tools {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+
+.panel-heading .tools .fa-chevron-down, .panel-heading .tools .fa-chevron-up {
+    cursor: pointer;
+}
+
+.hide-noneim {
+    display: none;
+}
+
+.navbar-toggle {
+    background: #33485C !important;
+}
+
+.table-responsive {
+    overflow-y: auto !important;
+}
+
+.row-selected {
+    background-color: #f9f9f9 !important;
+}
+
+.cbx-del-all .icheckbox_minimal-grey {
+    margin-left: 1px;
+}
+
+.ms-parent input[type='checkbox'] {
+    margin-top: 0 !important;
+}

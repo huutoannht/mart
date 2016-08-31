@@ -1,0 +1,93 @@
+﻿@using Share.Messages.BeScreens.ProductRes
+@model Models.Product.ProductModel
+@{
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box portlet-orange">
+            <div class="portlet-header">
+                <div class="caption">@ProductRes.ProductImageListOf "@Model.Name"</div>
+                <div class="actions">
+                    @if (sessionHelper.CanAdd(BePage.Roles))
+                    {
+                        <a href="javascript:sanPham.addNewImageClick('@Model.Id');" class="btn btn-sm btn-white">
+                            <i class="fa fa-plus"></i>&nbsp;
+                            @BackendMessage.AddNew
+                        </a>} &nbsp;
+
+                    <a href="javascript:sanPham.hideEdit();" class="btn btn-sm btn-white">
+                        @BackendMessage.Close
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="divNotifyEdit">
+                    @Html.Partial("EditorTemplates/_Notify")
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                                        <td>@ProductRes.Image</td>
+                                        <th class="text-center">@BackendMessage.Visible</th>
+                                        <th class="action-col">@BackendMessage.Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ProductImages.Any())
+                                    {
+                                        foreach (var item in Model.ProductImages)
+                                        {
+                                            <tr>
+                                                @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                                <td>
+                                                    @if (Url.ImageIsExist(item.ImagePath))
+                                                    {
+                                                        <a href="@Url.ImageLink(item.ImagePath)" target="_blank">
+                                                            <img alt="" src="@Url.ImageThumbSmallLink(item.ImagePath)" />
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-picture-o"></i>
+                                                    }
+                                                </td>
+                                                <td class="vamiddle text-center">
+                                                    <div class="checkbox-list">
+                                                        <label>
+                                                            <input onclick="sanPham.updateImageVisible(this, '@item.Id')" type="checkbox" value="true" @(item.Visible ? "checked=\"checked\"" : string.Empty) />
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td class="vamiddle text-center">
+                                                    <div class="btn-group btn-group-xs">
+                                                        @if (sessionHelper.CanDelete(BePage.Roles))
+                                                        {
+                                                            <button onclick="sanPham.deleteImage('@item.Id', '@Model.Id') " class="btn btn-red">@BackendMessage.Delete</button>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="100">@BackendMessage.NoRecordFound</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="divAddNewImage" class="col-lg-6 col-md-6 col-sm-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerModel
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover tablesorter dataTable">
+                <thead>
+                    <tr>
+                        <th class="text-center">@CustomerRes.PurchaseDate</th>
+                        <th>@CustomerRes.Device</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="100">@BackendMessage.NoRecordFound</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

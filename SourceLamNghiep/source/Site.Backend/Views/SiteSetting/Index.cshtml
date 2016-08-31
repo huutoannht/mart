@@ -1,0 +1,161 @@
+﻿@using Share.Messages.BeScreens.SiteSetting
+@model Models.AppSetting.AppSettingIndexModel
+
+@{
+    ViewBag.Title = SiteSetting.SiteSettings;
+}
+
+@Html.Partial("EditorTemplates/_Notify")
+
+@Html.Partial("_indexFilter")
+
+@Html.Partial("_appSettingList")
+
+<div id="divEdit"></div>
+
+@section PageJavascript
+{
+    @Scripts.Render("~/js/siteSetting")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            siteSetting.init({
+                addNewUrl: "@Url.Action("AddNew")",
+                editUrl: "@Url.Action("Edit")",
+                saveUrl: "@Url.Action("Save")",
+                deleteUrl: "@Url.Action("Delete")"
+            });
+        });
+    </script>
+}
+
+@section Head
+{
+    <style type="text/css">
+        .colours-wrapper .entry {
+            background: none repeat scroll 0 0 currentcolor;
+            cursor: pointer;
+            float: left;
+            height: 45px;
+            margin-right: 10px;
+            position: relative;
+            width: 45px;
+        }
+
+        .colours-wrapper .entry:after {
+            border: 3px solid currentcolor;
+            bottom: -5px;
+            content: "";
+            left: -5px;
+            opacity: 0;
+            position: absolute;
+            right: -5px;
+            top: -5px;
+        }
+
+        .colours-wrapper .entry.active:after {
+            opacity: 1;
+        }
+
+        .colours-wrapper .entry2 {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            border: 5px solid transparent;
+            display: inline-block;
+            padding: 10px !important;
+        }
+
+        .colours-wrapper .parent-entry2 {
+            float: left;
+            margin-right: 5px;
+            padding: 2px;
+            width: 35px;
+            height: 35px;
+        }
+
+        .colours-wrapper .parent-entry2.active {
+            border: 1px solid currentcolor;
+        }
+
+        .colours-wrapper .green-dark {
+          background: #594857;
+          border-color: #488c6c;
+        }
+        .colours-wrapper .red-dark {
+          background: #594857;
+          border-color: #bf4346;
+        }
+        .colours-wrapper .pink-dark {
+          background: #594857;
+          border-color: #bf3773;
+        }
+        .colours-wrapper .blue-dark {
+          background: #594857;
+          border-color: #0a819c;
+        }
+        .colours-wrapper .yellow-dark {
+          background: #594857;
+          border-color: #f2994b;
+        }
+        .colours-wrapper .green-grey {
+          background: #4b5d67;
+          border-color: #488c6c;
+        }
+        .colours-wrapper .red-grey {
+          background: #4b5d67;
+          border-color: #bf4346;
+        }
+        .colours-wrapper .pink-grey {
+          background: #4b5d67;
+          border-color: #bf3773;
+        }
+        .colours-wrapper .blue-grey {
+          background: #4b5d67;
+          border-color: #0a819c;
+        }
+        .colours-wrapper .yellow-grey {
+          background: #4b5d67;
+          border-color: #f2994b;
+        }
+        .colours-wrapper .yellow-green {
+          background: #007451;
+          border-color: #CCA32F;
+        }
+        .colours-wrapper .orange-grey {
+          background: #322F2B;
+          border-color: #D94E37;
+        }
+        .colours-wrapper .pink-blue {
+          background: #40516F;
+          border-color: #DC6767;
+        }
+        .colours-wrapper .pink-violet {
+          background: #554161;
+          border-color: #E82A62;
+        }
+        .colours-wrapper .orange-violet {
+          background: #554161;
+          border-color: #FF422B;
+        }
+        .colours-wrapper .pink-green {
+          background: #456445;
+          border-color: #FF5E70;
+        }
+        .colours-wrapper .pink-brown {
+          background: #573F2F;
+          border-color: #A21E46;
+        }
+        .colours-wrapper .orange-blue {
+          background: #33485C;
+          border-color: #E74C3C;
+        }
+        .colours-wrapper .yellow-blue {
+          background: #417CB2;
+          border-color: #FFC34C;
+        }
+        .colours-wrapper .green-blue {
+          background: #417CB2;
+          border-color: #66B354;
+        }
+    </style>
+}

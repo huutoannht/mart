@@ -1,0 +1,49 @@
+﻿@using Data.DataContract.BeUserDC
+@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerVisitIndexModel
+@{
+    var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+}
+
+<div id="divNotifyVisits">
+    @Html.Partial("EditorTemplates/_Notify")
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover tablesorter dataTable">
+        <thead>
+            <tr>
+                @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                <th class="@Html.ClassSort("DateVisit", Model.SortBy, Model.SortDirection.Value) w100" onclick="customer.sortVisit(this, 'DateVisit', '@Model.SortDirection.Value')">@CustomerRes.Date</th>
+                <th class="w100">@CustomerRes.Staff</th>
+                <th>@CustomerRes.Promise</th>
+                <th class="w50">@CustomerRes.Done</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Results.Any())
+            {
+                foreach (var item in Model.Results)
+                {
+                    var beUser = cache.GetBeUser(item.BeUserId) ?? new BeUser();
+                    <tr>
+                        @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                        <td class="text-center">@dateTimeHelper.ConvertToLocal(item.DateVisit, sessionHelper.CurrentTimeZone).ToDateString()</td>
+                        <td>@beUser.FullName</td>
+                        <td>@item.Promise</td>
+                        <td>@item.Done.GetEnumDesRes()</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@Html.PaginationFor(m => m.Pagination, "customer.goPageVisit({0})", "customer.changePageSizeVisit({0})")

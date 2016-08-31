@@ -1,0 +1,11 @@
+﻿@{
+    var imageName = SiteUtils.GetSiteLogo3ImageName();
+    if (Html.ImageIsExist(imageName))
+    {
+        <link rel="icon" href="@Url.ImageLink(imageName)"/>
+    }
+    else
+    {
+        <link rel="shortcut icon" href=""/>
+    }
+}

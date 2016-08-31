@@ -1,0 +1,29 @@
+﻿@model Models.Category.CategoryIndexModel
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToStr();
+}
+@Html.Partial("BaseView/ZeroClipboard/_script")
+@Html.Partial("BaseView/CkEditor/_scripts")
+<script src="~/content/theme/vendors/jstree/dist/jstree.min.js"></script>
+@Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+<script src="~/content/theme/vendors/jquery-treetable/javascripts/src/jquery.treetable.js"></script>
+@Scripts.Render("~/js/category")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        category.init({
+            getListUrl: "@Url.Action("GetList", controller)",
+                addNewUrl: "@Url.Action("AddNew", controller)",
+                editUrl: "@Url.Action("Edit", controller)",
+                saveUrl: "@Url.Action("Save", controller)",
+                deleteUrl: "@Url.Action("Delete", controller)",
+                saveFileUrl: "@Url.Action("SaveFile", controller)",
+                defaultLang: "@SiteUtils.GetDefaultLanguageIfNullOrEmpty()",
+                getImageListUrl: "@Url.Action("GetImageList", controller)",
+                getAddNewImageHtmlUrl: "@Url.Action("GetAddNewImageHtml", controller)",
+                updateImageVisibleUrl: "@Url.Action("UpdateImageVisible", controller)",
+                deleteImageUrl: "@Url.Action("DeleteImage", controller)",
+                saveImageUrl: "@Url.Action("SaveImage", controller)",
+            });
+        });
+</script>

@@ -1,0 +1,51 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerModel
+@{
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            @Html.Partial("BaseView/Common/_cbxDeleteHead")
+            <td>@CustomerRes.Image</td>
+            <th class="action-col">@BackendMessage.Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Images.Any())
+        {
+            foreach (var item in Model.Images)
+            {
+                <tr>
+                    @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                    <td>
+                        @if (Url.ImageIsExist(item.ImagePath))
+                        {
+                            <a href="@Url.ImageLink(item.ImagePath)" target="_blank">
+                                <img alt="" src="@Url.ImageThumbSmallLink(item.ImagePath)" />
+                            </a>
+                        }
+                        else
+                        {
+                            <i class="fa fa-picture-o"></i>
+                        }
+                    </td>
+                    <td class="vamiddle text-center">
+                        <div class="btn-group btn-group-xs">
+                            @if (sessionHelper.CanDelete(BePage.Roles))
+                            {
+                                <button onclick="customer.deleteImage('@item.Id', '@Model.Id') " class="btn btn-red">@BackendMessage.Delete</button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="100">@BackendMessage.NoRecordFound</td>
+            </tr>
+        }
+    </tbody>
+</table>

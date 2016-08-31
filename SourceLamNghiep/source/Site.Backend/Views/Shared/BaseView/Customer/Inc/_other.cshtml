@@ -1,0 +1,31 @@
+﻿@using Data.DataContract.BeUserDC
+@model Models.Customer.CustomerModel
+@{
+    var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+}
+@if (!Model.IsNew)
+{
+    var createdBy = cache.GetBeUser(Model.CreatedBy) ?? new BeUser();
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.CreatedBy, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.Label(createdBy.FullName.ToStr(), new { @class = "control-label" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.CreatedDate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            <label class="control-label">
+                @dateTimeHelper.ConvertToLocal(Model.CreatedDate, sessionHelper.CurrentTimeZone).ToDateTimeString()
+            </label>
+        </div>
+    </div>
+    
+    <div id="divDataLog">
+        @Html.Partial("BaseView/Customer/Inc/_dataLog", Model.DataLogIndex)
+    </div>
+}

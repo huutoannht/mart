@@ -1,0 +1,682 @@
+﻿@using System.Web.Script.Serialization
+@using Data.DataContract.CustomerDC
+@using Share.Messages.BeScreens.CustomerLog
+@model Models.DataLog.DataLogIndexModel
+@{
+    var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+    var beUsers = cache.GetAllBeUsers();
+    var jsonSerializer = new JavaScriptSerializer();
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @ViewBag.Title
+            </div>
+            <div class="panel-body grid-table">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover tablesorter dataTable no-footer">
+                        <thead>
+                            <tr>
+                                @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                                <th class="@Html.ClassSort("LogDate", Model.SortBy, Model.SortDirection.Value) w200" onclick="customerLog.sort(this, 'LogDate', '@Model.SortDirection.Value')">@CustomerLog.Date</th>
+                                <th>@CustomerLog.User</th>
+                                <th>@CustomerLog.Action</th>
+                                <th>ClinicID</th>
+                                <th>Field</th>
+                                <th>OldValue</th>
+                                <th>NewValue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Results.Any())
+                            {       
+                                int countrow=0;   
+                                foreach (var item in Model.Results)
+                                {
+                                    var newData = !string.IsNullOrWhiteSpace(item.NewData) ? jsonSerializer.Deserialize<Customer>(item.NewData) : null;
+                                    var oldData = !string.IsNullOrWhiteSpace(item.OldData) ? jsonSerializer.Deserialize<Customer>(item.OldData) : null;
+                                    var beUser = beUsers.FirstOrDefault(i => i.Id == item.BeUserId);
+                                  
+                                    if ((oldData != null ? oldData.CustomerType.ToString() : string.Empty) != (newData != null ? newData.CustomerType.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">Type for Customer</td>
+                                            <td class="text-left">@(oldData != null ? oldData.CustomerType.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.CustomerType.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.ClinicName : string.Empty) != (newData != null ? newData.ClinicName : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">ClinicName</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicName : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.ClinicName : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.ClinicEmail : string.Empty) != (newData != null ? newData.ClinicEmail : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">Email</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicEmail : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.ClinicEmail : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.Address : string.Empty) != (newData != null ? newData.Address : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">Address</td>
+                                            <td class="text-left">@(oldData != null ? oldData.Address : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.Address : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.ClinicPhone : string.Empty) != (newData != null ? newData.ClinicPhone : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">ClinicPhone</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicPhone : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.ClinicPhone : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.Website : string.Empty) != (newData != null ? newData.Website : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">Website</td>
+                                            <td class="text-left">@(oldData != null ? oldData.Website : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.Website : string.Empty)</td>
+                                        </tr>
+                                    }
+                                  
+                                    if ((oldData != null ? oldData.Lat.ToString() : string.Empty) != (newData != null ? newData.Lat.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">Lat</td>
+                                            <td class="text-left">@(oldData != null ? oldData.Lat.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.Lat.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.Lng.ToString() : string.Empty) != (newData != null ? newData.Lng.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">Lng</td>
+                                            <td class="text-left">@(oldData != null ? oldData.Lng.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.Lng.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.NumberOfDentist.ToString() : string.Empty) != (newData != null ? newData.NumberOfDentist.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">NumberOfDentist</td>
+                                            <td class="text-left">@(oldData != null ? oldData.NumberOfDentist.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.NumberOfDentist.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.NumberOfStaff.ToString() : string.Empty) != (newData != null ? newData.NumberOfStaff.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">NumberOfStaff</td>
+                                            <td class="text-left">@(oldData != null ? oldData.NumberOfStaff.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.NumberOfStaff.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.NumberOfChair.ToString() : string.Empty) != (newData != null ? newData.NumberOfChair.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">NumberOfChair</td>
+                                            <td class="text-left">@(oldData != null ? oldData.NumberOfChair.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.NumberOfChair.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.DentistName : string.Empty) != (newData != null ? newData.DentistName : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">DentistName</td>
+                                            <td class="text-left">@(oldData != null ? oldData.DentistName : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.DentistName : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.Gender.ToString() : string.Empty) != (newData != null ? newData.Gender.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">Gender</td>
+                                            <td class="text-left">@(oldData != null ? oldData.Gender.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.Gender.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.Age.ToString() : string.Empty) != (newData != null ? newData.Age.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">ClinicPhone</td>
+                                            <td class="text-left">@(oldData != null ? oldData.Age.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.Age.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.DentistPhone : string.Empty) != (newData != null ? newData.DentistPhone : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">DentistPhone</td>
+                                            <td class="text-left">@(oldData != null ? oldData.DentistPhone : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.DentistPhone : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.DentistEmail : string.Empty) != (newData != null ? newData.DentistEmail : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">DentistEmail</td>
+                                            <td class="text-left">@(oldData != null ? oldData.DentistEmail : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.DentistEmail : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.Specialization.ToString() : string.Empty) != (newData != null ? newData.Specialization.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">Specialization</td>
+                                            <td class="text-left">@(oldData != null ? oldData.Specialization.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.Specialization.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.MaritalStatus.ToString() : string.Empty) != (newData != null ? newData.MaritalStatus.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">MaritalStatus</td>
+                                            <td class="text-left">@(oldData != null ? oldData.MaritalStatus.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.MaritalStatus.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.JoinSeminar.ToString() : string.Empty) != (newData != null ? newData.JoinSeminar.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">JoinSeminar</td>
+                                            <td class="text-left">@(oldData != null ? oldData.JoinSeminar.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.JoinSeminar.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.JoinedDate.ToString() : string.Empty) != (newData != null ? newData.JoinedDate.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">JoinedDate</td>
+                                            <td class="text-left">@(oldData != null ? oldData.JoinedDate.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.JoinedDate.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.InterestingDevice : string.Empty) != (newData != null ? newData.InterestingDevice : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">InterestingDevice</td>
+                                            <td class="text-left">@(oldData != null ? oldData.InterestingDevice : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.InterestingDevice : string.Empty)</td>
+                                        </tr>
+                                    } if ((oldData != null ? oldData.LeadTime.ToString() : string.Empty) != (newData != null ? newData.LeadTime.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">LeadTime</td>
+                                            <td class="text-left">@(oldData != null ? oldData.LeadTime.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.LeadTime.ToString() : string.Empty)</td>
+                                        </tr>
+                                    } if ((oldData != null ? oldData.SundayWork.ToString() : string.Empty) != (newData != null ? newData.SundayWork.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">SundayWork</td>
+                                            <td class="text-left">@(oldData != null ? oldData.SundayWork.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.SundayWork.ToString() : string.Empty)</td>
+                                        </tr>
+                                    } if ((oldData != null ? oldData.SundayStart.ToString() : string.Empty) != (newData != null ? newData.SundayStart.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">SundayStart</td>
+                                            <td class="text-left">@(oldData != null ? oldData.SundayStart.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.SundayStart.ToString() : string.Empty)</td>
+                                        </tr>
+                                    } if ((oldData != null ? oldData.SundayEnd.ToString() : string.Empty) != (newData != null ? newData.SundayEnd.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">SundayEnd</td>
+                                            <td class="text-left">@(oldData != null ? oldData.SundayEnd.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.SundayEnd.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.MondayWork.ToString() : string.Empty) != (newData != null ? newData.MondayWork.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">MondayWork</td>
+                                            <td class="text-left">@(oldData != null ? oldData.MondayWork.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.MondayWork.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.MondayStart.ToString() : string.Empty) != (newData != null ? newData.MondayStart.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">MondayStart</td>
+                                            <td class="text-left">@(oldData != null ? oldData.MondayStart.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.MondayStart.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.MondayEnd.ToString() : string.Empty) != (newData != null ? newData.MondayEnd.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">MondayEnd</td>
+                                            <td class="text-left">@(oldData != null ? oldData.MondayEnd.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.MondayEnd.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+
+                                    if ((oldData != null ? oldData.TuesdayWork.ToString() : string.Empty) != (newData != null ? newData.TuesdayWork.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">TuesdayWork</td>
+                                            <td class="text-left">@(oldData != null ? oldData.TuesdayWork.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.TuesdayWork.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.TuesdayStart.ToString() : string.Empty) != (newData != null ? newData.TuesdayStart.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">TuesdayStart</td>
+                                            <td class="text-left">@(oldData != null ? oldData.TuesdayStart.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.TuesdayStart.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.TuesdayEnd.ToString() : string.Empty) != (newData != null ? newData.TuesdayEnd.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">TuesdayEnd</td>
+                                            <td class="text-left">@(oldData != null ? oldData.TuesdayEnd.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.TuesdayEnd.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+
+                                    if ((oldData != null ? oldData.WednesdayWork.ToString() : string.Empty) != (newData != null ? newData.WednesdayWork.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">WednesdayWork</td>
+                                            <td class="text-left">@(oldData != null ? oldData.WednesdayWork.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.WednesdayWork.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.WednesdayStart.ToString() : string.Empty) != (newData != null ? newData.WednesdayStart.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">WednesdayStart</td>
+                                            <td class="text-left">@(oldData != null ? oldData.WednesdayStart.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.WednesdayStart.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.WednesdayEnd.ToString() : string.Empty) != (newData != null ? newData.WednesdayEnd.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">WednesdayEnd</td>
+                                            <td class="text-left">@(oldData != null ? oldData.WednesdayEnd.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.WednesdayEnd.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+
+                                    if ((oldData != null ? oldData.ThursdayWork.ToString() : string.Empty) != (newData != null ? newData.ThursdayWork.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">ThursdayWork</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ThursdayWork.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.ThursdayWork.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.ThursdayStart.ToString() : string.Empty) != (newData != null ? newData.ThursdayStart.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">ThursdayStart</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ThursdayStart.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.ThursdayStart.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.ThursdayEnd.ToString() : string.Empty) != (newData != null ? newData.ThursdayEnd.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">ThursdayEnd</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ThursdayEnd.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.ThursdayEnd.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+
+                                    if ((oldData != null ? oldData.FridayWork.ToString() : string.Empty) != (newData != null ? newData.FridayWork.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">FridayWork</td>
+                                            <td class="text-left">@(oldData != null ? oldData.FridayWork.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.FridayWork.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.FridayStart.ToString() : string.Empty) != (newData != null ? newData.FridayStart.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">FridayStart</td>
+                                            <td class="text-left">@(oldData != null ? oldData.FridayStart.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.FridayStart.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.FridayEnd.ToString() : string.Empty) != (newData != null ? newData.FridayEnd.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">FridayEnd</td>
+                                            <td class="text-left">@(oldData != null ? oldData.FridayEnd.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.FridayEnd.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+
+                                    if ((oldData != null ? oldData.SaturdayWork.ToString() : string.Empty) != (newData != null ? newData.SaturdayWork.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">SaturdayWork</td>
+                                            <td class="text-left">@(oldData != null ? oldData.SaturdayWork.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.SaturdayWork.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.SaturdayStart.ToString() : string.Empty) != (newData != null ? newData.SaturdayStart.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">SaturdayStart</td>
+                                            <td class="text-left">@(oldData != null ? oldData.SaturdayStart.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.SaturdayStart.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.SaturdayEnd.ToString() : string.Empty) != (newData != null ? newData.SaturdayEnd.ToString() : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>   
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">SaturdayEnd</td>
+                                            <td class="text-left">@(oldData != null ? oldData.SaturdayEnd.ToString() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.SaturdayEnd.ToString() : string.Empty)</td>
+                                        </tr>
+                                    }
+                                   
+
+                                    if ((oldData != null ? oldData.Remark : string.Empty) != (newData != null ? newData.Remark : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        <tr>
+                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">SaturdayEnd</td>
+                                            <td class="text-left">@(oldData != null ? oldData.Remark : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? newData.Remark : string.Empty)</td>
+                                        </tr>
+                                    }
+                                }
+                                Model.Pagination.SetValue("TotalRecords", countrow);
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+                @Html.PaginationFor(m => m.Pagination, "customerLog.goPage({0})", "customerLog.changePageSize({0})")
+            </div>
+        </div>
+    </div>
+</div>
+

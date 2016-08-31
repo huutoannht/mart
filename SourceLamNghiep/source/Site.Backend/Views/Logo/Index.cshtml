@@ -1,0 +1,95 @@
+﻿@using Share.Messages.BeScreens.Menu
+@model Models.AppSetting.AppSettingModel
+@{
+    ViewBag.Title = Menu.Logo;
+}
+
+@Html.Partial("EditorTemplates/_Notify")
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @ViewBag.Title
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm(Model.ActionSave, Model.ControllerSave, FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.SettingType)
+                    @Html.HiddenFor(m => m.Name)
+                    @Html.HiddenFor(m => m.Value)
+
+                    @Html.HiddenFor(m => m.Id2)
+                    @Html.HiddenFor(m => m.Name2)
+
+                    @Html.HiddenFor(m => m.Id3)
+                    @Html.HiddenFor(m => m.Name3)
+
+                    @Html.HiddenFor(m => m.ControllerReturn)
+                    @Html.HiddenFor(m => m.ActionReturn)
+
+                    @Html.HiddenFor(m => m.ControllerSave)
+                    @Html.HiddenFor(m => m.ActionSave)
+                        
+                    @Html.ValidationSummary(string.Empty)
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Logo</label>
+                        <div class="col-md-4">
+                            @Html.HiddenFor(m => m.ImagePath)
+                            @Html.HiddenFor(m => m.OldImagePath)
+                            <input type="file" name="fileImage" id="fileImage" accept="image/*" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Login page background image</label>
+                        <div class="col-md-4">
+                            @Html.HiddenFor(m => m.ImagePath2)
+                            @Html.HiddenFor(m => m.OldImagePath2)
+                            <input type="file" name="fileImage2" id="fileImage2" accept="image/*" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Browser Icon</label>
+                        <div class="col-sm-4">
+                            @Html.HiddenFor(m => m.ImagePath3)
+                            @Html.HiddenFor(m => m.OldImagePath3)
+                            <input type="file" name="fileImage3" id="fileImage3" accept="image/*" />
+                        </div>
+                    </div>   
+                    
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button onclick="appSettingImage.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Head
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_css")
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+
+    @Scripts.Render("~/js/appSettingImage")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            appSettingImage.init({
+                imagePath: "@(Html.ImageIsExist(Model.ImagePath) ? Url.ImageLink(Model.ImagePath) : string.Empty)",
+                imagePath2: "@(Html.ImageIsExist(Model.ImagePath2) ? Url.ImageLink(Model.ImagePath2) : string.Empty)",
+                imagePath3: "@(Html.ImageIsExist(Model.ImagePath3) ? Url.ImageLink(Model.ImagePath3) : string.Empty)",
+                saveImageUrl: "@Url.Action("SaveImage")",
+                indexUrl: "@Url.Action("Index")",
+            });
+        });
+    </script>
+
+}

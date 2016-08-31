@@ -1,0 +1,20 @@
+﻿@{
+    var currentLanguage = SiteUtils.GetCurrentLanguageCode();
+}
+
+@if (currentLanguage == "vi-VN")
+{
+    <script src="~/Content/scripts/plug-in/moment-develop/locale/vi.js"></script>
+}
+else if (currentLanguage == "km-KH")
+{
+    <script src="~/Content/scripts/plug-in/moment-develop/locale/km.js"></script>
+}
+else if (currentLanguage == "fa-IR")
+{
+    <script src="~/Content/scripts/plug-in/moment-develop/locale/fa.js"></script>
+}
+
+
+
+

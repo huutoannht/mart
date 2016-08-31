@@ -1,0 +1,23 @@
+﻿@model Models.Customer.CustomerModel
+@{
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+    var beUsers = cache.GetAllBeUsers();
+    var staffIds = Model.AssignTo.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+    var staffNames = new List<string>();
+    staffIds.ForEach(id =>
+    {
+        var beUser = beUsers.FirstOrDefault(i => i.Id == id.ToGuid());
+        if (beUser != null)
+        {
+            staffNames.Add(beUser.FullName);
+        }
+    });
+}
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.AssignTo, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.Raw(string.Join("<br/>", staffNames))
+    </div>
+</div>
+
+@Html.Partial("BaseView/Customer/Inc/_other")

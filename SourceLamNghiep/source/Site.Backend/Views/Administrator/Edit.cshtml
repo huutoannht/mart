@@ -1,0 +1,131 @@
+﻿@model Models.BeUser.BeUserModel
+@using AdministratorRes = Share.Messages.BeScreens.Administrator.Administrator
+@{
+    var cacheHelper = ObjectFactory.GetInstance<ICacheHelper>();
+    var roles = cacheHelper.GetRoles().MapList<Reference>();
+    ViewBag.Title = Model.IsNew ? AdministratorRes.AddNewAdministratorPageTitle : AdministratorRes.EditAdministratorPageTitle;
+}
+
+@Html.Partial("EditorTemplates/_Notify")
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @AdministratorRes.UserInfo
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Save", "Administrator", FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Type)
+                    @Html.ValidationSummary(string.Empty)
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+                        </div>
+                        @Html.CustomLabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                        <label class="col-md-2 control-label">
+                            @(Model.IsNew ? AdministratorRes.Password : AdministratorRes.PasswordNew)
+                            <span class="red">*</span>
+                        </label>
+                        <div class="col-md-4">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", autocomplete = "off" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.BirthDay, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                @Html.TextBoxDateFor(m => m.BirthDay, new { @class = "form-control" })
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                        @Html.CustomLabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.EnumDropDownFor(m => m.Gender, BackendMessage.Select, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.RoleId, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.RoleId, roles.ToSelectList(), BackendMessage.Select, new { @class = "form-control chosen" })
+                        </div>
+                        @Html.CustomLabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.EnumDropDownFor(m => m.Status, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.PositionId, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.PositionId, cacheHelper.GetCategories(CategoryType.Position).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+                        </div>
+                        @Html.CustomLabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ImagePath, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.HiddenFor(m => m.ImagePath)
+                            @Html.HiddenFor(m => m.OldImagePath)
+                            <input type="file" name="fileImage" id="fileImage" accept="image/*" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div class="col-md-10">
+                            <button onclick="administrator.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                            <a href="@Url.Action("Index")" class="btn btn-warning">@BackendMessage.BackToIndex</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Head
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_css")
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+    @Scripts.Render("~/js/administrator")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            administrator.initEdit({
+                userId: "@Model.Id",
+                imagePath: "@(Html.ImageIsExist(Model.ImagePath) ? Url.ImageLink(Model.ImagePath) : string.Empty)",
+                passwordRequiredMsg: "@AdministratorRes.PasswordRequired",
+                roleRequiredMsg: "@AdministratorRes.RoleRequired",
+                adminId: "@(BeUserType.Admin.ToString())",
+                indexUrl: "@Url.Action("Index")",
+                saveUrl: "@Url.Action("Save")"
+            });
+        });
+    </script>
+}

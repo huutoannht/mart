@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8FCD4F51-FD51-42BE-892C-E80E609F0744}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Models</RootNamespace>
+    <AssemblyName>Models</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\References\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ML.Common">
+      <HintPath>..\References\ML.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\References\StructureMap\3.1.6.186\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSetting\AppSettingIndexModel.cs" />
+    <Compile Include="AppSetting\AppSettingModel.cs" />
+    <Compile Include="Artice\ArticeIndexModel.cs" />
+    <Compile Include="Artice\ArticeModel.cs" />
+    <Compile Include="Authen\AuthenViewModel.cs" />
+    <Compile Include="Authen\RecoverPasswordModel.cs" />
+    <Compile Include="Authen\ResetPasswordModel.cs" />
+    <Compile Include="AutoMapperCommonConfiguration.cs" />
+    <Compile Include="BeUser\BeUserIndexModel.cs" />
+    <Compile Include="BeUser\BeUserModel.cs" />
+    <Compile Include="Category\CategoryImageModel.cs" />
+    <Compile Include="Category\CategoryIndexModel.cs" />
+    <Compile Include="Category\CategoryModel.cs" />
+    <Compile Include="Customer\CustomerImageModel.cs" />
+    <Compile Include="Customer\CustomerVisitIndexModel.cs" />
+    <Compile Include="Customer\CustomerVisitModel.cs" />
+    <Compile Include="DataLog\DataLogIndexModel.cs" />
+    <Compile Include="DataLog\DataLogModel.cs" />
+    <Compile Include="File\FileIndexModel.cs" />
+    <Compile Include="File\FileModel.cs" />
+    <Compile Include="HtmlContent\HtmlContentModel.cs" />
+    <Compile Include="Product\ProductImageModel.cs" />
+    <Compile Include="Product\ProductIndexModel.cs" />
+    <Compile Include="Product\ProductModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role\RoleIndexModel.cs" />
+    <Compile Include="Role\RoleModel.cs" />
+    <Compile Include="Role\RolePermissionModel.cs" />
+    <Compile Include="SystemEmailTemplate\SystemEmailTemplateIndexModel.cs" />
+    <Compile Include="SystemEmailTemplate\SystemEmailTemplateModel.cs" />
+    <Compile Include="Customer\CustomerIndexModel.cs" />
+    <Compile Include="Customer\CustomerModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data.DataContract\Data.DataContract.csproj">
+      <Project>{81fcd4ea-9360-4193-9e7c-e6de1eaa1602}</Project>
+      <Name>Data.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Share.Helper\Share.Helper.csproj">
+      <Project>{ab65a81e-ee9d-4a7c-b122-15aac44b66d6}</Project>
+      <Name>Share.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Share.Messages\Share.Messages.csproj">
+      <Project>{9d19077a-0e59-4825-bfea-8ed99aa00f55}</Project>
+      <Name>Share.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

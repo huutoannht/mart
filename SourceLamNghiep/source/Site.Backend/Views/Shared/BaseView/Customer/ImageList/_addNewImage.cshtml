@@ -1,0 +1,28 @@
+﻿@using Share.Messages.BeScreens.ProductRes
+@model Models.Customer.CustomerModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @ProductRes.AddNewImage
+            </div>
+            <div class="panel-body">
+                <form id="formCustomerImage" class="form-horizontal" enctype="multipart/form-data">
+                    @Html.Hidden("CustomerId", Model.Id)
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="file" name="fileImage" id="fileImage" accept="image/*" />
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-success" onclick="customer.saveImage()"><span>@BackendMessage.Save</span></button>
+                            <button type="button" class="btn btn-default" onclick="customer.cancelAddNewImage()"><span>@BackendMessage.Cancel</span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

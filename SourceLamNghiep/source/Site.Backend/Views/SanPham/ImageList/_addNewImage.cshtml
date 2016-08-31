@@ -1,0 +1,40 @@
+﻿@using Share.Messages.BeScreens.ProductRes
+@model Models.Product.ProductModel
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @ProductRes.AddNewImage
+            </div>
+            <div class="panel-body">
+                <form id="formProductImage" class="form-horizontal" enctype="multipart/form-data">
+                    @Html.Hidden("ProductId", Model.Id)
+                    @Html.Hidden("CategoryId", string.Empty)
+                    @Html.Hidden("ProductName", string.Empty)
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@ProductRes.Visible</label>
+                        <div class="col-md-1 pt6">
+                            <div class="checkbox-list">
+                                <label>
+                                    <input id="Visible" name="Visible" type="checkbox" checked="checked" value="true"/>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="file" name="fileImage" id="fileImage" accept="image/*"/>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-success" onclick="sanPham.saveImage()"><span>@BackendMessage.Save</span></button>
+                            <button type="button" class="btn btn-default" onclick="sanPham.cancelAddNewImage()"><span>@BackendMessage.Cancel</span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

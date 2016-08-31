@@ -1,0 +1,86 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerModel
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-hidden="true"
+                class="close">
+                &times;</button>
+            <h4 id="modal-default-label" class="modal-title">
+                @CustomerRes.Customer <strong>"@Model.ClinicName"</strong>
+            </h4>
+        </div>
+        <div class="modal-body">
+            @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <div class="col-md-12">
+
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#divTabClinicInformation" data-toggle="tab">@CustomerRes.ClinicInformation</a>
+                            </li>
+                            <li>
+                                <a href="#divTabDentistInfo" data-toggle="tab">@CustomerRes.DentistInfo</a>
+                            </li>
+                            <li>
+                                <a href="#divTabWorkingHours" data-toggle="tab">@CustomerRes.WorkingHours</a>
+                            </li>
+                            <li>
+                                <a href="#divTabVisit" data-toggle="tab">@CustomerRes.Visit</a>
+                            </li>
+                            @if (Model.CustomerType == CustomerType.Current)
+                            {
+                                <li>
+                                    <a href="#divTabHistoryPurchase" data-toggle="tab">@CustomerRes.HistoryPurchase</a>
+                                </li>
+                            }
+                            <li>
+                                <a href="#divTabOther" data-toggle="tab">@CustomerRes.Other</a>
+                            </li>
+                            <li>
+                                <a href="#divTabRemark" data-toggle="tab">@CustomerRes.Remark</a>
+                            </li>
+                            <li>
+                                <a href="#divTabMap" data-toggle="tab">@CustomerRes.Map</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="divTabClinicInformation" class="tab-pane fade in active">
+                                @Html.Partial("BaseView/Customer/View/_clinicInfo")
+                            </div>
+                            <div id="divTabDentistInfo" class="tab-pane fade in">
+                                @Html.Partial("BaseView/Customer/View/_dentistInfo")
+                            </div>
+                            <div id="divTabWorkingHours" class="tab-pane fade in">
+                                @Html.Partial("BaseView/Customer/View/_workHours")
+                            </div>
+                            <div id="divTabVisit" class="tab-pane fade in">
+                                @Html.Partial("BaseView/Customer/View/_visit", Model.VisitIndex)
+                            </div>
+                            @if (Model.CustomerType == CustomerType.Current)
+                            {
+                                <div id="divTabHistoryPurchase" class="tab-pane fade in">
+                                    @Html.Partial("BaseView/Customer/Inc/_historyPurchase")
+                                </div>
+                            }
+                            <div id="divTabOther" class="tab-pane fade in">
+                                @Html.Partial("BaseView/Customer/View/_other")
+                            </div>
+                            <div id="divTabRemark" class="tab-pane fade in">
+                                @Html.Partial("BaseView/Customer/View/_remark")
+                            </div>
+                            <div id="divTabMap" class="tab-pane fade in">
+                                @Html.Partial("BaseView/Customer/Inc/_map")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-default">@BackendMessage.Close</button>
+        </div>
+    </div>
+</div>

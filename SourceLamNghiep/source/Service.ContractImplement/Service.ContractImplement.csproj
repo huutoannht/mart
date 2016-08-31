@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0101B51F-B85E-44D1-A449-BAA2FF1A6EEA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Service.ContractImplement</RootNamespace>
+    <AssemblyName>Service.ContractImplement</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\ML\References\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="ML.Common">
+      <HintPath>..\References\ML.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ML.Utils.Email">
+      <HintPath>..\References\ML.Utils.Email.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\References\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\References\StructureMap\3.1.6.186\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\References\StructureMap\3.1.6.186\StructureMap.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettingService.cs" />
+    <Compile Include="ArticeService.cs" />
+    <Compile Include="BeUserService.cs" />
+    <Compile Include="CategoryService.cs" />
+    <Compile Include="ContactUsService.cs" />
+    <Compile Include="DataLogService.cs" />
+    <Compile Include="FileService.cs" />
+    <Compile Include="HtmlContentService.cs" />
+    <Compile Include="ProductService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestPasswordService.cs" />
+    <Compile Include="RefreshTokenService.cs" />
+    <Compile Include="RoleService.cs" />
+    <Compile Include="SystemEmailTemplateService.cs" />
+    <Compile Include="CustomerService.cs" />
+    <Compile Include="__BaseService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data.DataContract\Data.DataContract.csproj">
+      <Project>{81fcd4ea-9360-4193-9e7c-e6de1eaa1602}</Project>
+      <Name>Data.DataContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Db.Interfaces\Db.Interfaces.csproj">
+      <Project>{db48a3cc-27e1-402c-bf64-f610fe567214}</Project>
+      <Name>Db.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service.Contract\Service.Contract.csproj">
+      <Project>{1a05e5b9-20ca-4065-9e3c-0e50d2c1e09e}</Project>
+      <Name>Service.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Share.Helper\Share.Helper.csproj">
+      <Project>{ab65a81e-ee9d-4a7c-b122-15aac44b66d6}</Project>
+      <Name>Share.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Share.Messages\Share.Messages.csproj">
+      <Project>{9d19077a-0e59-4825-bfea-8ed99aa00f55}</Project>
+      <Name>Share.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

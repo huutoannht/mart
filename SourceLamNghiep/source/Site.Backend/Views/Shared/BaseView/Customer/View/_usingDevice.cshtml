@@ -1,0 +1,24 @@
+﻿@model Models.Customer.CustomerModel
+@{
+    var cates = SiteUtils.BuildCategoryListFromTree();
+    Model.UsingDevices = Model.UsingDevices.ToStr();
+    var usingDeviceIds = Model.UsingDevices.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+    var deviceNames = new List<string>();
+    usingDeviceIds.ForEach(id =>
+    {
+        var cate = cates.FirstOrDefault(i => i.Id == id.ToGuid());
+        if (cate != null)
+        {
+            deviceNames.Add(cate.Name);
+        }
+    });
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.UsingDevices, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        <label class="control-label">
+            @Html.Raw(string.Join("<br/>", deviceNames))
+        </label>
+    </div>
+</div>

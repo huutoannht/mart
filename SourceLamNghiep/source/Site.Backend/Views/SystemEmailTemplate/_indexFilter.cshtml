@@ -1,0 +1,34 @@
+﻿@model Models.SystemEmailTemplate.SystemEmailTemplateIndexModel
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @BackendMessage.Filter
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Index", "SystemEmailTemplate", FormMethod.Post, new { id = "formFilter", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.ValidationSummary(string.Empty)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.EnumDropDownFor(m => m.Type, BackendMessage.Select, new { @class = "form-control chosen" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Language, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.Language, SiteUtils.LanguageList().ToSelectList(), BackendMessage.Select, new { @class = "form-control chosen" })
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-md-offset-1 col-md-10">
+                            <button onclick="systemEmailTemplate.searchClick()" class="btn btn-success" type="button">@BackendMessage.Search</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

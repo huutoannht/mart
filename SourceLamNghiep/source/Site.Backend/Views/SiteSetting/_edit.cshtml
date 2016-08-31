@@ -1,0 +1,151 @@
+﻿@using Share.Messages.BeScreens.SiteSetting
+@model Models.AppSetting.AppSettingModel
+
+@functions{
+    public string IsActive(string dataTheme)
+    {
+        if (dataTheme == Model.Value) return "active";
+        return string.Empty;
+    }
+}
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @(Model.IsNew ? SiteSetting.AddPageTitle : SiteSetting.EditPageTitle)
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Save", "SiteSetting", FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.ValidationSummary(string.Empty)
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.SettingType, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-5">
+                            @if (Model.IsNew)
+                            {
+                                @Html.EnumDropDownFor(m => m.SettingType, BackendMessage.Select, new { @class = "form-control chosen" })
+                            }
+                            else
+                            {
+                                <label class="control-label">@Model.SettingType.GetEnumDesRes()</label>
+                                @Html.HiddenFor(m => m.SettingType)
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-5">
+                            @if (Model.IsNew)
+                            {
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", maxlength = "500" })
+                            }
+                            else
+                            {
+                                <label class="control-label">@Model.Name</label>
+                                @Html.HiddenFor(m => m.Name)
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Value, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-5">
+                            @if (Model.Name == ConstKeys.StoreSiteColor)
+                            {
+                                <div class="colours-wrapper">
+                                    @Html.HiddenFor(m => m.Value)
+                                    @{
+                                var arrColor = new List<string> { "green", "blue", "dark-blue" };
+                                foreach (var color in arrColor)
+                                {
+                                        <div onclick="siteSetting.updateValue(this, '@color')" class="entry @IsActive(color)" style="color: @SiteUtils.GetFrontEndColorCode(color);"></div>
+                                }
+                                    }
+                                </div>
+                            }
+                            else if (Model.Name == ConstKeys.AdminSiteColor)
+                            {
+                                <div class="colours-wrapper">
+                                    @Html.HiddenFor(m => m.Value)
+                                    @{
+                                var arrColor = new List<string>
+                                        {
+                                            "green-dark","red-dark","pink-dark","blue-dark","yellow-dark",
+                                            "green-grey","red-grey","pink-grey","blue-grey","yellow-grey",
+                                            "yellow-green","orange-grey","pink-blue","pink-violet",
+                                            "orange-violet","pink-green","pink-brown","orange-blue",
+                                            "yellow-blue","green-blue"
+                                        };
+                                foreach (var color in arrColor)
+                                {
+                                        <div onclick="siteSetting.updateValue(this, '@color')" class="parent-entry2 @IsActive(color)">
+                                            <div class="entry2 @color"></div>
+                                        </div>
+                                }
+                                    }
+                                </div>
+                            }
+                            else if (Model.Name == ConstKeys.AdminNotifyLanguage || Model.Name == ConstKeys.DefaultDisplayLanguage)
+                            {
+                                <div class="col-md-3" style="padding-left: 0">
+                                    @Html.DropDownListFor(m => m.Value, SiteUtils.LanguageList().ToSelectList(), new { @class = "form-control" })
+                                </div>
+                            }
+                            else if (Model.Name == ConstKeys.SmsVendor)
+                            {
+                                <div class="col-md-3" style="padding-left: 0">
+                                    @Html.DropDownListFor(m => m.Value, SiteUtils.GetSmsVendors().ToSelectList(), new { @class = "form-control" })
+                                </div>
+                            }
+                            else if (Model.Name == ConstKeys.Currency)
+                            {
+                                <div class="col-md-3" style="padding-left: 0">
+                                    @Html.DropDownListFor(m => m.Value, SiteUtils.CurrencyList().ToSelectList(), new { @class = "form-control" })
+                                </div>
+                            }
+                            else if (Model.Name == ConstKeys.GoogleScript)
+                            {
+                                @Html.TextAreaFor(m => m.Value, new { @class = "form-control", rows = 10 })
+                            }
+                            else if (Model.Name == ConstKeys.SmtpPassword)
+                            {
+                                @Html.Password("Value", string.Empty, new { @class = "form-control", rows = 10 })
+                            }
+                            else if (Model.Name == ConstKeys.PaypalIsSandbox)
+                            {
+                                <div class="checkbox mtx">
+                                    <label>
+                                        <input name="@Html.GetFullHtmlFieldName(m => m.Value)" id="@Html.GetFullHtmlFieldId(m => m.Id)"
+                                                type="checkbox" value="true" @(Model.Value.ToBool() ? "checked=\"checked\"" : string.Empty)/>
+                                    </label>
+                                </div>
+                            }
+                            else if (Model.Name == ConstKeys.ExchangeRateToUSD)
+                            {
+                                @Html.TextBoxFor(m => m.Value, new {@class = "form-control currency"})
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(m => m.Value, new {@class = "form-control"})
+                            }
+
+                            @if (Model.Name == ConstKeys.HotlineHoTro || Model.Name == ConstKeys.HotlineMuaSi)
+                            {
+                                <p class="text-danger mt4 italic">@SiteSetting.PhoneNumbersSeperateBySimicolon</p>
+                            }
+                        </div>
+                    </div>
+                        
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button onclick="siteSetting.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                            <button onclick="$('#divEdit').hide()" class="btn btn-default" type="button">@BackendMessage.Close</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

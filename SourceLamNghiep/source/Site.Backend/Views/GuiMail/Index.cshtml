@@ -1,0 +1,85 @@
+﻿@using Share.Messages.BeScreens.GuiMail
+@model Site.Backend.Models.ComposeMailModel
+@{
+    ViewBag.Title = GuiMail.PageTitle;
+}
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @ViewBag.Title
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new {id = "formInfo", role = "form", @class = "form-horizontal"}))
+                {
+                    @Html.Partial("EditorTemplates/_Notify")
+                    @Html.ValidationSummary(string.Empty)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Emails, new {@class = "col-md-2 control-label"})
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Emails, new {@class = "form-control"})
+                            <span class="help-block">@GuiMail.EmailsSeperateBySemicolon</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
+                            <div class="checkbox-list">
+                                <label>
+                                    @Html.CustomCheckBoxFor(m => m.SendToAllRegisteredCustomer)&nbsp;
+                                    @GuiMail.SendToAllRegisteredCustomer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Subject, new {@class = "col-md-2 control-label"})
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Subject, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Content, new {@class = "col-md-2 control-label"})
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(m => m.Content, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@GuiMail.FileAttach</label>
+                        <div id="divFiles" class="col-md-10">
+                            <div class="col-md-12">
+                                <input type="file" name="fileImage1"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <button type="button" class="btn btn-info" onclick="guiMail.addNewFile()"><i class="fa fa-plus"></i>@BackendMessage.AddFile</button>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button onclick="guiMail.send()" class="btn btn-success" type="button">@GuiMail.Send</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/CkEditor/_scripts")
+    @Scripts.Render("~/js/guiMail")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            guiMail.init({
+                emailsRequiredMsg: "@GuiMail.EmailsRequired",
+                sendUrl: "@Url.Action("Send")"
+            });
+        });
+    </script>
+}

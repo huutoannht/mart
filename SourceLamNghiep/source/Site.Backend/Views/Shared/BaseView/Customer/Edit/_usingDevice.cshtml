@@ -1,0 +1,39 @@
+﻿@using Data.DataContract.CategoryDC
+@model Models.Customer.CustomerModel
+@{
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+    var productCates = cache.GetCategoryTreeList().Where(i => i.CategoryType == CategoryType.Product);
+    Model.UsingDevices = Model.UsingDevices.ToStr();
+}
+
+@helper RenderCateOption(Category cate)
+{
+    <option value="@cate.Id" @(Model.UsingDevices.Contains(cate.Id.ToStr()) ? "selected=\"selected\"" : string.Empty)>
+        @if (cate.LevelPadding > 0)
+        {
+            @Html.Raw("&nbsp;".Repeat(cate.LevelPadding))
+        }
+        @cate.Name
+    </option>
+    if (cate.Childs.Any())
+    {
+        foreach (var c in cate.Childs)
+        {
+            @RenderCateOption(c)
+        }
+    }
+}
+
+<div class="form-group">
+    @Html.LabelFor(m => m.UsingDevices, new { @class = "col-md-2 control-label" })
+    <div id="divUsingDevice" class="col-md-4">
+        <div class="divUsingDevice">
+            @foreach (var cate in productCates)
+            {
+                <div class="col-md-12">
+                    <div class="tree" parentid="@cate.Id"></div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

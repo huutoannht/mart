@@ -1,0 +1,181 @@
+﻿@model Models.Customer.CustomerModel
+@{
+    const string subfix = "Str";
+}
+<div class="form-group">
+    @if (Model.SundayWork)
+    {
+        <div class="row mbm">
+            <div class="col-md-2">
+                <div class="checkbox-list mt5">
+                    <label>
+                        @Html.CustomCheckBoxFor(m => m.SundayWork, new { disabled = "disabled" })&nbsp;
+                        @WeekDay.Sunday.GetEnumDesRes()
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.SundayStart.ToTimeString(), new { @class = "control-label" })
+            </div>
+            <div class="col-md-1">
+                <div class="input-group">
+                    <span class="input-group-addon">@BackendMessage.To</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.SundayEnd.ToTimeString(), new { @class = "control-label" })
+            </div>
+        </div>
+    }
+
+    @if (Model.MondayWork)
+    {
+        <div class="row mbm">
+            <div class="col-md-2">
+                <div class="checkbox-list mt5">
+                    <label>
+                        @Html.CustomCheckBoxFor(m => m.MondayWork, new { disabled = "disabled" })&nbsp;
+                    @WeekDay.Monday.GetEnumDesRes()
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.MondayStart.ToTimeString(), new { @class = "control-label" })
+            </div>
+            <div class="col-md-1">
+                <div class="input-group">
+                    <span class="input-group-addon">@BackendMessage.To</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.MondayEnd.ToTimeString(), new { @class = "control-label" })
+            </div>
+        </div>
+    }
+
+    @if (Model.TuesdayWork)
+    {
+        <div class="row mbm">
+            <div class="col-md-2">
+                <div class="checkbox-list mt5">
+                    <label>
+                        @Html.CustomCheckBoxFor(m => m.TuesdayWork, new { disabled = "disabled" })&nbsp;
+                    @WeekDay.Tuesday.GetEnumDesRes()
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.TuesdayStart.ToTimeString(), new { @class = "control-label" })
+            </div>
+            <div class="col-md-1">
+                <div class="input-group">
+                    <span class="input-group-addon">@BackendMessage.To</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.TuesdayEnd.ToTimeString(), new { @class = "control-label" })
+            </div>
+        </div>
+    }
+
+    @if (Model.WednesdayWork)
+    {
+        <div class="row mbm">
+            <div class="col-md-2">
+                <div class="checkbox-list mt5">
+                    <label>
+                        @Html.CustomCheckBoxFor(m => m.WednesdayWork, new { disabled = "disabled" })&nbsp;
+                    @WeekDay.Wednesday.GetEnumDesRes()
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.WednesdayStart.ToTimeString(), new { @class = "control-label" })
+            </div>
+            <div class="col-md-1">
+                <div class="input-group">
+                    <span class="input-group-addon">@BackendMessage.To</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.WednesdayEnd.ToTimeString(), new { @class = "control-label" })
+            </div>
+        </div>
+    }
+
+    @if (Model.ThursdayWork)
+    {
+        <div class="row mbm">
+            <div class="col-md-2">
+                <div class="checkbox-list mt5">
+                    <label>
+                        @Html.CustomCheckBoxFor(m => m.ThursdayWork, new { disabled = "disabled" })&nbsp;
+                    @WeekDay.Thursday.GetEnumDesRes()
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.ThursdayStart.ToTimeString(), new { @class = "control-label" })
+            </div>
+            <div class="col-md-1">
+                <div class="input-group">
+                    <span class="input-group-addon">@BackendMessage.To</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.ThursdayEnd.ToTimeString(), new { @class = "control-label" })
+            </div>
+        </div>
+    }
+
+    @if (Model.FridayWork)
+    {
+        <div class="row mbm">
+            <div class="col-md-2">
+                <div class="checkbox-list mt5">
+                    <label>
+                        @Html.CustomCheckBoxFor(m => m.FridayWork, new { disabled = "disabled" })&nbsp;
+                    @WeekDay.Friday.GetEnumDesRes()
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.FridayStart.ToTimeString(), new { @class = "control-label" })
+            </div>
+            <div class="col-md-1">
+                <div class="input-group">
+                    <span class="input-group-addon">@BackendMessage.To</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.FridayEnd.ToTimeString(), new { @class = "control-label" })
+            </div>
+        </div>
+    }
+
+    @if (Model.SaturdayWork)
+    {
+        <div class="row mbm">
+            <div class="col-md-2">
+                <div class="checkbox-list mt5">
+                    <label>
+                        @Html.CustomCheckBoxFor(m => m.SaturdayWork, new { disabled = "disabled" })&nbsp;
+                    @WeekDay.Saturday.GetEnumDesRes()
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.SaturdayStart.ToTimeString(), new { @class = "control-label" })
+            </div>
+            <div class="col-md-1">
+                <div class="input-group">
+                    <span class="input-group-addon">@BackendMessage.To</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                @Html.Label(Model.SaturdayEnd.ToTimeString(), new { @class = "control-label" })
+            </div>
+        </div>
+    }
+
+</div>

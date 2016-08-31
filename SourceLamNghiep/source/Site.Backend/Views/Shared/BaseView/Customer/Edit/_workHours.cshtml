@@ -1,0 +1,229 @@
+﻿@model Models.Customer.CustomerModel
+@{
+    const string subfix = "Str";
+}
+<div class="form-group">
+    <div class="row mbm">
+        <div class="col-md-2">
+            <div class="checkbox-list mt5">
+                <label>
+                    @Html.CustomCheckBoxFor(m => m.SundayWork)&nbsp;
+                    @WeekDay.Sunday.GetEnumDesRes()
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.SundayStartStr, new { @class = "form-control timepicker", placeholder = BackendMessage.Start })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+                <span class="input-group-addon">@BackendMessage.To</span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.SundayEndStr, new { @class = "form-control timepicker", placeholder = BackendMessage.End })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mbm">
+        <div class="col-md-2">
+            <div class="checkbox-list mt5">
+                <label>
+                    @Html.CustomCheckBoxFor(m => m.MondayWork)&nbsp;
+                    @WeekDay.Monday.GetEnumDesRes()
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.MondayStartStr, new { @class = "form-control timepicker", placeholder = BackendMessage.Start })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+                <span class="input-group-addon">@BackendMessage.To</span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.MondayEndStr, new { @class = "form-control timepicker", placeholder = BackendMessage.End })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mbm">
+        <div class="col-md-2">
+            <div class="checkbox-list mt5">
+                <label>
+                    @Html.CustomCheckBoxFor(m => m.TuesdayWork)&nbsp;
+                    @WeekDay.Tuesday.GetEnumDesRes()
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.TuesdayStartStr, new { @class = "form-control timepicker", placeholder = BackendMessage.Start })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+                <span class="input-group-addon">@BackendMessage.To</span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.TuesdayEndStr, new { @class = "form-control timepicker", placeholder = BackendMessage.End })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mbm">
+        <div class="col-md-2">
+            <div class="checkbox-list mt5">
+                <label>
+                    @Html.CustomCheckBoxFor(m => m.WednesdayWork)&nbsp;
+                    @WeekDay.Wednesday.GetEnumDesRes()
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.WednesdayStartStr, new { @class = "form-control timepicker", placeholder = BackendMessage.Start })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+                <span class="input-group-addon">@BackendMessage.To</span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.WednesdayEndStr, new { @class = "form-control timepicker", placeholder = BackendMessage.End })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mbm">
+        <div class="col-md-2">
+            <div class="checkbox-list mt5">
+                <label>
+                    @Html.CustomCheckBoxFor(m => m.ThursdayWork)&nbsp;
+                    @WeekDay.Thursday.GetEnumDesRes()
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.ThursdayStartStr, new { @class = "form-control timepicker", placeholder = BackendMessage.Start })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+                <span class="input-group-addon">@BackendMessage.To</span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.ThursdayEndStr, new { @class = "form-control timepicker", placeholder = BackendMessage.End })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mbm">
+        <div class="col-md-2">
+            <div class="checkbox-list mt5">
+                <label>
+                    @Html.CustomCheckBoxFor(m => m.FridayWork)&nbsp;
+                    @WeekDay.Friday.GetEnumDesRes()
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.FridayStartStr, new { @class = "form-control timepicker", placeholder = BackendMessage.Start })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+                <span class="input-group-addon">@BackendMessage.To</span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.FridayEndStr, new { @class = "form-control timepicker", placeholder = BackendMessage.End })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mbm">
+        <div class="col-md-2">
+            <div class="checkbox-list mt5">
+                <label>
+                    @Html.CustomCheckBoxFor(m => m.SaturdayWork)&nbsp;
+                    @WeekDay.Saturday.GetEnumDesRes()
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.SaturdayStartStr, new { @class = "form-control timepicker", placeholder = BackendMessage.Start })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="input-group">
+                <span class="input-group-addon">@BackendMessage.To</span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.SaturdayEndStr, new { @class = "form-control timepicker", placeholder = BackendMessage.End })
+                <span class="input-group-addon">
+                    <i class="fa fa-clock-o"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

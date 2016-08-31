@@ -1,0 +1,36 @@
+﻿@model Models.Product.ProductIndexModel
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @BackendMessage.Filter
+                <div class="tools">
+                    <i class="fa @Html.FilterSlideControlClass(Model.FilterVisible)"></i>
+                </div>
+            </div>
+            <div class="panel-body @Html.FilterBodyClass(Model.FilterVisible)">
+                @using (Html.BeginForm("Index", "SanPham", FormMethod.Post, new { id = "formFilter", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Pagination.CurrentPageIndex)
+                    @Html.HiddenFor(m => m.Pagination.PageSize)
+                    @Html.HiddenFor(m => m.SortBy)
+                    @Html.HiddenFor(m => m.SortDirection)
+                    @Html.HiddenFor(m => m.FilterVisible)
+                    @Html.HiddenFor(m => m.EventFiredFromSortButton)
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.TextSearch, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.TextSearch, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button onclick="sanPham.goPage(1)" class="btn btn-success" type="button">@BackendMessage.Search</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

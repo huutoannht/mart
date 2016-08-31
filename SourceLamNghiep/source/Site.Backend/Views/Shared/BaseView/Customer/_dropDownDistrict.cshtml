@@ -1,0 +1,6 @@
+﻿@model Models.Customer.CustomerIndexModel
+@{
+    var districts = SiteUtils.GetVietNamDistricts(Model.City.ToShort());
+}
+
+@Html.DropDownListFor(m => m.District, districts.ToSelectList(), BackendMessage.Select, new { @class = "form-control" })

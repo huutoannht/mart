@@ -1,0 +1,80 @@
+﻿@using Models.Category
+@using Share.Messages.BeScreens.CategoryRes
+@model CategoryIndexModel
+
+@helper RenderRow(CategoryModel item)
+{
+
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+
+    <tr level="@item.Level" data-tt-id="@item.LevelTreeView" @(!string.IsNullOrWhiteSpace(item.ParentLevelTreeView) ? string.Format("data-tt-parent-id={0}", item.ParentLevelTreeView) : string.Empty)>
+        @if (Model.CategoryType != CategoryType.Product)
+        {
+            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+        }
+        @if (Model.CategoryType == CategoryType.Product || Model.CategoryType == CategoryType.UOM)
+        {
+            <td>@item.Code</td>
+        }
+        <td>@item.Name</td>
+        <td>
+            <div class="btn-group btn-group-xs">
+                @if (Model.CategoryType == CategoryType.Product && sessionHelper.CanAdd(BePage.Roles))
+                {
+                    <button onclick="category.addNewClick('@item.Id')" class="btn btn-info">@BackendMessage.AddNewChildGroup</button>
+                }
+                @if (sessionHelper.CanUpdate(BePage.Roles))
+                {
+                    <button onclick="category.editClick('@item.Id')" class="btn btn-default">@BackendMessage.Edit</button>
+                }
+                @if (!item.Childs.Any() && sessionHelper.CanDelete(BePage.Roles))
+                {
+                    <button onclick="category.deleteClick('@item.Id')" class="btn btn-danger">@BackendMessage.Delete</button>
+                }
+            </div>
+        </td>
+    </tr>
+    if (item.Childs.Any())
+    {
+        foreach (var child in item.Childs)
+        {
+            @RenderRow(child);
+        }
+    }
+}
+
+<div class="table-responsive">
+    <table id="tblCategories" class="table table-bordered table-hover tablesorter dataTable no-footer">
+        <thead>
+            <tr>
+                @if (Model.CategoryType != CategoryType.Product)
+                {
+                    @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                }
+                @if (Model.CategoryType == CategoryType.Product || Model.CategoryType == CategoryType.UOM)
+                {
+                    <th class="@Html.ClassSort("Code", Model.SortBy, Model.SortDirection.Value)" onclick="category.sort(this, 'Code', '@Model.SortDirection.Value')">@CategoryRes.Code</th>
+                }
+                <th class="@Html.ClassSort("Name", Model.SortBy, Model.SortDirection.Value)" onclick="category.sort(this, 'Name', '@Model.SortDirection.Value')">@CategoryRes.NameOnly</th>
+                <th class="@(Model.CategoryType == CategoryType.Product ? "action-col200" : "action-col")">@BackendMessage.Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Results.Any())
+            {
+                foreach (var item in Model.Results)
+                {
+                    @RenderRow(item);
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

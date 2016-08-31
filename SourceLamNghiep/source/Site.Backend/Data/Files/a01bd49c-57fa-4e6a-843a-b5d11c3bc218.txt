@@ -1,0 +1,5 @@
+About me:
+
+I have more than 15 years of experience in software development and worked on many various positions in software companies. I am working for Microsoft Vietnam as Technical Evangelist from 2012. My main responsibility is promoting for Microsoft platforms with technical audiences, and train developers how to develop with new technology from Microsoft such as Windows Apps, Azure, Microsoft Platform and how to use cloud service to build applications. I also have deeply engagement into application solutions which include architecture design and development
+
+I also joined at some events of Vietnamese startup communities as speaker/mentor to share how to align technology with business

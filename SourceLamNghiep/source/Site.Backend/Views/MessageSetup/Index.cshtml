@@ -1,0 +1,29 @@
+﻿@model Models.HtmlContent.HtmlContentModel
+@using Share.Messages.BeScreens.MessageSetup
+@{
+    ViewBag.Title = MessageSetup.PageTitle;
+}
+
+@Html.Partial("EditorTemplates/_Notify")
+
+@Html.Partial("_indexFilter")
+
+@if (!string.IsNullOrWhiteSpace(Model.LanguageCode))
+{
+    @Html.Partial("_messageInfo")
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/CkEditor/_scripts")
+
+    @Scripts.Render("~/js/htmlContent")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            htmlContent.init({
+                isCkeditor: true
+            });
+        });
+    </script>
+}

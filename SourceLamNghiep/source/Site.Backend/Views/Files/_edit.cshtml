@@ -1,0 +1,44 @@
+﻿@using Share.Messages.BeScreens.Files
+@model Models.File.FileModel
+<script src="~/Content/scripts/plug-in/bootstrap-filestyle.js"></script>
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @Files.AddNewFile
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+
+                    <div id="divNotifyEdit">
+                        @Html.Partial("EditorTemplates/_Notify")
+                    </div>
+                    
+                    @Html.ValidationSummary(string.Empty)
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">@Files.SelectFile</label>
+                        <div class="col-md-4">
+                            @Html.HiddenFor(m => m.PhysicName)
+                            @Html.HiddenFor(m => m.OldPhysicName)
+                            <input type="file" name="fileUpload" id="fileUpload" class="mt5 filestyle" data-buttonname="btn-primary" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button onclick="file.save()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

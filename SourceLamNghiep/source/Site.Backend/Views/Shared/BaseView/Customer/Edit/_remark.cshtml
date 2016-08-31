@@ -1,0 +1,7 @@
+﻿@model Models.Customer.CustomerModel
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.Remark, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextAreaFor(m => m.Remark, new { @class = "form-control", rows = 10 })
+    </div>
+</div>

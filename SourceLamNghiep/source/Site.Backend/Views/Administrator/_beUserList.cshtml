@@ -1,0 +1,87 @@
+﻿@model Models.BeUser.BeUserIndexModel
+@using Data.DataContract.CategoryDC
+@using Data.DataContract.RoleDC
+@using AdministratorRes = Share.Messages.BeScreens.Administrator.Administrator
+@{
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+    var cacheHelper = ObjectFactory.GetInstance<ICacheHelper>();
+    var roles = cacheHelper.GetRoles();
+    var categories = cacheHelper.GetCategories();
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @string.Format(BackendMessage.List, AdministratorRes.UserOnly)
+            </div>
+            <div class="panel-body grid-table">
+                <div class="mbm">
+                    @if (sessionHelper.CanAdd(BePage.Roles))
+                    {
+                        <a class="btn btn-info" href="@Url.Action("Add")">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            @BackendMessage.AddNew
+                        </a>
+                    }
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover tablesorter dataTable no-footer">
+                        <thead>
+                            <tr>
+                                @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                                <th class="@Html.ClassSort("Code", Model.SortBy, Model.SortDirection.Value)" onclick="administrator.sort(this, 'Code', '@Model.SortDirection.Value')">@AdministratorRes.Code</th>
+                                <th class="@Html.ClassSort("FullName", Model.SortBy, Model.SortDirection.Value)" onclick="administrator.sort(this, 'FullName', '@Model.SortDirection.Value')">@AdministratorRes.FullName</th>
+                                <th class="@Html.ClassSort("Email", Model.SortBy, Model.SortDirection.Value)" onclick="administrator.sort(this, 'Email', '@Model.SortDirection.Value')">@AdministratorRes.Email</th>
+                                <th>@AdministratorRes.Role</th>
+                                <th>@AdministratorRes.Position</th>
+                                <th>@AdministratorRes.Status</th>
+                                <th class="@Html.ClassSort("CreatedDate", Model.SortBy, Model.SortDirection.Value) w100" onclick="administrator.sort(this, 'CreatedDate', '@Model.SortDirection.Value')">@AdministratorRes.CreatedDate</th>
+                                <th class="action-col">@BackendMessage.Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Results.Any())
+                            {
+                                foreach (var item in Model.Results)
+                                {
+                                    var role = roles.FirstOrDefault(r => r.Id == item.RoleId) ?? new Role();
+                                    var position = categories.FirstOrDefault(i => i.Id == item.PositionId) ?? new Category();
+                                    <tr>
+                                        @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                        <td>@item.Code</td>
+                                        <td>@item.FullName</td>
+                                        <td>@item.Email</td>
+                                        <td>@role.Name</td>
+                                        <td>@position.Name</td>
+                                        <td>@item.Status.GetEnumDesRes()</td>
+                                        <td class="text-center">@item.CreatedDate.ToDateString()</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                                {
+                                                    <a href="@Url.Action("Edit", "Administrator", new { item.Id })" class="btn btn-default" data-toggle="tooltip" data-original-title="@BackendMessage.Edit">@BackendMessage.Edit</a>
+                                                }
+                                                @if (item.Id != sessionHelper.CurrentUserId && sessionHelper.CanDelete(BePage.Roles))
+                                                {
+                                                    <button onclick="administrator.deleteClick('@item.Id')" class="btn btn-danger" data-toggle="tooltip" data-original-title="@BackendMessage.Delete">@BackendMessage.Delete</button>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @Html.PaginationFor(m => m.Pagination, "administrator.goPage({0})", "administrator.changePageSize({0})")
+            </div>
+        </div>
+    </div>
+</div>

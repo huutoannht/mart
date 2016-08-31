@@ -1,0 +1,29 @@
+﻿@using Share.Messages.BeScreens.Role
+@model Models.Role.RoleIndexModel
+@{
+    ViewBag.Title = Role.Roles;
+}
+
+@Html.Partial("EditorTemplates/_Notify")
+
+@Html.Partial("_indexFilter")
+
+@Html.Partial("_roleList")
+
+<div id="divEdit"></div>
+
+@section PageJavascript
+{
+    @Scripts.Render("~/js/role")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            role.init({
+                addNewUrl: "@Url.Action("AddNew")",
+                editUrl: "@Url.Action("Edit")",
+                saveUrl: "@Url.Action("Save")",
+                deleteUrl: "@Url.Action("Delete")"
+        });
+    });
+    </script>
+}

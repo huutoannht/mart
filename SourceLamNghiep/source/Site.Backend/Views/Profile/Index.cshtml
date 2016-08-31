@@ -1,0 +1,93 @@
+﻿@model Models.BeUser.BeUserModel
+@using ProfileRes = Share.Messages.BeScreens.Profile.Profile;
+@using AdministratorRes = Share.Messages.BeScreens.Administrator.Administrator
+@{
+    ViewBag.Title = ProfileRes.PageTitle;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @ProfileRes.MyProfile
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Save", "Profile", FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal", enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.Type)
+                    @Html.HiddenFor(m => m.Code)
+                    @Html.HiddenFor(m => m.Status)
+                    @Html.HiddenFor(m => m.RoleId)
+                    @Html.ValidationSummary(string.Empty)
+                    @Html.Partial("EditorTemplates/_Notify")
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            <label class="control-label">@Model.Code</label>
+                        </div>
+                        @Html.CustomLabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", maxlength = "100" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", maxlength = "200" })
+                        </div>
+                        @Html.CustomLabelFor(m => m.BirthDay, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                @Html.TextBoxDateFor(m => m.BirthDay, new { @class = "form-control" })
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ImagePath, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.HiddenFor(m => m.ImagePath)
+                            @Html.HiddenFor(m => m.OldImagePath)
+                            <input type="file" name="fileImage" id="fileImage" accept="image/*" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div class="col-md-8 col-lg-offset-2">
+                            <button onclick="administrator.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Head
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_css")
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+    @Scripts.Render("~/js/administrator")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            administrator.initEdit({
+                userId: "@Model.Id",
+                imagePath: "@(Html.ImageIsExist(Model.ImagePath) ? Url.ImageLink(Model.ImagePath) : string.Empty)",
+                passwordRequiredMsg: "@AdministratorRes.PasswordRequired",
+                roleRequiredMsg: "@AdministratorRes.RoleRequired",
+                adminId: "@(BeUserType.Admin.ToString())",
+                saveUrl: "@Url.Action("Save")",
+                indexUrl: "@Url.Action("Index")"
+            });
+        });
+    </script>
+}

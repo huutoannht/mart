@@ -1,0 +1,18 @@
+﻿@using Share.Messages.BeScreens.Menu
+@model Models.Category.CategoryIndexModel
+
+@{
+    ViewBag.Title = Menu.Age;
+}
+
+@Html.Partial("BaseView/Nhom/_index")
+
+@section Head
+{
+    @Html.Partial("BaseView/Nhom/_indexCss")
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/Nhom/_indexScript")
+}

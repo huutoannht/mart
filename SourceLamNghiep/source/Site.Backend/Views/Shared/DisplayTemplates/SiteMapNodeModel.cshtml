@@ -1,0 +1,24 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.SiteMapNodeModel
+@using System.Web.Mvc.Html
+@using MvcSiteMapProvider.Web.Html.Models
+
+@if (Model.Title != "Root")
+{
+    if (Model.IsCurrentNode && Model.SourceMetadata["HtmlHelper"].ToString() != "MvcSiteMapProvider.Web.Html.MenuHelper")
+    { 
+    <li class="active">@Model.Title</li>
+    }
+    else if (Model.Title == SiteUtils.GetSiteName())
+    {
+    <li>
+        <i class="fa fa-home"></i>&nbsp;<a href="@Url.Action("Index", "Home")">@Model.Title</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;
+    </li>
+    }
+    else
+    { 
+    <li><a href="@Model.Url">@Model.Title</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+    }
+
+
+}
+

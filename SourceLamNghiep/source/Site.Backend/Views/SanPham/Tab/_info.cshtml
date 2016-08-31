@@ -1,0 +1,91 @@
+﻿@using Data.DataContract.CategoryDC
+@using Share.Messages.BeScreens.ProductRes
+@model Models.Product.ProductModel
+@{
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+
+    var listCate = cache.GetCategoryTreeList().Where(i => i.CategoryType == CategoryType.Product);
+}
+
+@helper RenderCateOption(Category cate)
+{
+    <option value="@cate.Id" @(Model.CategoryId == cate.Id ? "selected=\"selected\"" : string.Empty)>
+        @if (cate.LevelPadding > 0)
+        {
+            @Html.Raw("&nbsp;".Repeat(cate.LevelPadding))
+        }
+        @cate.Name
+    </option>
+    if (cate.Childs.Any())
+    {
+        foreach (var c in cate.Childs)
+        {
+    @RenderCateOption(c)
+        }
+    }
+}
+
+<div class="form-group">
+    <label class="col-md-2 control-label">@ProductRes.Category <span class="red">*</span></label>
+    <div class="col-md-5">
+        <select id="@Html.GetFullHtmlFieldId(m => m.CategoryId)" name="@Html.GetFullHtmlFieldName(m => m.CategoryId)" 
+                class="form-control chosen">
+            <option value="">@BackendMessage.Select</option>
+            @foreach (var cate in listCate)
+            {
+                @RenderCateOption(cate)
+            }
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.ProductCode, new { @class = "col-md-2 control-label" })
+    <div class="col-md-5">
+        @Html.TextBoxFor(m => m.ProductCode, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control " })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Cost, new { @class = "col-md-2 control-label" })
+    <div class="col-md-3">
+        <div class="input-icon right">
+            @Html.TextBoxFor(m => m.Cost, new { @class = "currency form-control " })
+        </div>
+    </div>
+    @Html.LabelFor(m => m.Price, new { @class = "col-md-2 control-label" })
+    <div class="col-md-3">
+        <div class="input-icon right">
+            @Html.TextBoxFor(m => m.Price, new { @class = "currency form-control " })
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Vat, new { @class = "col-md-2 control-label" })
+    <div class="col-md-3">
+        <div class="input-group">
+            @Html.TextBoxFor(m => m.Vat, new { @class = "currency form-control" })
+            <span class="input-group-addon">%
+            </span>
+        </div>
+    </div>
+    @Html.CustomLabelFor(m => m.Status, new { @class = "col-md-2 control-label" })
+    <div class="col-md-3">
+        @Html.EnumDropDownFor(m => m.Status, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.UnitId, new { @class = "col-md-2 control-label" })
+    <div class="col-md-3">
+        @Html.DropDownListFor(m => m.UnitId, cache.GetCategories(CategoryType.UOM).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+    </div>
+</div>

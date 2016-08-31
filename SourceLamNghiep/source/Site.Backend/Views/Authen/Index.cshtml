@@ -1,0 +1,95 @@
+﻿@using Share.Messages.BeScreens.Login
+@model Models.Authen.AuthenViewModel
+@{
+    ViewBag.Title = Login.SignIn;
+    var imageName = SiteUtils.GetSiteLogoImageName();
+}
+
+<div class="page-form">
+    @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new { id = "formLogin", role = "form", @class = "form" }))
+    {
+        @Html.HiddenFor(m => m.ReturnUrl)
+        <div class="header-content text-center">
+            @if (Url.ImageIsExist(imageName))
+            {
+                <img alt="@SiteUtils.GetSiteName()" src="@Url.ImageLink(imageName)"/>
+            }
+            else
+            {
+                <h1>@ViewBag.Title</h1>
+            }
+        </div>
+        <div class="body-content">
+            @Html.ValidationSummary(string.Empty)
+            @Html.Partial("EditorTemplates/_Notify")
+            <div class="form-group">
+                <div class="input-icon right">
+                    <i class="fa fa-user"></i>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = Login.Email })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-icon right">
+                    <i class="fa fa-key"></i>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = Login.Password })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-7 pl0">
+                    <div class="checkbox-list">
+                        <label>
+                            @Html.CustomCheckBoxFor(m => m.Remember)&nbsp;
+                        @Login.RememberMe
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-5 pr0">
+                    <button type="button" onclick="authen.login()" class="btn btn-success pull-right">@Login.SignIn&nbsp;<i class="fa fa-chevron-circle-right"></i></button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="form-group">
+                <hr>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-8 pl0">
+                    <div class="forget-password">
+                        <p><a href="@Url.Action("ForgotPassword")">@Login.IForgotMyPassword</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    }
+</div>
+
+@section Head
+{
+    @{
+        var backgroundLoginImage = SiteUtils.GetSiteLogo2ImageName();
+    }
+    @if (Url.ImageIsExist(backgroundLoginImage))
+    {
+        <style type="text/css">
+            #signin-page {
+                background: url('@Url.ImageLink(backgroundLoginImage)') center center fixed !important;
+            }
+        </style>
+    }
+}
+
+@section PageJavascript
+{
+    @Scripts.Render("~/js/authen")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            authen.initLogin({
+                validateUserUrl: "@Url.Action("ValidateUser")"
+            });
+        });
+    </script>
+
+}

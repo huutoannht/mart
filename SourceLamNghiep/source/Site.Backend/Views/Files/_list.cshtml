@@ -1,0 +1,83 @@
+﻿@using Share.Messages.BeScreens.Files
+@model Models.File.FileIndexModel
+
+@{
+    var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @Files.FileManagement
+            </div>
+            <div class="panel-body grid-table">
+                @if (sessionHelper.CanAdd(BePage.Roles))
+                {
+                    <button class="btn btn-info mbm" type="button" onclick="file.addClick()">
+                        <i class="fa fa-plus"></i>
+                        &nbsp;@BackendMessage.AddNew
+                    </button>
+                }
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover tablesorter dataTable no-footer">
+                        <thead>
+                            <tr>
+                                @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                                <th class="@Html.ClassSort("Name", Model.SortBy, Model.SortDirection.Value)" onclick="file.sort(this, 'Name', '@Model.SortDirection.Value')">@Files.Name</th>
+                                <th class="@Html.ClassSort("CreatedDate", Model.SortBy, Model.SortDirection.Value) w100" onclick="file.sort(this, 'CreatedDate', '@Model.SortDirection.Value')">@Files.CreatedDate</th>
+                                <th class="@Html.ClassSort("CreatedBy", Model.SortBy, Model.SortDirection.Value) w100" onclick="file.sort(this, 'CreatedBy', '@Model.SortDirection.Value')">@Files.CreatedBy</th>
+                                <th class="w100">Download</th>
+                                <th class="action-col">@BackendMessage.Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Results.Any())
+                            {
+                                foreach (var item in Model.Results)
+                                {
+                                    var beUser = cache.GetBeUser(item.CreatedBy);
+                                    <tr>
+                                        @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                        <td>
+                                            <a href="@Url.Action("Download", new { item.Id })">
+                                                @item.Name
+                                            </a>
+                                        </td>
+                                        <td class="text-center">@dateTimeHelper.ConvertToLocal(item.CreatedDate, sessionHelper.CurrentTimeZone).ToDateString()</td>
+                                        <td>@(beUser != null ? beUser.FullName : string.Empty)</td>
+                                        <td class="text-center">
+                                            <a href="@Url.Action("Download", new { item.Id })">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                                {
+                                                    <button onclick="file.editClick('@item.Id')" class="btn btn-default" data-toggle="tooltip" data-original-title="@BackendMessage.Edit">@BackendMessage.Edit</button>
+                                                } @if (sessionHelper.CanDelete(BePage.Roles))
+                                                {
+                                                    <button onclick="file.deleteClick('@item.Id')" class="btn btn-danger" data-toggle="tooltip" data-original-title="@BackendMessage.Delete">@BackendMessage.Delete</button>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @Html.PaginationFor(m => m.Pagination, "file.goPage({0})", "file.changePageSize({0})")
+            </div>
+        </div>
+    </div>
+</div>

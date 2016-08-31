@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddNewCustomer" xml:space="preserve">
+    <value>Add new customer</value>
+  </data>
+  <data name="AddNewPotentialCustomer" xml:space="preserve">
+    <value>Add new potential customer</value>
+  </data>
+  <data name="AddNewProspectsCustomer" xml:space="preserve">
+    <value>Add new prospects customer</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddressCanNotFind" xml:space="preserve">
+    <value>We can not geolocate your address</value>
+  </data>
+  <data name="AddressRequired" xml:space="preserve">
+    <value>The Address is required</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="BranchNameRequired" xml:space="preserve">
+    <value>The shop name is required</value>
+  </data>
+  <data name="CellPhone" xml:space="preserve">
+    <value>Cell Phone</value>
+  </data>
+  <data name="CellPhoneRequired" xml:space="preserve">
+    <value>The cell phone filed is required</value>
+  </data>
+  <data name="ChangeStatus" xml:space="preserve">
+    <value>Change Status</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City/ Provine</value>
+  </data>
+  <data name="CityRequired" xml:space="preserve">
+    <value>The city field is required</value>
+  </data>
+  <data name="ClinicId" xml:space="preserve">
+    <value>Clinic Id</value>
+  </data>
+  <data name="ClinicIdRequired" xml:space="preserve">
+    <value>The clinic id field is required</value>
+  </data>
+  <data name="ClinicInformation" xml:space="preserve">
+    <value>Clinic information</value>
+  </data>
+  <data name="ClinicName" xml:space="preserve">
+    <value>Clinic name</value>
+  </data>
+  <data name="ClinicNameRequired" xml:space="preserve">
+    <value>The clinic name field is required</value>
+  </data>
+  <data name="ClinicPhone" xml:space="preserve">
+    <value>Clinic phone</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="ConfirmPasswordNew" xml:space="preserve">
+    <value>Confirm New Password</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="DentistEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="DentistInfo" xml:space="preserve">
+    <value>Dentist information</value>
+  </data>
+  <data name="DentistName" xml:space="preserve">
+    <value>Dentist name</value>
+  </data>
+  <data name="DentistPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="DistrictRequired" xml:space="preserve">
+    <value>The district field is required</value>
+  </data>
+  <data name="EditCustomer" xml:space="preserve">
+    <value>Edit customer</value>
+  </data>
+  <data name="EditPotentialCustomer" xml:space="preserve">
+    <value>Edit potential customer</value>
+  </data>
+  <data name="EditProspectsCustomer" xml:space="preserve">
+    <value>Edit prospects customer</value>
+  </data>
+  <data name="EditUserPageTitle" xml:space="preserve">
+    <value>Edit customer info</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailExisted" xml:space="preserve">
+    <value>This email is already existed in the system</value>
+  </data>
+  <data name="EmailIsInvalid" xml:space="preserve">
+    <value>The email address is invalid format</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>The email field is required</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>The First Name field is required</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="FullNameRequired" xml:space="preserve">
+    <value>The full name field is required</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="InterestingDevice" xml:space="preserve">
+    <value>Interesting device</value>
+  </data>
+  <data name="JoinedDate" xml:space="preserve">
+    <value>Joined date</value>
+  </data>
+  <data name="JoinSeminar" xml:space="preserve">
+    <value>Join seminar</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>The Last Name field is required</value>
+  </data>
+  <data name="LeadTime" xml:space="preserve">
+    <value>Lead time</value>
+  </data>
+  <data name="MaritalStatus" xml:space="preserve">
+    <value>Marital status</value>
+  </data>
+  <data name="NumberOfChair" xml:space="preserve">
+    <value>Number of chair</value>
+  </data>
+  <data name="NumberOfDentist" xml:space="preserve">
+    <value>Number of dentist</value>
+  </data>
+  <data name="NumberOfStaff" xml:space="preserve">
+    <value>Number of staff</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Customer list</value>
+  </data>
+  <data name="Provine" xml:space="preserve">
+    <value>Provine</value>
+  </data>
+  <data name="ProvineRequired" xml:space="preserve">
+    <value>The Provine is required</value>
+  </data>
+  <data name="ShopHomePageLayout" xml:space="preserve">
+    <value>Shop homepage layout</value>
+  </data>
+  <data name="ShopStatus" xml:space="preserve">
+    <value>Shop Status</value>
+  </data>
+  <data name="Specialization" xml:space="preserve">
+    <value>Specialization</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="UserInfo" xml:space="preserve">
+    <value>Customer info</value>
+  </data>
+  <data name="UserOnly" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="UsingDevice" xml:space="preserve">
+    <value>Using device</value>
+  </data>
+  <data name="UsingRC" xml:space="preserve">
+    <value>Using RC</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="WorkingHours" xml:space="preserve">
+    <value>Working hours</value>
+  </data>
+  <data name="WorkingHourInvalid" xml:space="preserve">
+    <value>The start time must be smaller than end time</value>
+  </data>
+  <data name="WorkingHourRequired" xml:space="preserve">
+    <value>You are not input {0} time for {1}</value>
+  </data>
+  <data name="AddNewVisit" xml:space="preserve">
+    <value>Add new visit</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DateVisitRequired" xml:space="preserve">
+    <value>The date field is required</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="EditVisit" xml:space="preserve">
+    <value>Edit visit</value>
+  </data>
+  <data name="Promise" xml:space="preserve">
+    <value>Promise</value>
+  </data>
+  <data name="Staff" xml:space="preserve">
+    <value>Staff</value>
+  </data>
+  <data name="StaffRequired" xml:space="preserve">
+    <value>The staff field is required</value>
+  </data>
+  <data name="Visit" xml:space="preserve">
+    <value>Visit</value>
+  </data>
+  <data name="AssignTo" xml:space="preserve">
+    <value>Assign to</value>
+  </data>
+  <data name="Device" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="HistoryPurchase" xml:space="preserve">
+    <value>History purchase</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="PurchaseDate" xml:space="preserve">
+    <value>Purchase date</value>
+  </data>
+  <data name="Remark" xml:space="preserve">
+    <value>Remark</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImageListOf" xml:space="preserve">
+    <value>Image list of customer</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="VisitFrom" xml:space="preserve">
+    <value>Visit from</value>
+  </data>
+  <data name="VisitTo" xml:space="preserve">
+    <value>Visit to</value>
+  </data>
+  <data name="MustSelectAtLeast1CustomerToDelete" xml:space="preserve">
+    <value>You must select at least 1 customer to delete</value>
+  </data>
+  <data name="ImageIsRequired" xml:space="preserve">
+    <value>You are not choose image</value>
+  </data>
+  <data name="ExcelClinicIdRequired" xml:space="preserve">
+    <value>(Row {0}) Clinic Id is required</value>
+  </data>
+  <data name="ExcelClinicNameRequired" xml:space="preserve">
+    <value>(Row {0}) Clinic Name is required</value>
+  </data>
+  <data name="ExcelEmailInvalid" xml:space="preserve">
+    <value>(Row {0}) Email is not valid format : "{1}"</value>
+  </data>
+  <data name="ChangeType" xml:space="preserve">
+    <value>Change type</value>
+  </data>
+  <data name="ChangeTypeForCustomer" xml:space="preserve">
+    <value>Change type for customer</value>
+  </data>
+  <data name="CustomerType" xml:space="preserve">
+    <value>Customer type</value>
+  </data>
+  <data name="CustomerTypeRequired" xml:space="preserve">
+    <value>The customer type is required</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>Created by</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="AddCustomerMarker" xml:space="preserve">
+    <value>Add customer marker</value>
+  </data>
+  <data name="CanNotFindRoute" xml:space="preserve">
+    <value>Can not find direction from company to customer</value>
+  </data>
+  <data name="CanNotLoadDirection" xml:space="preserve">
+    <value>Can not load direction. Please set company address and input customer address or set customer location on map.</value>
+  </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="DateVisitInvalid" xml:space="preserve">
+    <value>The date is invalid</value>
+  </data>
+  <data name="DentistNameRequired" xml:space="preserve">
+    <value>The dentist name is required</value>
+  </data>
+</root>

@@ -1,0 +1,40 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerModel
+@{
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box portlet-orange">
+            <div class="portlet-header">
+                <div class="caption">@CustomerRes.ImageListOf "@Model.ClinicName"</div>
+                <div class="actions">
+                    @if (sessionHelper.CanUpdate(BePage.Roles))
+                    {
+                        <a href="javascript:customer.addNewImageClick('@Model.Id');" class="btn btn-sm btn-info">
+                            <i class="fa fa-plus"></i>&nbsp;
+                            @BackendMessage.AddNew
+                        </a>
+                    }&nbsp;
+                    <a href="javascript:customer.backToIndex();" class="btn btn-sm btn-white">
+                        @BackendMessage.Cancel
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="divNotifyEdit">
+                    @Html.Partial("EditorTemplates/_Notify")
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="divImageLists" class="table-responsive">
+                            @Html.Partial("BaseView/Customer/ImageList/_imageList")
+                        </div>
+                    </div>
+                    <div id="divAddNewImage" class="col-lg-6 col-md-6 col-sm-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

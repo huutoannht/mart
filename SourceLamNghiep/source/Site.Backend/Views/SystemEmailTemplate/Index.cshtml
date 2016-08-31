@@ -1,0 +1,26 @@
+﻿@using Share.Messages.BeScreens.Menu
+@model Models.SystemEmailTemplate.SystemEmailTemplateIndexModel
+
+@{
+    ViewBag.Title = Menu.EmailTemplate;
+}
+
+@Html.Partial("EditorTemplates/_Notify")
+
+@Html.Partial("_indexFilter")
+
+@Html.PartialOrDiscard("_emailTemplateInfo", Model.SystemEmailTemplate)
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/CkEditor/_scripts")
+
+    @Scripts.Render("~/js/systemEmailTemplate")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            systemEmailTemplate.init({
+            });
+        });
+    </script>
+
+}

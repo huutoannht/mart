@@ -1,0 +1,32 @@
+﻿@model Models.Category.CategoryIndexModel
+
+<div id="divNotifyTop">
+    @Html.Partial("EditorTemplates/_Notify")
+</div>
+
+@Html.Partial("BaseView/Nhom/_indexFilter")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @ViewBag.Title
+            </div>
+            <div class="panel-body grid-table">
+                <div class="row mb10">
+                    <div class="col-md-12">
+                        @Html.Partial("BaseView/Nhom/_buttons")
+                    </div>
+                </div>
+                <div id="divList">
+                    @Html.Partial("BaseView/Nhom/_list")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divEdit"></div>
+
+
+

@@ -1,0 +1,27 @@
+﻿@using Share.Messages.BeScreens.BaiViet
+@model Models.Artice.ArticeModel
+
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-2 control-label">@BaiViet.Status</label>
+    <div class="col-md-2">
+        @Html.EnumDropDownFor(m => m.Status, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="col-md-2 control-label">
+        @BaiViet.Image
+    </label>
+    <div class="col-md-4">
+        @Html.HiddenFor(m => m.ImagePath)
+        @Html.HiddenFor(m => m.OldImagePath)
+        <input type="file" name="fileImage" id="fileImage" accept="image/*" />
+    </div>
+</div>

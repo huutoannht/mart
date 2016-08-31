@@ -1,0 +1,62 @@
+﻿
+<div id="divNotifyContainer">
+    <div id="notifyError" class="alert alert-danger alert-dismissable" style="display: none;">
+        <button aria-hidden="true" onclick="$(this).parent().hide();" class="close" type="button">×</button>
+        <div content=""></div>
+    </div>
+    <div id="notifySuccess" class="alert alert-success alert-dismissable" style="display: none;">
+        <button aria-hidden="true" onclick="$(this).parent().hide();" class="close" type="button">×</button>
+        <div content=""></div>
+    </div>
+    <div id="notifyWarning" class="alert alert-warning alert-dismissable" style="display: none;">
+        <button aria-hidden="true" onclick="$(this).parent().hide();" class="close" type="button">×</button>
+        <div content=""></div>
+    </div>
+    <div id="notifyInformation" class="alert alert-info alert-dismissable" style="display: none;">
+        <button aria-hidden="true" onclick="$(this).parent().hide();" class="close" type="button">×</button>
+        <div content=""></div>
+    </div>
+</div>
+@{ if (TempData[ConstKeys.HasNotification] != null && (bool)TempData[ConstKeys.HasNotification])
+   {
+    <script type="text/javascript">
+        $(document).ready(function () {
+			@if (TempData[NotifyType.Error.ToString()] != null)
+   {
+				<text>
+		    notify.error("@Ajax.JavaScriptStringEncode(TempData[NotifyType.Error.ToString()].ToString())");
+		    </text>
+   }
+
+			@if (TempData[NotifyType.Warning.ToString()] != null)
+   {
+				<text>
+		    notify.warning("@Ajax.JavaScriptStringEncode(TempData[NotifyType.Warning.ToString()].ToString())");
+		    </text>
+   }
+				
+			@if (TempData[NotifyType.Success.ToString()] != null)
+   {
+				<text>
+		    notify.success("@Ajax.JavaScriptStringEncode(TempData[NotifyType.Success.ToString()].ToString())");
+		    </text>
+   }
+				
+			@if (TempData[NotifyType.Information.ToString()] != null)
+   {
+				<text>
+		    notify.info("@Ajax.JavaScriptStringEncode(TempData[NotifyType.Information.ToString()].ToString())");
+		    </text>
+   }
+		});
+    </script>
+   }
+}
+
+@{
+    TempData[ConstKeys.HasNotification] = null;
+    TempData[NotifyType.Error.ToString()] = null;
+    TempData[NotifyType.Warning.ToString()] = null;
+    TempData[NotifyType.Information.ToString()] = null;
+    TempData[NotifyType.Success.ToString()] = null;
+}

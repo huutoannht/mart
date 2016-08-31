@@ -1,0 +1,69 @@
+﻿@using Share.Messages.BeScreens.Role
+@model Models.Role.RoleIndexModel
+@{
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @string.Format(BackendMessage.List, Role.RoleOnly)
+            </div>
+            <div class="panel-body grid-table">
+                @if (sessionHelper.CanAdd(BePage.Roles))
+                {
+                    <div class="mbm">
+                        <button class="btn btn-info" type="button" onclick="role.addNewClick()">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            @BackendMessage.AddNew
+                        </button>
+                    </div>
+                }
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover tablesorter dataTable no-footer">
+                        <thead>
+                            <tr>
+                                @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                                <th class="@Html.ClassSort("Name", Model.SortBy, Model.SortDirection.Value)" onclick="role.sort(this, 'Name', '@Model.SortDirection.Value')">@Role.Name</th>
+                                <th>@Role.Description</th>
+                                <th class="action-col">@BackendMessage.Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Results.Any())
+                            {
+                                foreach (var item in Model.Results)
+                                {
+                                    <tr>
+                                        @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                                        <td>@item.Name</td>
+                                        <td>@Html.Raw(item.Description)</td>
+                                        <td>
+                                            <div class="btn-group btn-group-xs">
+                                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                                {
+                                                    <button onclick="role.editClick('@item.Id')" class="btn btn-default" data-toggle="tooltip" data-original-title="@BackendMessage.Edit">@BackendMessage.Edit</button>
+                                                }
+                                                @if (sessionHelper.CanDelete(BePage.Roles))
+                                                {
+                                                    <button onclick="role.deleteClick('@item.Id')" class="btn btn-danger" data-toggle="tooltip" data-original-title="@BackendMessage.Delete">@BackendMessage.Delete</button>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                @Html.PaginationFor(m => m.Pagination, "role.goPage({0})", "role.changePageSize({0})")
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿@using Share.Messages.BeScreens.Role
+@model Models.Role.RoleModel
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                @(Model.IsNew ? Role.AddNewRoleTitle : Role.EditRoleTitle)
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Save", "Role", FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.ValidationSummary(string.Empty)
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-5">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", maxlength = "500" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.CustomLabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-5">
+                            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", maxlength = "500" })
+                        </div>
+                    </div>
+
+                    @Html.Partial("_rolePermission")
+                        
+                    <div class="form-actions">
+                        <div class="col-md-10">
+                            <button onclick="role.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                            <button onclick="$('#divEdit').hide()" class="btn btn-default" type="button">@BackendMessage.Close</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

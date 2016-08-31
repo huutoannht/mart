@@ -1,0 +1,40 @@
+﻿@using Data.DataContract.CategoryDC
+@using Models.Category
+@using Share.Messages.BeScreens.CategoryRes
+@model CategoryModel
+@{
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+}
+
+@if (Model.ParentId.HasValue)
+{
+    var parent = cache.GetCategories().FirstOrDefault(i => i.Id == Model.ParentId.Value) ?? new Category();
+    <div class="form-group">
+        <label class="col-md-2 control-label">
+            @CategoryRes.Parent
+        </label>
+        <div class="col-md-5">
+            <label class="control-label">
+                @parent.Name
+            </label>
+        </div>
+    </div>
+}
+
+@if (Model.CategoryType == CategoryType.Product || Model.CategoryType == CategoryType.UOM)
+{
+    <div class="form-group">
+        @Html.CustomLabelFor(m => m.Code, new { @class = "col-md-2 control-label" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.Code, new { @class = "form-control" })
+        </div>
+    </div>  
+}
+
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+    <div class="col-md-5">
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    </div>
+</div>
+

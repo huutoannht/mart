@@ -1,0 +1,23 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+
+<div id="divNotifyMap">
+    @Html.Partial("EditorTemplates/_Notify")
+</div>
+
+<div class="mbm">
+    @if (!Model.View)
+    {
+        <button type="button" class="btn btn-info" onclick="customer.addCustomerMarker()">
+            <i class="fa fa-map-marker"></i>&nbsp;
+            @CustomerRes.AddCustomerMarker
+        </button>
+    }
+
+    <button type="button" class="btn btn-yellow pull-right" onclick="customer.showDirection()">
+        <i class="fa fa-road"></i>&nbsp;
+        @CustomerRes.Direction
+    </button>
+    <div class="clearfix"></div>
+</div>
+
+<div id="map" style="width: 100%; height:300px;"></div>

@@ -1,0 +1,51 @@
+﻿@using Models.Category
+@using Share.Messages.BeScreens.CategoryRes
+@model CategoryModel
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                @(Model.IsNew ? ViewBag.AddNewTitle : ViewBag.EditTitle)
+            </div>
+            <div class="panel-body">
+
+                <div id="divNotifyEdit">
+                    @Html.Partial("EditorTemplates/_Notify")
+                </div>
+
+                @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.SortOrder)
+                    @Html.HiddenFor(m => m.ParentId)
+                    @Html.HiddenFor(m => m.CategoryType)
+                    @Html.HiddenFor(m => m.ImageFileNames)
+                    @Html.ValidationSummary(string.Empty)
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#divTabInfo" data-toggle="tab">@CategoryRes.Information</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="divTabInfo" class="tab-pane fade in active">
+                                    @Html.Partial("BaseView/Nhom/Tab/_info")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div class="col-md-12">
+                            <button onclick="category.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                            <button onclick="category.hideEdit()" class="btn btn-default" type="button">@BackendMessage.Close</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

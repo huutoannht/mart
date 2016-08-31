@@ -1,0 +1,67 @@
+﻿@model Models.Customer.CustomerModel
+@{
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+}
+
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.ClinicId, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.ClinicId, new { @class = "form-control" })
+    </div>
+    @Html.CustomLabelFor(m => m.ClinicName, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.ClinicName, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.ClinicEmail, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.ClinicEmail, new { @class = "form-control" })
+    </div>
+    @Html.CustomLabelFor(m => m.Website, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.Website, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.ClinicPhone, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.ClinicPhone, new { @class = "form-control" })
+    </div>
+    @Html.CustomLabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.DropDownListFor(m => m.City, SiteUtils.GetVietNamProvines().ToSelectList(), BackendMessage.Select, new { @class = "form-control chosen" })
+    </div>
+    @Html.LabelFor(m => m.District, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4" id="divDistricts">
+        @Html.Partial("BaseView/Customer/Edit/_dropDownDistrict")
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.NumberOfDentist, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.DropDownListFor(m => m.NumberOfDentist, cache.GetCategories(CategoryType.NumberOfDentist).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+    </div>
+    @Html.LabelFor(m => m.NumberOfStaff, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.DropDownListFor(m => m.NumberOfStaff, cache.GetCategories(CategoryType.NumberOfStaff).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.NumberOfChair, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.DropDownListFor(m => m.NumberOfChair, cache.GetCategories(CategoryType.NumberOfChair).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+    </div>
+    @Html.LabelFor(m => m.UsingRC, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.DropDownListFor(m => m.UsingRC, cache.GetCategories(CategoryType.UsingRC).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+    </div>
+</div>
+
+@Html.Partial("BaseView/Customer/Edit/_usingDevice")

@@ -1,0 +1,17 @@
+﻿<script src="~/Content/scripts/plug-in/ZeroClipboard/ZeroClipboard.min.js"></script>
+<script type="text/javascript">
+    ZeroClipboard.config({ swfPath: "@("http://" + Request.Url.Host + Url.Content("~/Content/scripts/plug-in/ZeroClipboard/ZeroClipboard.swf"))" });
+    function initCopyToClipboard() {
+        var clip = new ZeroClipboard($(".clip_button"));
+
+        clip.on("ready", function () {
+            this.on("aftercopy", function (event) {
+                showNotifyAlert("Copied link to clipboard");
+            });
+        });
+
+        clip.on("error", function (event) {
+            ZeroClipboard.destroy();
+        });
+    }
+</script>

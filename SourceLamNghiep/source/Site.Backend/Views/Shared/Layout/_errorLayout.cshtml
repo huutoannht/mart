@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="background-color: #ffffff">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    @Html.Partial("BaseView/Logo/_icon")
+    <title>@SiteUtils.GetSiteName() - @ViewBag.Title</title>
+
+    @Html.Partial("Layout/Inc/_css")
+
+    @RenderSection("Head", false)
+
+    @Html.Partial("Layout/Inc/_headScripts")
+</head>
+
+<body style="background-color: #ffffff">
+    <section style="background-color: #ffffff">
+        <div class="notfoundpanel">
+            @RenderBody()    
+        </div>
+    </section>
+
+    @Html.Partial("Layout/Inc/_scripts")
+</body>
+</html>

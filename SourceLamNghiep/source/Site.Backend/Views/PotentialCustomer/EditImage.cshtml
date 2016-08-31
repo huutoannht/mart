@@ -1,0 +1,18 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerModel
+@{
+    ViewBag.Title = CustomerRes.ImageListOf + " " + Model.ClinicName + " - PotentialCustomer";
+}
+
+@Html.Partial("BaseView/Customer/_editImages")
+
+@section Head
+{
+    @Html.Partial("BaseView/Customer/_cssEditImage")
+}
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/Customer/_scriptEditImage")
+}
+

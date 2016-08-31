@@ -1,0 +1,21 @@
+﻿@using Share.Messages.BeScreens.CustomerRes
+@model Models.Customer.CustomerModel
+@Scripts.Render("~/js/customer")
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToStr();
+}
+
+@Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        customer.initEditImages({
+            getAddNewImageHtmlUrl: "@Url.Action("GetAddNewImageHtml", controller)",
+            saveImageUrl: "@Url.Action("SaveImage", controller)",
+            deleteImageUrl: "@Url.Action("DeleteImage", controller)",
+            indexUrl: "@Url.Action("Index", controller)",
+            imageIsRequiredMsg: "@Html.Raw(CustomerRes.ImageIsRequired)"
+        });
+    });
+
+</script>

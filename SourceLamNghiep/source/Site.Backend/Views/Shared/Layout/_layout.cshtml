@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-cache">
+    @Html.Partial("BaseView/Logo/_icon")
+    <title>@SiteUtils.GetSiteName() - @ViewBag.Title</title>
+
+    @Html.Partial("Layout/Inc/_css")
+
+    @RenderSection("Head", false)
+
+    @Html.Partial("Layout/Inc/_headScripts")
+</head>
+<body>
+    <div>
+        @Html.Partial("Layout/Inc/Authorised/_header")
+        
+        <div id="wrapper">
+            @Html.Partial("Layout/Inc/Authorised/_leftNav")
+            <div id="page-wrapper">
+                @Html.Partial("Layout/Inc/Authorised/_breadCrumb")
+                <div class="page-content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @Html.Partial("Layout/Inc/_scripts")
+    @Html.Partial("Layout/Inc/_loading")
+    @RenderSection("PageJavascript", false)
+</body>
+</html>

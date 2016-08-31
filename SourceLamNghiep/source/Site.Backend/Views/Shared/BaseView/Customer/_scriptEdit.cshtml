@@ -1,0 +1,41 @@
+﻿@model Models.Customer.CustomerModel
+@using Share.Messages.BeScreens.CustomerRes
+@Scripts.Render("~/js/customer")
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToStr();
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+}
+
+@Html.Partial("BaseView/GoogleMap/_scripts")
+@Html.Partial("BaseView/kartik-v-bootstrap-fileinput/_scripts")
+<script src="~/content/theme/vendors/jstree/dist/jstree.min.js"></script>
+<script src="~/Content/scripts/plug-in/multiple-select-master/jquery.multiple.select.js"></script>
+
+<script src="~/Content/scripts/plug-in/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        customer.initEdit({
+            companyAddress: "@Html.Raw(SiteUtils.GetCompanyInfo(ConstKeys.CompanyInfoAddress))",
+            model: @Html.Raw(Json.Encode(Model)),
+            productCatesTree: @Html.Raw(Json.Encode(cache.GetCategoryTreeList(CategoryType.Product))),
+            editUrl: "@Url.Action("Edit", controller)",
+            getDropDownDistrictsUrl: "@Url.Action("GetDropDownDistrictsWards", controller)",
+            weekDays: @Html.Raw(Json.Encode(SiteUtils.GetWeekDay())),
+            workingHoursRequiredMsg: "@Html.Raw(CustomerRes.WorkingHourRequired)",
+            startMsg: "@Html.Raw(BackendMessage.Start)",
+            endMsg: "@Html.Raw(BackendMessage.End)",
+            workingHourInvalidMsg: "@Html.Raw(CustomerRes.WorkingHourInvalid)",
+            saveCustomerUrl: "@Url.Action("SaveCustomer", controller)",
+            getVisitsUrl: "@Url.Action("GetVisits", controller)",
+            editVisitUrl: "@Url.Action("EditVisit", controller)",
+            indexUrl: "@Url.Action("Index", controller)",
+            getDataLogsUrl: "@Url.Action("GetDataLogs", controller)",
+            getCityNameDistrictNameUrl: "@Url.Action("GetCityNameDistrictName", controller)",
+            canNotLoadDirectionMsg: "@Html.Raw(CustomerRes.CanNotLoadDirection)",
+            canNotFindRouteMsg: "@Html.Raw(CustomerRes.CanNotFindRoute)"
+        });
+    });
+
+</script>

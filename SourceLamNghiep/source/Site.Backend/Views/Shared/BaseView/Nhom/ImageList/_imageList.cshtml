@@ -1,0 +1,85 @@
+﻿@using Share.Messages.BeScreens.CategoryRes
+@model Models.Category.CategoryModel
+@{
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box portlet-orange">
+            <div class="portlet-header">
+                <div class="caption">@CategoryRes.ImageListOf "@Model.Name()"</div>
+                <div class="actions">
+                    <a href="javascript:nhomSanPham.addNewImageClick('@Model.Id');" class="btn btn-sm btn-white">
+                        <i class="fa fa-plus"></i>&nbsp;
+                        @CategoryRes.AddNewImage
+                    </a>&nbsp;
+                    <a href="javascript:nhomSanPham.hideEdit();" class="btn btn-sm btn-white">
+                        @BackendMessage.Close
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>@CategoryRes.Image</td>
+                                        <th class="text-center">@BackendMessage.Visible</th>
+                                        <th class="action-col">@BackendMessage.Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Images.Any())
+                                    {
+                                        foreach (var item in Model.Images)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @if (Url.ImageIsExist(item.ImagePath))
+                                                    {
+                                                        <a href="@Url.ImageLink(item.ImagePath)" target="_blank">
+                                                            <img alt="" src="@Url.ImageThumbSmallLink(item.ImagePath)" />
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa fa-picture-o"></i>
+                                                    }
+                                                </td>
+                                                <td class="vamiddle text-center">
+                                                    <div class="checkbox-list">
+                                                        <label>
+                                                            <input onclick="nhomSanPham.updateImageVisible(this, '@item.Id')" type="checkbox" value="true" @(item.Visible ? "checked=\"checked\"" : string.Empty) />
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td class="vamiddle text-center">
+                                                    <div class="btn-group btn-group-xs">
+                                                        @if (sessionHelper.CanDelete(BePage.Roles))
+                                                        {
+                                                            <button onclick="nhomSanPham.deleteImage('@item.Id', '@Model.Id') " class="btn btn-red">@BackendMessage.Delete</button>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="100">@BackendMessage.NoRecordFound</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="divAddNewImage" class="col-lg-6 col-md-6 col-sm-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,SiteName" clickable="false">
+    
+    <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Dashboard" controller="Dashboard" action="Index"></mvcSiteMapNode>
+
+    <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Home" controller="Home" action="Index"></mvcSiteMapNode>
+
+    <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,SystemSetup" clickable="false">
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EmailTemplate" controller="SystemEmailTemplate" action="Index"></mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,SiteSettings" controller="SiteSetting" action="Index"></mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Logo" controller="Logo" action="Index"></mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,ChangePassword" controller="Profile" action="ChangePassword"></mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Files" controller="Files" action="Index"></mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,News" controller="News" action="Index"></mvcSiteMapNode>
+      
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Administrator" controller="Administrator" action="Index">
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EditAdministratorPageTitle" controller="Administrator" action="Edit" preservedRouteParameters="id" />
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,AddNewAdministratorPageTitle" controller="Administrator" action="Add"/>
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Roles" controller="Role" action="Index">
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EditRolePageTitle" controller="Role" action="Edit" preservedRouteParameters="id" />
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,AddNewRolePageTitle" controller="Role" action="Add" />
+      </mvcSiteMapNode>
+      
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,MessageSetup" controller="MessageSetup" action="Index"></mvcSiteMapNode>
+
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,DataSettings" clickable="false">
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,NumberOfStaff" controller="NumberOfStaffSetting" action="Index"></mvcSiteMapNode>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,NumberOfDoctor" controller="NumberOfDoctorSetting" action="Index"></mvcSiteMapNode>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Specialization" controller="SpecializationSetting" action="Index"></mvcSiteMapNode>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,NumberOfChair" controller="NumberOfChairSetting" action="Index"></mvcSiteMapNode>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Age" controller="AgeSetting" action="Index"></mvcSiteMapNode>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,LeadTime" controller="LeadTimeSetting" action="Index"></mvcSiteMapNode>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,UsingRC" controller="UsingRCSetting" action="Index"></mvcSiteMapNode>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Position" controller="PositionSetting" action="Index"></mvcSiteMapNode>
+      </mvcSiteMapNode>
+      
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Profile" controller="Profile" action="Index"></mvcSiteMapNode>
+
+    
+    
+    <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,List" clickable="false">
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,UOM" controller="UOM" action="Index"></mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Product" controller="SanPham" action="Index"></mvcSiteMapNode>
+    <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,NhomSanPham" controller="NhomSanPham" action="Index"></mvcSiteMapNode>
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,Customers" clickable="false">
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,PotentialCustomers" controller="PotentialCustomer" action="Index">
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EditPotentialCustomer" controller="PotentialCustomer" action="Edit" preservedRouteParameters="id" />
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,AddNewPotentialCustomer" controller="PotentialCustomer" action="Add"/>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EditImage" controller="PotentialCustomer" action="EditImages"  preservedRouteParameters="id" />
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,CurrentCustomers" controller="Customer" action="Index">
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EditCustomer" controller="Customer" action="Edit" preservedRouteParameters="id" />
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,AddNewCustomer" controller="Customer" action="Add"/>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EditImage" controller="Customer" action="EditImages"  preservedRouteParameters="id" />
+      </mvcSiteMapNode>
+
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,ProspectsCustomers" controller="ProspectsCustomer" action="Index">
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EditProspectsCustomer" controller="ProspectsCustomer" action="Edit" preservedRouteParameters="id" />
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,AddNewProspectsCustomer" controller="ProspectsCustomer" action="Add"/>
+        <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,EditImage" controller="ProspectsCustomer" action="EditImages"  preservedRouteParameters="id" />
+      </mvcSiteMapNode>
+      
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,CustomerLog" controller="CustomerLog" action="Index"></mvcSiteMapNode>
+      <mvcSiteMapNode title="$resources:Share.Messages.BreadCrumb.Backend.BeBreadCrumb,GuiMail" controller="GuiMail" action="Index"></mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+  </mvcSiteMapNode>
+</mvcSiteMap>

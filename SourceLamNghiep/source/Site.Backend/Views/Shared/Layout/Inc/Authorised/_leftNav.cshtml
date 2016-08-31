@@ -1,0 +1,426 @@
+﻿@using Share.Messages.BeScreens.Menu
+@{
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+<nav id="sidebar" role="navigation" class="navbar-default navbar-static-side">
+    <div id="sideMenuParent" class="sidebar-collapse menu-scroll">
+        <ul id="side-menu" class="nav">
+            <li class="user-panel">
+                <div class="thumb">
+                    @if (Html.ImageIsExist(sessionHelper.CurrentUser.ImagePath))
+                    {
+                        @:<img src="@Url.ImageLink(sessionHelper.CurrentUser.ImagePath)" class="img-circle" alt=""/>
+                    }
+                    else
+                    {
+                        @:<img src="@Url.Content("~/Content/styles/images/avatar17.jpg")" class="img-circle" alt="" />
+                    }
+                </div>
+                <div class="info">
+                    <p>@sessionHelper.CurrentUser.FullName</p>
+                    <ul class="list-inline list-unstyled">
+                        <li><a href="@Url.Action("Index", "Profile")" data-hover="tooltip" title="@BackendMessage.Profile"><i
+                            class="fa fa-user"></i></a></li>
+                        <li><a href="@Url.Action("Index", "Authen")" data-hover="tooltip" title="@BackendMessage.Logout"><i
+                            class="fa fa-sign-out"></i></a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </li>
+
+            <li class="@Html.IsMenuSelected("Logo") 
+            @Html.IsMenuSelected("Profile", "ChangePassword") @Html.IsMenuSelected("Files") 
+            @Html.IsMenuSelected("SiteSetting") @Html.IsMenuSelected("Role") @Html.IsMenuSelected("News") 
+            @Html.IsMenuSelected("Administrator") 
+            @Html.IsMenuSelected("NumberOfStaffSetting") @Html.IsMenuSelected("NumberOfDoctorSetting") 
+            @Html.IsMenuSelected("SpecializationSetting") @Html.IsMenuSelected("NumberOfChairSetting") 
+            @Html.IsMenuSelected("AgeSetting") @Html.IsMenuSelected("LeadTimeSetting") 
+            @Html.IsMenuSelected("UsingRCSetting") @Html.IsMenuSelected("PositionSetting")
+            ">
+                <a href="#">
+                    <i class="fa fa-gear fa-fw">
+                        <div class="icon-bg bg-pink"></div>
+                    </i>
+                    <span class="menu-title">@Menu.System</span><span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="@Url.Action("ChangePassword", "Profile")">
+                            <span class="submenu-title">@Menu.ChangePassword</span>
+                        </a>
+                    </li>
+
+                    @if (sessionHelper.CanView(BePage.Roles))
+                    {
+                        <li><a href="@Url.Action("Index", "Role")">
+                            <span class="submenu-title">@Menu.Roles</span>
+                        </a></li>
+                    }
+
+                    @if (sessionHelper.CanView(BePage.BackendUsers))
+                    {
+                        <li><a href="@Url.Action("Index", "Administrator")">
+                            <span class="submenu-title">@Menu.BackendUsers</span>
+                        </a></li>
+                    }
+
+                    @if (sessionHelper.CanView(BePage.SiteSettings))
+                    {
+                        <li><a href="@Url.Action("Index", "SiteSetting")">
+                            <span class="submenu-title">@Menu.SiteSettings</span>
+                        </a></li>
+                    }
+
+                    @if (sessionHelper.CanView(BePage.Logo))
+                    {
+                        <li><a href="@Url.Action("Index", "Logo")">
+                            <span class="submenu-title">@Menu.Logo</span>
+                        </a></li>
+                    }
+
+                    @if (sessionHelper.CanView(BePage.Files))
+                    {
+                        <li><a href="@Url.Action("Index", "Files")">
+                            <span class="submenu-title">@Menu.Files</span>
+                        </a></li>
+                    }
+
+                    @if (sessionHelper.CanView(BePage.News))
+                    {
+                        <li><a href="@Url.Action("Index", "News")">
+                            <span class="submenu-title">@Menu.News</span>
+                        </a></li>
+                    }
+
+                    @if (sessionHelper.CanView(BePage.NumberOfStaffSetting)
+                        || sessionHelper.CanView(BePage.NumberOfDoctorSetting)
+                        || sessionHelper.CanView(BePage.SpecializationSetting)
+                        || sessionHelper.CanView(BePage.NumberOfChairSetting)
+                        || sessionHelper.CanView(BePage.AgeSetting)
+                        || sessionHelper.CanView(BePage.LeadTimeSetting)
+                        || sessionHelper.CanView(BePage.UsingRCSetting)
+                        || sessionHelper.CanView(BePage.PositionSetting))
+                    {
+                        <li class="@Html.IsMenuSelected("NumberOfStaffSetting") @Html.IsMenuSelected("NumberOfDoctorSetting") 
+                    @Html.IsMenuSelected("SpecializationSetting") @Html.IsMenuSelected("NumberOfChairSetting") 
+                    @Html.IsMenuSelected("AgeSetting") @Html.IsMenuSelected("LeadTimeSetting") 
+                    @Html.IsMenuSelected("UsingRCSetting") @Html.IsMenuSelected("PositionSetting")">
+                            <a href="#">
+                                <span class="menu-title">@Menu.DataSettings</span><span class="fa arrow"></span>
+                            </a>
+                            <ul class="nav nav-second-level">
+                                @if (sessionHelper.CanView(BePage.NumberOfStaffSetting))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "NumberOfStaffSetting")">
+                                            <span class="submenu-title">
+                                                @Html.Raw("&nbsp;".Repeat(2)) @Menu.NumberOfStaff
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (sessionHelper.CanView(BePage.NumberOfDoctorSetting))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "NumberOfDoctorSetting")">
+                                            <span class="submenu-title">
+                                                @Html.Raw("&nbsp;".Repeat(2)) @Menu.NumberOfDoctor
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (sessionHelper.CanView(BePage.SpecializationSetting))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "SpecializationSetting")">
+                                            <span class="submenu-title">
+                                                @Html.Raw("&nbsp;".Repeat(2)) @Menu.Specialization
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (sessionHelper.CanView(BePage.NumberOfChairSetting))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "NumberOfChairSetting")">
+                                            <span class="submenu-title">
+                                                @Html.Raw("&nbsp;".Repeat(2)) @Menu.NumberOfChair
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (sessionHelper.CanView(BePage.AgeSetting))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "AgeSetting")">
+                                            <span class="submenu-title">
+                                                @Html.Raw("&nbsp;".Repeat(2)) @Menu.Age
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (sessionHelper.CanView(BePage.LeadTimeSetting))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "LeadTimeSetting")">
+                                            <span class="submenu-title">
+                                                @Html.Raw("&nbsp;".Repeat(2)) @Menu.LeadTime
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (sessionHelper.CanView(BePage.UsingRCSetting))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "UsingRCSetting")">
+                                            <span class="submenu-title">
+                                                @Html.Raw("&nbsp;".Repeat(2)) @Menu.UsingRC
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+
+                                @if (sessionHelper.CanView(BePage.PositionSetting))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("Index", "PositionSetting")">
+                                            <span class="submenu-title">
+                                                @Html.Raw("&nbsp;".Repeat(2)) @Menu.Position
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                    @if (sessionHelper.CanView(BePage.SystemEmailTemplates))
+                    {
+                        <li><a href="@Url.Action("Index", "SystemEmailTemplate")">
+                            <span class="submenu-title">@Menu.EmailTemplate</span>
+                        </a></li>
+                    }
+                </ul>
+            </li>
+
+        @if (sessionHelper.CanView(BePage.NhomSanPham)
+            || sessionHelper.CanView(BePage.SanPham)
+            || sessionHelper.CanView(BePage.UOM)
+         )
+            {
+                <li class="@Html.IsMenuSelected("NhomSanPham") @Html.IsMenuSelected("SanPham") 
+                    @Html.IsMenuSelected("UOM") 
+                    ">
+                    <a href="#"><i class="fa fa-book fa-fw">
+                        <div class="icon-bg bg-pink"></div>
+                    </i><span class="menu-title">@Menu.List</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        @if (sessionHelper.CanView(BePage.NhomSanPham))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "NhomSanPham")">
+                                    <span class="submenu-title">@Menu.DanhSachNhomSanPham</span>
+                                </a>
+                            </li>
+                        }
+
+                        @if (sessionHelper.CanView(BePage.SanPham))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "SanPham")">
+                                    <span class="submenu-title">@Menu.Product</span>
+                                </a>
+                            </li>
+                        }
+
+                        @if (sessionHelper.CanView(BePage.UOM))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "UOM")">
+                                    <span class="submenu-title">@Menu.UOM</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+
+            @if (sessionHelper.CanView(BePage.Customer)
+                || sessionHelper.CanView(BePage.PotentialCustomer)
+                || sessionHelper.CanView(BePage.ProspectsCustomer)
+                || sessionHelper.CanView(BePage.CustomerLog))
+            {
+                <li class="@Html.IsMenuSelected("Customer") @Html.IsMenuSelected("PotentialCustomer") 
+                    @Html.IsMenuSelected("ProspectsCustomer") @Html.IsMenuSelected("UnderConstruction", "Index") 
+                    @Html.IsMenuSelected("CustomerLog")
+                ">
+                    <a href="#"><i class="fa fa-user fa-fw">
+                        <div class="icon-bg bg-pink"></div>
+                    </i><span class="menu-title">@Menu.Customers</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        @if (sessionHelper.CanView(BePage.PotentialCustomer))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "PotentialCustomer")">
+                                    <span class="submenu-title">@Menu.PotentialCustomers</span>
+                                </a>
+                            </li>
+                        }
+                        
+                        @if (sessionHelper.CanView(BePage.ProspectsCustomer))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "ProspectsCustomer")">
+                                    <span class="submenu-title">@Menu.ProspectsCustomers</span>
+                                </a>
+                            </li>
+                        }
+                        
+                        @if (sessionHelper.CanView(BePage.Customer))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Customer")">
+                                    <span class="submenu-title">@Menu.CurrentCustomers</span>
+                                </a>
+                            </li>
+                        }
+
+                        <li>
+                            <a href="@Url.Action("Index", "UnderConstruction")">
+                                <span class="submenu-title">@Menu.Dealers</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index", "UnderConstruction")">
+                                <span class="submenu-title">@Menu.Competitors</span>
+                            </a>
+                        </li>
+                        
+                        @if (sessionHelper.CanView(BePage.CustomerLog))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "CustomerLog")">
+                                    <span class="submenu-title">@Menu.Log</span>
+                                </a>
+                            </li>
+                        }
+
+                        <li>
+                            <a href="@Url.Action("Index", "UnderConstruction")">
+                                <span class="submenu-title">@Menu.CustomerService</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+
+            <li class="@Html.IsMenuSelected("UnderConstruction", "Sales") 
+            ">
+                <a href="#"><i class="fa fa-user fa-fw">
+                    <div class="icon-bg bg-pink"></div>
+                </i><span class="menu-title">@Menu.Sales</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="@Url.Action("Sales", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.Invoice</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Sales", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.ItemSaleJournal</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Sales", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.SaleByCustomerReport</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Sales", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.SaleByEmployeeReport</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Sales", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.SaleByProductReport</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Sales", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.DebtReceivableDetailReport</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Sales", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.DebtReceivableSummaryReport</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Sales", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.ServiceReport</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="@Html.IsMenuSelected("UnderConstruction", "Cash") 
+            ">
+                <a href="#"><i class="fa fa-user fa-fw">
+                    <div class="icon-bg bg-pink"></div>
+                </i><span class="menu-title">@Menu.Cash</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="@Url.Action("Cash", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.Receipt</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Cash", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.Payment</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Cash", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.CashReceiptJournalReport</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Cash", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.CashPaymentJournalReport</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Cash", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.CashBookReport</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Cash", "UnderConstruction")">
+                            <span class="submenu-title">@Menu.BankBookReport</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>

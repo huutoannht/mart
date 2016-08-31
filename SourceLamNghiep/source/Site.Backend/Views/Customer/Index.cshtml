@@ -1,0 +1,12 @@
+﻿@model Models.Customer.CustomerIndexModel
+@using Share.Messages.BeScreens.Menu
+@{
+    ViewBag.Title = Menu.CurrentCustomers;
+}
+
+@Html.Partial("BaseView/Customer/_index")
+
+@section PageJavascript
+{
+    @Html.Partial("BaseView/Customer/_scriptIndex")
+}

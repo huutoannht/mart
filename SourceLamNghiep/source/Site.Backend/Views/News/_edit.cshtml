@@ -1,0 +1,52 @@
+﻿@using Share.Messages.BeScreens.BaiViet
+@model Models.Artice.ArticeModel
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                @(Model.IsNew ? BaiViet.AddNew : BaiViet.Edit)
+            </div>
+            <div class="panel-body">
+
+                <div id="divNotifyEdit">
+                    @Html.Partial("EditorTemplates/_Notify")
+                </div>
+
+                @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.ValidationSummary(string.Empty)
+                    
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#divTabInfo" data-toggle="tab">@BaiViet.ThongTin</a></li>
+                                <li><a href="#divTabDescription" data-toggle="tab">@BaiViet.Description</a></li>
+                                <li><a href="#divTabContent" data-toggle="tab">@BaiViet.Content</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="divTabInfo" class="tab-pane fade in active">
+                                    @Html.Partial("Tab/_info")
+                                </div>
+                                <div id="divTabDescription" class="tab-pane fade">
+                                    @Html.Partial("Tab/_description")
+                                </div>
+                                <div id="divTabContent" class="tab-pane fade">
+                                    @Html.Partial("Tab/_content")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div class="col-md-12">
+                            <button onclick="baiViet.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                            <button onclick="baiViet.hideEdit()" class="btn btn-default" type="button">@BackendMessage.Close</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

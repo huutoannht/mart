@@ -1,0 +1,68 @@
+﻿@using Share.Messages.BeScreens.BaiViet
+@model Models.Artice.ArticeIndexModel
+
+@{
+    var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-hover tablesorter dataTable no-footer">
+        <thead>
+            <tr>
+                @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                <th class="w50">@BaiViet.Image</th>
+                <th class="@Html.ClassSort("Name", Model.SortBy, Model.SortDirection.Value)" onclick="baiViet.sort(this, 'Name', '@Model.SortDirection.Value')">@BaiViet.Title</th>
+                <th class="@Html.ClassSort("CreatedDate", Model.SortBy, Model.SortDirection.Value) w100" onclick="baiViet.sort(this, 'CreatedDate', '@Model.SortDirection.Value')">@BaiViet.Date</th>
+                <th class="@Html.ClassSort("Status", Model.SortBy, Model.SortDirection.Value) w50" onclick="baiViet.sort(this, 'Status', '@Model.SortDirection.Value')">@BaiViet.Status</th>
+                <th class="action-col150">@BackendMessage.Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Results.Any())
+            {
+                foreach (var item in Model.Results)
+                {
+                    <tr>
+                        @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                        <td>
+                            @if (Html.ImageIsExist(item.ImagePath))
+                            {
+                                <a data-toggle="lightbox-image" href="@Url.ImageLink(item.ImagePath)">
+                                    <img class="avartar-img" src="@Url.ImageThumbSmallLink(item.ImagePath)" />
+                                </a>
+                            }
+                            else
+                            {
+                                <i class="fa fa-picture-o"></i>
+                            }
+                        </td>
+                        <td>@item.Name</td>
+                        <td class="text-center">
+                            @dateTimeHelper.ConvertToLocal(item.CreatedDate, sessionHelper.CurrentTimeZone).ToDateString()
+                        </td>
+                        <td>@item.Status.GetEnumDesRes()</td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                {
+                                    <button onclick="baiViet.editArtice('@item.Id')" class="btn btn-blue">@BackendMessage.Edit</button>
+                                }
+                                @if (sessionHelper.CanDelete(BePage.Roles))
+                                {
+                                    <button onclick="baiViet.deleteArtice('@item.Id')" class="btn btn-red">@BackendMessage.Delete</button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@Html.PaginationFor(m => m.Pagination, "baiViet.goPage({0})", "baiViet.changePageSize({0})")

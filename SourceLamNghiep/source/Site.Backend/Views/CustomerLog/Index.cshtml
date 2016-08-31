@@ -1,0 +1,23 @@
+﻿@using Share.Messages.BeScreens.CustomerLog
+@model Models.DataLog.DataLogIndexModel
+@{
+    ViewBag.Title = CustomerLog.PageTitle;
+}
+
+@Html.Partial("EditorTemplates/_Notify")
+
+@Html.Partial("_indexFilter")
+
+@Html.Partial("_list")
+
+@section PageJavascript
+{
+    @Scripts.Render("~/js/customerLog")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            customerLog.initIndex({
+            });
+    });
+    </script>
+}

@@ -1,0 +1,117 @@
+﻿@model Models.Customer.CustomerIndexModel
+@using Data.DataContract.CategoryDC
+@using Share.Messages.BeScreens.CustomerRes
+
+@{
+    var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+    var cates = SiteUtils.BuildCategoryListFromTree();
+    var beUsers = cache.GetAllBeUsers();
+    var controller = ViewContext.RouteData.Values["controller"].ToStr();
+}
+<div class="table-responsive mbm">
+    <table class="table table-bordered table-hover tablesorter dataTable no-footer" style="width: 2300px">
+        <thead>
+            <tr>
+                @Html.Partial("BaseView/Common/_cbxDeleteHead")
+                <th class="action-col250"> @BackendMessage.Action</th>
+
+                <th class="@Html.ClassSort("ClinicId", Model.SortBy, Model.SortDirection.Value) w50" onclick="customer.sort(this, 'ClinicId', '@Model.SortDirection.Value')">@CustomerRes.ClinicId</th>
+                <th class="@Html.ClassSort("ClinicName", Model.SortBy, Model.SortDirection.Value) w200" onclick="customer.sort(this, 'ClinicName', '@Model.SortDirection.Value')">@CustomerRes.ClinicName</th>
+                <th class="@Html.ClassSort("DentistName", Model.SortBy, Model.SortDirection.Value) w200" onclick="customer.sort(this, 'DentistName', '@Model.SortDirection.Value')">@CustomerRes.DentistName</th>
+                <th class="w30">@CustomerRes.Age</th>
+                <th class="w50">@CustomerRes.Specialization</th>
+                <th class="@Html.ClassSort("City", Model.SortBy, Model.SortDirection.Value) w80" onclick="customer.sort(this, 'City', '@Model.SortDirection.Value')">@CustomerRes.City</th>
+                <th class="w100">@CustomerRes.NumberOfChair</th>
+                <th class="w120">@CustomerRes.NumberOfDentist</th>
+                <th class="w100">@CustomerRes.UsingRC</th>
+                <th class="@Html.ClassSort("ClinicPhone", Model.SortBy, Model.SortDirection.Value) w100" onclick="customer.sort(this, 'ClinicPhone', '@Model.SortDirection.Value')">@CustomerRes.ClinicPhone</th>
+                <th class="w100">@CustomerRes.Staff</th>
+                <th class="w100">@CustomerRes.UsingDevice</th>
+                <th class="@Html.ClassSort("CreatedDate", Model.SortBy, Model.SortDirection.Value) w100" onclick="customer.sort(this, 'CreatedDate', '@Model.SortDirection.Value')">@CustomerRes.CreatedDate</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Results.Any())
+            {
+                foreach (var item in Model.Results)
+                {
+                    var age = cates.FirstOrDefault(i => i.Id == item.Age.ToGuid()) ?? new Category();
+                    var specialization = cates.FirstOrDefault(i => i.Id == item.Specialization.ToGuid()) ?? new Category();
+                    var city = SiteUtils.GetVietNamProvine(item.City) ?? new EnumModel();
+                    var numberOfChair = cates.FirstOrDefault(i => i.Id == item.NumberOfChair.ToGuid()) ?? new Category();
+                    var numberOfDentist = cates.FirstOrDefault(i => i.Id == item.NumberOfDentist.ToGuid()) ?? new Category();
+                    var usingRc = cates.FirstOrDefault(i => i.Id == item.UsingRC.ToGuid()) ?? new Category();
+
+                    var staffIds = item.AssignTo.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    var staffNames = new List<string>();
+                    staffIds.ForEach(id =>
+                    {
+                        var beUser = beUsers.FirstOrDefault(i => i.Id == id.ToGuid());
+                        if (beUser != null)
+                        {
+                            staffNames.Add(beUser.FullName);
+                        }
+                    });
+
+                    var usingDeviceIds = item.UsingDevices.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    var deviceNames = new List<string>();
+                    usingDeviceIds.ForEach(id =>
+                    {
+                        var cate = cates.FirstOrDefault(i => i.Id == id.ToGuid());
+                        if (cate != null)
+                        {
+                            deviceNames.Add(cate.Name);
+                        }
+                    });
+                    <tr>
+                        @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <button onclick="customer.viewCustomer('@item.Id')" class="btn btn-yellow">@BackendMessage.View</button>
+                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                {
+                                    <button type="button" onclick="gotoUrl('@Url.Action("Edit", controller, new { item.Id })')" class="btn btn-blue">@BackendMessage.Edit</button>
+                                }
+                                @if (sessionHelper.CanDelete(BePage.Roles))
+                                {
+                                    <button onclick="customer.deleteCustomer('@item.Id')" class="btn btn-red">@BackendMessage.Delete</button>
+                                }
+                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                {
+                                <button onclick="customer.changeCustomerTypeClick('@item.Id')" class="btn btn-violet">@CustomerRes.ChangeType</button>
+                                }
+                                <a href="javascript:gotoUrl('@Url.Action("EditImages", controller, new { customerId = item.Id })');" class="btn btn-orange">
+                                    @BackendMessage.Images
+                                </a>
+                            </div>
+                        </td>
+                        <td>@item.ClinicId</td>
+                        <td>@item.ClinicName</td>
+                        <td>@item.DentistName</td>
+                        <td class="text-right">@age.Name</td>
+                        <td>@specialization.Name</td>
+                        <td>@city.Name</td>
+                        <td class="text-right">@numberOfChair.Name</td>
+                        <td class="text-right">@numberOfDentist.Name</td>
+                        <td>@usingRc.Name</td>
+                        <td class="text-right">@item.ClinicPhone</td>
+                        <td>@Html.Raw(string.Join("<br/>", staffNames))</td>
+                        <td>@Html.Raw(string.Join("<br/>", deviceNames))</td>
+                        <td class="text-center">@dateTimeHelper.ConvertToLocal(item.CreatedDate, sessionHelper.CurrentTimeZone).ToDateTimeString()</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="100">@BackendMessage.NoRecordFound</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+
+@Html.PaginationFor(m => m.Pagination, "customer.goPage({0})", "customer.changePageSize({0})")

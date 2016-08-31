@@ -1,0 +1,162 @@
+﻿.error-title {
+    color: #22262E;
+    font-size: 60px;
+    font-weight: 300;
+    line-height: 80px;
+    text-align: center;
+}
+
+.error-content {
+    color: #a94442;
+    padding: 20px;
+}
+
+.panel-danger-alt {
+    border-color: #d43f3a;
+}
+
+    .panel-danger-alt .panel-heading {
+        background-color: #d9534f;
+        color: #fff;
+    }
+
+        .panel-success-alt .panel-heading p a,
+        .panel-info-alt .panel-heading p a,
+        .panel-warning-alt .panel-heading p a,
+        .panel-danger-alt .panel-heading p a,
+        .panel-dark .panel-heading p a {
+            color: #fff;
+        }
+
+        .panel-success-alt .panel-heading .panel-btns a,
+        .panel-info-alt .panel-heading .panel-btns a,
+        .panel-warning-alt .panel-heading .panel-btns a,
+        .panel-danger-alt .panel-heading .panel-btns a,
+        .panel-dark .panel-heading .panel-btns a {
+            border-color: #fff;
+            color: #fff;
+            opacity: 0.75;
+        }
+
+.panel-primary-head .panel-heading,
+.panel-success-head .panel-heading,
+.panel-warning-head .panel-heading,
+.panel-danger-head .panel-heading,
+.panel-info-head .panel-heading,
+.panel-dark-head .panel-heading {
+    border-bottom: 0;
+    color: #fff;
+}
+
+    .panel-primary-head .panel-heading p,
+    .panel-success-head .panel-heading p,
+    .panel-warning-head .panel-heading p,
+    .panel-danger-head .panel-heading p,
+    .panel-info-head .panel-heading p,
+    .panel-dark-head .panel-heading p {
+        opacity: 0.75;
+    }
+
+.panel-primary-head .panel-body,
+.panel-success-head .panel-body,
+.panel-warning-head .panel-body,
+.panel-danger-head .panel-body,
+.panel-info-head .panel-body,
+.panel-dark-head .panel-body {
+    border: 1px solid #ddd;
+    border-top: 0;
+}
+
+.panel-primary-head .panel-footer,
+.panel-success-head .panel-footer,
+.panel-warning-head .panel-footer,
+.panel-danger-head .panel-footer,
+.panel-info-head .panel-footer,
+.panel-dark-head .panel-footer {
+    border: 1px solid #ddd;
+    border-top: 0;
+}
+
+.panel-primary-head .panel-heading {
+    background-color: #428bca;
+}
+
+.panel-success-head .panel-heading {
+    background-color: #5cb85c;
+}
+
+.panel-warning-head .panel-heading {
+    background-color: #f0ad4e;
+}
+
+.panel-danger-head .panel-heading {
+    background-color: #d9534f;
+}
+
+.panel-info-head .panel-heading {
+    background-color: #5bc0de;
+}
+
+.panel-dark-head .panel-heading {
+    background-color: #4e5154;
+}
+
+    .panel-primary-head .panel-heading p a,
+    .panel-success-head .panel-heading p a,
+    .panel-info-head .panel-heading p a,
+    .panel-warning-head .panel-heading p a,
+    .panel-danger-head .panel-heading p a,
+    .panel-dark-head .panel-heading p a {
+        color: #fff;
+    }
+
+    .panel-primary-head .panel-heading .panel-btns a,
+    .panel-success-head .panel-heading .panel-btns a,
+    .panel-info-head .panel-heading .panel-btns a,
+    .panel-warning-head .panel-heading .panel-btns a,
+    .panel-danger-head .panel-heading .panel-btns a,
+    .panel-dark-head .panel-heading .panel-btns a {
+        border-color: #fff;
+        color: #fff;
+        opacity: 0.75;
+    }
+
+
+.notfoundpanel {
+    text-align: center;
+    width: 600px;
+    margin: 80px auto 0 auto;
+    position: relative;
+}
+
+    .notfoundpanel h1 {
+        font-size: 180px;
+        font-weight: 200;
+        color: #000;
+        margin: 0 0 10px 0;
+        line-height: 180px;
+        /* text-shadow: 4px 4px rgba(0,0,0,0.2); */
+    }
+
+    .notfoundpanel h3 {
+        color: #333;
+        margin: 0 0 10px 0;
+    }
+
+    .notfoundpanel p {
+        font-size: 14px !important;
+    }
+
+    .notfoundpanel form {
+        width: 350px;
+        margin: 20px auto 0 auto;
+    }
+
+    .notfoundpanel .form-control {
+        width: 250px;
+        float: left;
+    }
+
+    .notfoundpanel .btn {
+        padding: 9px 20px 10px 20px;
+    }

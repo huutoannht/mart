@@ -1,0 +1,88 @@
+﻿<script src="~/content/theme/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/content/theme/vendors/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+<script src="~/content/theme/js/html5shiv.js"></script>
+<script src="~/content/theme/js/respond.min.js"></script>
+<script src="~/content/theme/vendors/iCheck/icheck.min.js"></script>
+<script src="~/content/theme/vendors/iCheck/custom.min.js"></script>
+
+<script src="~/content/theme/vendors/metisMenu/jquery.metisMenu.js"></script>
+<script src="~/content/theme/vendors/slimScroll/jquery.slimscroll.js"></script>
+<script src="~/content/theme/vendors/jquery-notific8/jquery.notific8.min.js"></script>
+<script src="~/content/theme/js/jquery.menu.js"></script>
+<script src="~/content/theme/vendors/holder/holder.js"></script>
+<script src="~/content/theme/vendors/responsive-tabs/responsive-tabs.js"></script>
+<script src="~/content/theme/vendors/jquery-news-ticker/jquery.newsTicker.min.js"></script>
+<script src="~/content/theme/vendors/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="~/content/theme/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="~/content/theme/js/main.js"></script>
+<script src="~/Content/theme/my-theme-custom.js@(ConstKeys.JsVersion)"></script>
+
+@*----------------*@
+
+<script src="~/Content/scripts/plug-in/string.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.blockui.js"></script>
+@Scripts.Render("~/js/extensions")
+
+<script src="~/Content/scripts/plug-in/moment-develop/moment.min.js"></script>
+<script src="~/Content/scripts/plug-in/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+@Html.Partial("Layout/Inc/_dateTimeLocalJs")
+<script type="text/javascript">
+    moment.locale('@SiteUtils.GetCurrentLanguageCode().Substring(0, 2)');
+</script>
+
+<script src="~/Content/scripts/plug-in/jquery.ui.touch-punch.min.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.card-number-input.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.cookies.js"></script>
+<script src="~/Content/scripts/plug-in/chosen/chosen.jquery.min.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.alerts/jquery.alerts.js"></script>
+<script src="~/Content/scripts/plug-in/autoNumeric.js"></script>
+<script src="~/Content/scripts/plug-in/jlinq.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.inputmask.min.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.mask.min.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.numeric.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.scrollTo.min.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.serializeFormJSON.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.validate.js"></script>
+<script src="~/Content/scripts/plug-in/jquery.validate.unobtrusive.js"></script>
+<script src="~/Content/scripts/plug-in/validate_custom.js"></script>
+
+<script src="~/Content/scripts/plug-in/magnificPopup/magnificPopup.js"></script>
+<script src="~/Content/scripts/plug-in/linq.js"></script>
+
+<script type="text/javascript">
+    var CONFIRM_DELETE_MESSAGE = "@Html.Raw(BackendMessage.AreYourSureToDelete)";
+    var CONFIRM_DELETE_TITLE = "@Html.Raw(BackendMessage.ConfirmDelete)";
+    var PICKUP_IMAGE_CAPTION = "@Html.Raw(BackendMessage.PickupImage)";
+    var DELETE_CAPTION = "@Html.Raw(BackendMessage.Delete)";
+    var DragAndDropHere_CAPTION = "@Html.Raw(BackendMessage.DragAndDropHere)";
+    var ChenAnh_CAPTION = "@Html.Raw(BackendMessage.InsertImage)";
+    var AllowedImageFileExtensions = @Html.Raw(SiteUtils.GeAllowedImageFileExtensions());
+
+    var DATE_FORMAT_JS = "@SiteSettings.DateFormatJS";
+
+    var NumberDecimalSeparator = "@SiteSettings.NumberDecimalSeparator";
+    var NumberGroupSeparator = "@SiteSettings.NumberGroupSeparator";
+
+    var AvatarImageMaxSizeMessage = "@BackendMessage.AvatarImageMaxSizeMessage";
+</script>
+
+@Scripts.Render("~/js/formComponent")
+@Scripts.Render("~/js/common")
+
+@Scripts.Render("~/js/site")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        site.init({
+            browserTimeZone: "@ConstKeys.BrowserTimeZone",
+            languageCode: "@ConstKeys.LanguageCode"
+        });
+    });
+</script>
+
+@{
+    var languageCode = SiteUtils.GetCurrentLanguageCode();
+}
+<script type="text/javascript">
+    var DATEPICKER_LANGUAGE = "@languageCode.Substring(0, 2)";
+</script>

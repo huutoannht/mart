@@ -1,0 +1,81 @@
+﻿@model Models.Customer.CustomerModel
+@{
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+    var products = cache.GetProducts();
+}
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.DentistName, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.DentistName, new { @class = "form-control" })
+    </div>
+    @Html.CustomLabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.EnumDropDownFor(m => m.Gender, BackendMessage.Select, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.DentistPhone, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.DentistPhone, new { @class = "form-control" })
+    </div>
+    @Html.CustomLabelFor(m => m.DentistEmail, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.TextBoxFor(m => m.DentistEmail, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Age, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.DropDownListFor(m => m.Age, cache.GetCategories(CategoryType.Age).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+    </div>
+    @Html.LabelFor(m => m.Specialization, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.DropDownListFor(m => m.Specialization, cache.GetCategories(CategoryType.Specialization).ToSelectList(), BackendMessage.Select, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.MaritalStatus, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.EnumDropDownFor(m => m.MaritalStatus, BackendMessage.Select, new { @class = "form-control" })
+    </div>
+    @Html.CustomLabelFor(m => m.JoinSeminar, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        @Html.EnumDropDownFor(m => m.JoinSeminar, BackendMessage.Select, new { @class = "form-control" })
+    </div>
+</div>
+<div class="form-group">
+    @Html.CustomLabelFor(m => m.JoinedDate, new { @class = "col-md-2 control-label" })
+    <div class="col-md-4">
+        <div class="input-group">
+            @Html.TextBoxDateFor(m => m.JoinedDate, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </span>
+        </div>
+    </div>
+    @if (Model.CustomerType == CustomerType.Current || Model.CustomerType == CustomerType.Prospects)
+    {
+        @Html.LabelFor(m => m.LeadTime, new {@class = "col-md-2 control-label"})
+        <div class="col-md-4">
+            @Html.DropDownListFor(m => m.LeadTime, cache.GetCategories(CategoryType.LeadTime).ToSelectList(), BackendMessage.Select, new {@class = "form-control"})
+        </div>
+    }
+</div>
+
+@if (Model.CustomerType == CustomerType.Current || Model.CustomerType == CustomerType.Prospects)
+{
+    <div class="form-group">
+        @Html.CustomLabelFor(m => m.InterestingDevice, new {@class = "col-md-2 control-label"})
+        <div class="col-md-4">
+            <select id="selInterestingDevice" multiple="multiple">
+                @{
+                    Model.InterestingDevice = Model.InterestingDevice.ToStr().ToLower();
+                }
+                @foreach (var item in products)
+                {
+                    <option value="@item.Id" @(Model.InterestingDevice.Contains(item.Id.ToString().ToLower()) ? "selected=\"selected\"" : string.Empty)>@item.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+}

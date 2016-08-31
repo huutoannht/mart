@@ -1,0 +1,57 @@
+﻿@using Share.Messages.BeScreens.ProductRes
+@model Models.Product.ProductModel
+
+<div class="row">
+    <div class="col-md-12 col-md-12">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                @(Model.IsNew ? ProductRes.AddNewProduct : ProductRes.EditProduct)
+            </div>
+            <div class="panel-body">
+
+                <div id="divNotifyEdit">
+                    @Html.Partial("EditorTemplates/_Notify")
+                </div>
+
+                @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal" }))
+                {
+                    @Html.HiddenFor(m => m.Id)
+
+                    @Html.HiddenFor(m => m.TextSearch)
+
+                    @Html.HiddenFor(m => m.VideosJsonString)
+                    
+                    @Html.ValidationSummary(string.Empty)
+                    
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#divTabInfo" data-toggle="tab">@ProductRes.ThongTinSanPham</a></li>
+                                @if (Model.ProductImages == null || !Model.ProductImages.Any())
+                                {
+                                    <li><a href="#divTabImage" data-toggle="tab">@ProductRes.Image</a></li>
+                                }
+                            </ul>
+                            <div class="tab-content">
+                                <div id="divTabInfo" class="tab-pane fade in active">
+                                    @Html.Partial("Tab/_info")
+                                </div>
+                                <div id="divTabImage" class="tab-pane fade">
+                                    @Html.Partial("Tab/_images")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <div class="col-md-12">
+                            <button onclick="sanPham.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>
+                            <button onclick="sanPham.hideEdit()" class="btn btn-default" type="button">@BackendMessage.Close</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

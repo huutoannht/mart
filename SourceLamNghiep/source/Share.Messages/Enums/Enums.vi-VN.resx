@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Admin" xml:space="preserve">
+    <value>Người quản lý</value>
+  </data>
+  <data name="Appsettings" xml:space="preserve">
+    <value>Quản lý thông số hệ thống</value>
+  </data>
+  <data name="SystemEmailTemplateType_BackEndForgotPassword" xml:space="preserve">
+    <value>Gửi tới người quản lý - Quên mật khẩu</value>
+  </data>
+  <data name="BackendUsers" xml:space="preserve">
+    <value>Danh sách người quản lý</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Quốc gia</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Trang thống kê</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Trang thông tin cá nhân</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Quản lý vai trò</value>
+  </data>
+  <data name="SiteSettings" xml:space="preserve">
+    <value>Tùy chỉnh tham số hệ thống</value>
+  </data>
+  <data name="AppSettingType_Smtp" xml:space="preserve">
+    <value>Thông tin đăng nhập máy chủ mail</value>
+  </data>
+  <data name="AppSettingType_State" xml:space="preserve">
+    <value>Bang</value>
+  </data>
+  <data name="SuperAdmin" xml:space="preserve">
+    <value>Người quản lý cao nhất</value>
+  </data>
+  <data name="SystemEmailTemplates" xml:space="preserve">
+    <value>Danh sách mẫu nội dung email của hệ thống</value>
+  </data>
+  <data name="SystemEmailTemplateType_StoreFrontContactUs" xml:space="preserve">
+    <value>Gửi tới người quản lý - Liên hệ với chúng tôi</value>
+  </data>
+  <data name="AppSettingType_EmailSettings" xml:space="preserve">
+    <value>Tùy chỉnh email</value>
+  </data>
+  <data name="AppSettingType_Domains" xml:space="preserve">
+    <value>Tên miền</value>
+  </data>
+  <data name="BePage_MessageSetup" xml:space="preserve">
+    <value>Cài đặt tin nhắn trên trang web</value>
+  </data>
+  <data name="MessageCase_ForgotPasswordEmailSent" xml:space="preserve">
+    <value>Gửi tới Người dùng - Đã gửi thành công email giúp khôi phục mật khẩu</value>
+  </data>
+  <data name="AppSettingType_DateFormats" xml:space="preserve">
+    <value>Định dạng hiển thị ngày tháng</value>
+  </data>
+  <data name="AppSettingType_FrontEndColor" xml:space="preserve">
+    <value>Màu trang khách</value>
+  </data>
+  <data name="Currency_IRR" xml:space="preserve">
+    <value>Iran Rial</value>
+  </data>
+  <data name="Currency_KHR" xml:space="preserve">
+    <value>Campuchia Riel</value>
+  </data>
+  <data name="Currency_LAK" xml:space="preserve">
+    <value>Lào Kip</value>
+  </data>
+  <data name="Currency_USD" xml:space="preserve">
+    <value>USD</value>
+  </data>
+  <data name="Currency_VND" xml:space="preserve">
+    <value>VND</value>
+  </data>
+  <data name="AppSettingType_GoogleMapSettings" xml:space="preserve">
+    <value>Tùy chỉnh bản đồ google</value>
+  </data>
+  <data name="AppSettingType_SystemTransferSettings" xml:space="preserve">
+    <value>Tùy chỉnh chuyển đổi hệ thống</value>
+  </data>
+  <data name="AppSettingType_SiteStyleSettings" xml:space="preserve">
+    <value>Tùy chỉnh hiển thị trang web</value>
+  </data>
+  <data name="AppSettingType_SiteData" xml:space="preserve">
+    <value>Dữ liệu trang web</value>
+  </data>
+  <data name="AppSettingType_DateTimeFormats" xml:space="preserve">
+    <value>Định dạng ngày giờ</value>
+  </data>
+  <data name="PaymentMethod_Cash" xml:space="preserve">
+    <value>Nhận hàng thanh thanh toán (COD): người mua chịu chi phí vận chuyển</value>
+  </data>
+  <data name="PaymentMethod_CreditCard" xml:space="preserve">
+    <value>Người mua chuyển khoảng trước shop sẽ chịu chi phí vận chuyển</value>
+  </data>
+  <data name="HtmlContentDisplayType_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="HtmlContentDisplayType_SMS" xml:space="preserve">
+    <value>SMS</value>
+  </data>
+  <data name="HtmlContentDisplayType_WebSite" xml:space="preserve">
+    <value>Mạng xã hội</value>
+  </data>
+  <data name="AppSettingType_SmsVendorSetting" xml:space="preserve">
+    <value>Tham số gửi SMS</value>
+  </data>
+  <data name="BePage_Customer" xml:space="preserve">
+    <value>Khách hàng</value>
+  </data>
+  <data name="Gender_Nam" xml:space="preserve">
+    <value>Nam</value>
+  </data>
+  <data name="Gender_Nu" xml:space="preserve">
+    <value>Nữ</value>
+  </data>
+  <data name="BePage_SanPham" xml:space="preserve">
+    <value>Sản phẩm</value>
+  </data>
+  <data name="BePage_NhomSanPham" xml:space="preserve">
+    <value>Nhóm sản phẩm</value>
+  </data>
+  <data name="Currency_CNY" xml:space="preserve">
+    <value>CNY</value>
+  </data>
+  <data name="PaymentStatus_ChuaThanhToan" xml:space="preserve">
+    <value>Chưa thanh toán</value>
+  </data>
+  <data name="PaymentStatus_DaThanhToan" xml:space="preserve">
+    <value>Đã thanh toán</value>
+  </data>
+  <data name="PaymentStatus_ThanhToanKhongThanhCong" xml:space="preserve">
+    <value>Thanh toán không thành công</value>
+  </data>
+  <data name="AppSettingType_CompanyInfo" xml:space="preserve">
+    <value>Thông tin công ty</value>
+  </data>
+  <data name="SystemEmailTemplateType_ExternalLoginIdConfirm" xml:space="preserve">
+    <value>Gửi tới người dùng - Xác nhận External Id</value>
+  </data>
+  <data name="MessageCase_ExternalLoginIdConfirm" xml:space="preserve">
+    <value>Gửi tới người dùng - một email đã được gửi tới bạn để xác nhận định danh External</value>
+  </data>
+  <data name="MessageCase_DatHangThanhCong" xml:space="preserve">
+    <value>Gửi tới người dùng - đặt hàng thành công</value>
+  </data>
+  <data name="MessageCase_HuyBoThanhToan" xml:space="preserve">
+    <value>Gửi tới người dùng - người dùng hủy bỏ thanh toán</value>
+  </data>
+  <data name="SystemEmailTemplateType_HasNewOrder" xml:space="preserve">
+    <value>Gửi tới người quản lý - có đơn hàng mới</value>
+  </data>
+  <data name="BePage_GuiMail" xml:space="preserve">
+    <value>Gửi mail</value>
+  </data>
+  <data name="ProductStatus_Active" xml:space="preserve">
+    <value>Kích hoạt</value>
+  </data>
+  <data name="BePage_Logo" xml:space="preserve">
+    <value>Ảnh logo</value>
+  </data>
+  <data name="BePage_Files" xml:space="preserve">
+    <value>Danh sách file</value>
+  </data>
+  <data name="ArticeStatus_Hidden" xml:space="preserve">
+    <value>Ẩn</value>
+  </data>
+  <data name="ArticeStatus_Visible" xml:space="preserve">
+    <value>Hiển thị</value>
+  </data>
+  <data name="BePage_News" xml:space="preserve">
+    <value>Bài viết</value>
+  </data>
+  <data name="ProductStatus_Inactive" xml:space="preserve">
+    <value>Không kích hoạt</value>
+  </data>
+  <data name="BePage_UOM" xml:space="preserve">
+    <value>UOM</value>
+  </data>
+  <data name="CustomerType_Current" xml:space="preserve">
+    <value>Hiện tại</value>
+  </data>
+  <data name="CustomerType_Potential" xml:space="preserve">
+    <value>Tiềm năng</value>
+  </data>
+  <data name="CustomerType_Prospects" xml:space="preserve">
+    <value>Triển vọng</value>
+  </data>
+  <data name="BePage_AgeSetting" xml:space="preserve">
+    <value>Tùy chỉnh tuổi</value>
+  </data>
+  <data name="BePage_LeadTimeSetting" xml:space="preserve">
+    <value>Tùy chỉnh thời gian hướng dẫn</value>
+  </data>
+  <data name="BePage_NumberOfChairSetting" xml:space="preserve">
+    <value>Tùy chỉnh số ghế</value>
+  </data>
+  <data name="BePage_NumberOfDoctorSetting" xml:space="preserve">
+    <value>Tùy chỉnh số bác sĩ</value>
+  </data>
+  <data name="BePage_NumberOfStaffSetting" xml:space="preserve">
+    <value>Tùy chỉnh số nhân viên</value>
+  </data>
+  <data name="BePage_SpecializationSetting" xml:space="preserve">
+    <value>Tùy chỉnh chuyên ngành</value>
+  </data>
+  <data name="BePage_UsingRCSetting" xml:space="preserve">
+    <value>Tùy chỉnh sử dụng RC</value>
+  </data>
+  <data name="BePage_PositionSetting" xml:space="preserve">
+    <value>Tùy chỉnh vị trí nhân viên</value>
+  </data>
+  <data name="BePage_PotentialCustomer" xml:space="preserve">
+    <value>Khách hàng tiềm năng</value>
+  </data>
+  <data name="BePage_ProspectsCustomer" xml:space="preserve">
+    <value>Khách hàng triển vọng</value>
+  </data>
+  <data name="BeUserStatus_Active" xml:space="preserve">
+    <value>Kích hoạt</value>
+  </data>
+  <data name="BeUserStatus_Locked" xml:space="preserve">
+    <value>Đã khóa</value>
+  </data>
+  <data name="MaritalStatus_Divorced" xml:space="preserve">
+    <value>Đã ly dị</value>
+  </data>
+  <data name="MaritalStatus_Married" xml:space="preserve">
+    <value>Đã kết hôn</value>
+  </data>
+  <data name="MaritalStatus_Single" xml:space="preserve">
+    <value>Độc thân</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Không</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Có</value>
+  </data>
+  <data name="WeekDay_Friday" xml:space="preserve">
+    <value>Thứ 6</value>
+  </data>
+  <data name="WeekDay_Monday" xml:space="preserve">
+    <value>Thứ 2</value>
+  </data>
+  <data name="WeekDay_Saturday" xml:space="preserve">
+    <value>Thứ 7</value>
+  </data>
+  <data name="WeekDay_Sunday" xml:space="preserve">
+    <value>Chủ nhật</value>
+  </data>
+  <data name="WeekDay_Thursday" xml:space="preserve">
+    <value>Thứ 5</value>
+  </data>
+  <data name="WeekDay_Tuesday" xml:space="preserve">
+    <value>Thứ 3</value>
+  </data>
+  <data name="WeekDay_Wednesday" xml:space="preserve">
+    <value>Thứ 4</value>
+  </data>
+  <data name="SystemEmailTemplateType_ConfirmNewAccountToUser" xml:space="preserve">
+    <value>Gửi tới người dùng - tài khoản đã được tạo</value>
+  </data>
+  <data name="BePage_CustomerLog" xml:space="preserve">
+    <value>Nhật ký khách hàng</value>
+  </data>
+  <data name="ActionLog_ChangeType" xml:space="preserve">
+    <value>Đổi kiểu</value>
+  </data>
+  <data name="ActionLog_Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="ActionLog_Insert" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="ActionLog_Update" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="ActionLog_DeleteImage" xml:space="preserve">
+    <value>Xóa hình ảnh</value>
+  </data>
+  <data name="ActionLog_InsertImage" xml:space="preserve">
+    <value>Thêm hình ảnh</value>
+  </data>
+</root>

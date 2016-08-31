@@ -1,0 +1,217 @@
+﻿@using Data.DataContract.CategoryDC
+@model Models.Customer.CustomerModel
+@{
+    var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
+    var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+    var cache = ObjectFactory.GetInstance<ICacheHelper>();
+    var products = cache.GetProducts();
+}
+
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content" style="padding:0px 10px;overflow-y:auto; overflow-x:hidden;height:500px; ">
+        <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-hidden="true"
+                    class="close">
+                &times;
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 style="font-weight:600;">Clinic information</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Clinic ID:  </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.ClinicId, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Clinic name: </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.ClinicName, new { @class = "control-label" })
+                </div>
+                <div class="col-md-2 clLabel"> Clinic phone:   </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.ClinicPhone.ToStr(), new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Website: </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.Website.ToStr(), new { @class = "control-label" })
+                </div>
+                <div class="col-md-2 clLabel"> Email: </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.ClinicEmail, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Address:  </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.Address.ToStr(), new { @class = "control-label" })
+                </div>
+                <div class="col-md-2 clLabel"> District:  </div>
+                <div class="col-md-3">
+                    @{
+                        var district = SiteUtils.GetVietNamDistrict(Model.District) ?? new EnumModel();
+                    }
+                    @Html.Label(district.Name.ToStr(), new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> City:  </div>
+                <div class="col-md-3">
+                    @{
+                        var city = SiteUtils.GetVietNamProvine(Model.City) ?? new EnumModel();
+                    }
+                    @Html.Label(city.Name.ToStr(), new { @class = "control-label" })
+                </div>
+                <div class="col-md-2 clLabel"> Number of Doctor:  </div>
+                <div class="col-md-3">
+                    @{
+                        var numberOfDentist = cache.GetCategories(CategoryType.NumberOfDentist).FirstOrDefault(i => i.Id == Model.NumberOfDentist) ?? new Category();
+                    }
+                    @Html.Label(numberOfDentist.Name.ToStr(), new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Number of Staff:   </div>
+                <div class="col-md-3">
+                    @{
+                        var numberOfStaff = cache.GetCategories(CategoryType.NumberOfStaff).FirstOrDefault(i => i.Id == Model.NumberOfDentist) ?? new Category();
+                    }
+                    @Html.Label(numberOfStaff.Name.ToStr(), new { @class = "control-label" })
+                </div>
+                <div class="col-md-2 clLabel"> Number of Chair:  </div>
+                <div class="col-md-3">
+                    @{
+                        var numberOfChair = cache.GetCategories(CategoryType.NumberOfChair).FirstOrDefault(i => i.Id == Model.NumberOfDentist) ?? new Category();
+                    }
+                    @Html.Label(numberOfChair.Name.ToStr(), new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Using Device:  </div>
+                <div class="col-md-3">
+                    @Html.Partial("BaseView/Customer/View/_usingDevice")
+                </div>
+                <div class="col-md-2 clLabel"> Using RC:   </div>
+                <div class="col-md-3">
+                    @{
+                        var usingRc = cache.GetCategories(CategoryType.UsingRC).FirstOrDefault(i => i.Id == Model.NumberOfDentist) ?? new Category();
+                    }
+                    @Html.Label(usingRc.Name.ToStr(), new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 style="font-weight:600;">Dentist information</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel">  Name:  </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.DentistName.ToStr(), new { @class = "control-label" })
+                </div>
+                <div class="col-md-2 clLabel"> Gender: </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.Gender.HasValue ? Model.Gender.Value.GetEnumDesRes() : string.Empty, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Age:  </div>
+                <div class="col-md-3">
+                    @{
+                        var age = cache.GetCategories(CategoryType.Age).FirstOrDefault(i => i.Id == Model.NumberOfDentist) ?? new Category();
+                    }
+                    @Html.Label(age.Name.ToStr(), new { @class = "control-label" })
+                </div>
+                <div class="col-md-2 clLabel"> Telephone:   </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.DentistPhone.ToStr(), new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Specialization:  </div>
+                <div class="col-md-3">
+                    @{
+                        var specialization = cache.GetCategories(CategoryType.Specialization).FirstOrDefault(i => i.Id == Model.NumberOfDentist) ?? new Category();
+                    }
+                    @Html.Label(specialization.Name.ToStr(), new { @class = "control-label" })
+                </div>
+                <div class="col-md-2 clLabel"> Email:  </div>
+                <div class="col-md-3">
+                  @Html.CustomLabelFor(m => m.DentistEmail, new { @class = "col-md-2 control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Marital status:   </div>
+                <div class="col-md-3">
+                    @Html.Label(Model.MaritalStatus.HasValue ? Model.MaritalStatus.Value.GetEnumDesRes() : string.Empty, new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Joined Date:  </div>
+                <div class="col-md-3">
+                    @if (Model.JoinedDate.HasValue)
+                    {
+                        @dateTimeHelper.ConvertToLocal(Model.JoinedDate.Value, sessionHelper.CurrentTimeZone).ToDateString()
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel"> Interesting Device:  </div>
+                <div class="col-md-3">
+                    @{
+                        var deviceIds = Model.InterestingDevice.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).Select(id => id.ToGuid()).ToList();
+                        var listDeviceNames = new List<string>();
+                        deviceIds.ForEach(id =>
+                        {
+                            var product = products.FirstOrDefault(i => i.Id == id);
+                            if (product != null)
+                            {
+                                listDeviceNames.Add(product.Name);
+                            }
+                        });
+                    }
+                    @Html.Raw(string.Join("<br/>", listDeviceNames))
+                </div>
+                <div class="col-md-2 clLabel"> Lead time:  </div>
+                <div class="col-md-3">
+                    @{
+                        var leadTime = cache.GetCategories(CategoryType.LeadTime).FirstOrDefault(i => i.Id == Model.NumberOfDentist) ?? new Category();
+                    }
+                    @Html.Label(leadTime.Name.ToStr(), new { @class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel">
+                    Work Hours:
+                </div>
+                <div class="col-md-5 ">
+                   @Html.Partial("BaseView/Customer/View/_workHours")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 clLabel">
+                    Remark:
+                </div>
+                <div class="col-md-8">
+                    @Html.Partial("BaseView/Customer/View/_remark")
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 style="font-weight:600;">Visit</h4>
+                </div>
+            </div>
+            <div class="col-md-7">
+                @Html.Partial("BaseView/Customer/View/_visit", Model.VisitIndex)
+            </div>
+        </div>
+    </div>
+</div>
+</div>
