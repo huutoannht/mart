@@ -65,5 +65,6 @@ namespace Models.Product
         public string TextSearch { get; set; }
 
         public string VideosJsonString { get; set; }
+
     }
 }

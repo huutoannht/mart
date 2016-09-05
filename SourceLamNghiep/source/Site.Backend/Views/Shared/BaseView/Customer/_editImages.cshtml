@@ -9,7 +9,9 @@
             <div class="portlet-header">
                 <div class="caption">@CustomerRes.ImageListOf "@Model.ClinicName"</div>
                 <div class="actions">
-                    @if (sessionHelper.CanUpdate(BePage.Roles))
+                    @if (sessionHelper.CanAdd(BePage.Customer)
+                    || sessionHelper.CanAdd(BePage.PotentialCustomer)
+                    || sessionHelper.CanAdd(BePage.ProspectsCustomer))
                     {
                         <a href="javascript:customer.addNewImageClick('@Model.Id');" class="btn btn-sm btn-info">
                             <i class="fa fa-plus"></i>&nbsp;

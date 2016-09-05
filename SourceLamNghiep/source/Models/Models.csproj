@@ -63,7 +63,9 @@
     <Compile Include="Category\CategoryIndexModel.cs" />
     <Compile Include="Category\CategoryModel.cs" />
     <Compile Include="Customer\CustomerImageModel.cs" />
+    <Compile Include="Customer\CustomerServiceIndexModel.cs" />
     <Compile Include="Customer\CustomerVisitIndexModel.cs" />
+    <Compile Include="Customer\CustomerServiceModel.cs" />
     <Compile Include="Customer\CustomerVisitModel.cs" />
     <Compile Include="DataLog\DataLogIndexModel.cs" />
     <Compile Include="DataLog\DataLogModel.cs" />

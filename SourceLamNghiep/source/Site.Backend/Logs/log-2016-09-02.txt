@@ -1,0 +1,112 @@
+2016-09-02 16:46:47,535 [11] ERROR Share.Helper.Attributes.HandleErrorAttribute - Unhandled exception from  ::1 to: /Customer/Edit/c32a4c6b-084c-27c7-8e37-08d3d14d52cb - Customer/Edit GET
+-------------
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.ContractImplement.BaseService.HandleException(Exception error) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\__BaseService.cs:line 70
+   at Service.ContractImplement.BaseService.Execute[TRepository,TResult](TRepository repository, Func`2 repositoryFunc) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\__BaseService.cs:line 22
+   at Service.ContractImplement.DataLogService.FindDataLogs(FindRequest request) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\DataLogService.cs:line 40
+   at Site.Backend.Controllers.CustomerBaseController.<>c__DisplayClass80.<PopulateDataLogIndexModel>b__7f(IDataLogService s) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 1262
+   at ML.Common.std.ExecuteDispose[TService,TResult](TService service, Func`2 funcService) in d:\Projects\ML\ML.Common\std.cs:line 859
+   at Site.Backend.Controllers.CustomerBaseController.PopulateDataLogIndexModel(CustomerModel customerModel) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 1262
+   at Site.Backend.Controllers.CustomerBaseController.Edit(Guid id) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 105
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.InvokeSynchronousActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.ContractImplement.BaseService.HandleException(Exception error) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\__BaseService.cs:line 70
+   at Service.ContractImplement.BaseService.Execute[TRepository,TResult](TRepository repository, Func`2 repositoryFunc) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\__BaseService.cs:line 22
+   at Service.ContractImplement.DataLogService.FindDataLogs(FindRequest request) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\DataLogService.cs:line 40
+   at Site.Backend.Controllers.CustomerBaseController.<>c__DisplayClass80.<PopulateDataLogIndexModel>b__7f(IDataLogService s) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 1262
+   at ML.Common.std.ExecuteDispose[TService,TResult](TService service, Func`2 funcService) in d:\Projects\ML\ML.Common\std.cs:line 859
+   at Site.Backend.Controllers.CustomerBaseController.PopulateDataLogIndexModel(CustomerModel customerModel) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 1262
+   at Site.Backend.Controllers.CustomerBaseController.Edit(Guid id) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 105
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.InvokeSynchronousActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+2016-09-02 16:47:22,853 [20] ERROR Share.Helper.Attributes.HandleErrorAttribute - Unhandled exception from  ::1 to: /Customer/Edit/c32a4c6b-084c-27c7-8e37-08d3d14d52cb - Customer/Edit GET
+-------------
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.ContractImplement.BaseService.HandleException(Exception error) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\__BaseService.cs:line 70
+   at Service.ContractImplement.BaseService.Execute[TRepository,TResult](TRepository repository, Func`2 repositoryFunc) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\__BaseService.cs:line 22
+   at Service.ContractImplement.DataLogService.FindDataLogs(FindRequest request) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\DataLogService.cs:line 40
+   at Site.Backend.Controllers.CustomerBaseController.<>c__DisplayClass80.<PopulateDataLogIndexModel>b__7f(IDataLogService s) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 1262
+   at ML.Common.std.ExecuteDispose[TService,TResult](TService service, Func`2 funcService) in d:\Projects\ML\ML.Common\std.cs:line 859
+   at Site.Backend.Controllers.CustomerBaseController.PopulateDataLogIndexModel(CustomerModel customerModel) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 1262
+   at Site.Backend.Controllers.CustomerBaseController.Edit(Guid id) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 105
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.InvokeSynchronousActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Service.ContractImplement.BaseService.HandleException(Exception error) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\__BaseService.cs:line 70
+   at Service.ContractImplement.BaseService.Execute[TRepository,TResult](TRepository repository, Func`2 repositoryFunc) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\__BaseService.cs:line 22
+   at Service.ContractImplement.DataLogService.FindDataLogs(FindRequest request) in i:\Code\SamSungViNa\SVN\source\Service.ContractImplement\DataLogService.cs:line 40
+   at Site.Backend.Controllers.CustomerBaseController.<>c__DisplayClass80.<PopulateDataLogIndexModel>b__7f(IDataLogService s) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 1262
+   at ML.Common.std.ExecuteDispose[TService,TResult](TService service, Func`2 funcService) in d:\Projects\ML\ML.Common\std.cs:line 859
+   at Site.Backend.Controllers.CustomerBaseController.PopulateDataLogIndexModel(CustomerModel customerModel) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 1262
+   at Site.Backend.Controllers.CustomerBaseController.Edit(Guid id) in i:\Code\SamSungViNa\SVN\source\Site.Backend\Controllers\CustomerBaseController.cs:line 105
+   at lambda_method(Closure , ControllerBase , Object[] )
+   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.InvokeSynchronousActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   at System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)

@@ -18,14 +18,18 @@
             <div class="panel-body grid-table">
                 <div class="row mbm">
                     <div class="col-md-4">
-                        @if (sessionHelper.CanAdd(BePage.Roles))
+                        @if (sessionHelper.CanAdd(BePage.Customer)
+                        || sessionHelper.CanAdd(BePage.PotentialCustomer)
+                        || sessionHelper.CanAdd(BePage.ProspectsCustomer))
                         {
                             <a class="btn btn-info" href="@Url.Action("Add", controller)">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 @BackendMessage.AddNew
                             </a>
                         }
-                        @if (sessionHelper.CanDelete(BePage.Roles))
+                          @if (sessionHelper.CanDelete(BePage.Customer)
+                        || sessionHelper.CanDelete(BePage.PotentialCustomer)
+                        || sessionHelper.CanDelete(BePage.ProspectsCustomer))
                         {
                             <button type="button" class="btn btn-danger" onclick="customer.deleteCustomers()">
                                 <span class="glyphicon glyphicon-remove"></span>
@@ -34,14 +38,18 @@
                         }
                     </div>
                     <div class="col-md-8">
-                        @if (sessionHelper.CanExport(BePage.Roles))
+                         @if (sessionHelper.CanExport(BePage.Customer)
+                        || sessionHelper.CanExport(BePage.PotentialCustomer)
+                        || sessionHelper.CanExport(BePage.ProspectsCustomer))
                         {
                             <button type="button" class="btn btn-warning pull-right ml3" onclick="customer.export()">
                                 <span class="fa fa-cloud-download"></span>
                                 @BackendMessage.ExportExcel
                             </button>
                         }
-                        @if (sessionHelper.CanImport(BePage.Roles))
+                         @if (sessionHelper.CanImport(BePage.Customer)
+                        || sessionHelper.CanImport(BePage.PotentialCustomer)
+                        || sessionHelper.CanImport(BePage.ProspectsCustomer))
                         {
                             <button type="button" class="btn btn-pink pull-right ml3" onclick="customer.importClick()">
                                 <span class="fa fa-cloud-upload"></span>

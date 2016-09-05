@@ -6,6 +6,7 @@
         settings = $.extend(settings, options);
         $.validator.addMethod('accept', function () { return true; });
         sanPham.initList();
+        sanPham.initFileImport();
     };
 
     sanPham.goPage = function (pageIndex) {
@@ -52,6 +53,7 @@
                 $("#divEdit").html(res.html).show();
                 sanPham.initInfoForm(res);
                 _scrollTo($("#divEdit"));
+
             } else {
                 notify.error(res.message, $("#divNotifyTop"));
                 _scrollTop();
@@ -65,7 +67,6 @@
         $("#Cost").rules("remove", "required");
         $("#Price").rules("remove", "required");
         $("#Vat").rules("remove", "required");
-
         setupSelect($("#divEdit"));
         initICheck($("#divEdit"));
         setupCurrency($("#divEdit"), 0);
@@ -85,15 +86,19 @@
         initCheckboxDeleteInList($("#divList"));
     };
 
-    sanPham.saveClick = function() {
+    sanPham.saveClick = function () {
+       
         for (var instanceName in CKEDITOR.instances) {
             CKEDITOR.instances[instanceName].updateElement();
         }
-
-        if (!$("#formInfo").valid()) return;
-
         var model = $("#formInfo").serializeFormJSON();
-
+        if (!$("#formInfo").valid()) {
+            if (model.CategoryId.isEmpty()) {
+                notify.error(settings.categoryRequiredMsg, $("#divNotifyEdit"));
+                _scrollTo($("#divEdit"));
+                return;
+            }
+        }
         if (model.CategoryId.isEmpty()) {
             notify.error(settings.categoryRequiredMsg, $("#divNotifyEdit"));
             _scrollTo($("#divEdit"));
@@ -219,6 +224,7 @@
             if (res.success) {
                 $("#divEdit").html(res.imageList).show();
                 sanPham.initImagesList();
+                initThemeCheckbox($("#divEdit"));
                 _scrollTo($("#divEdit"));
             } else {
                 notify.error(res.message, $("#divNotifyTop"));
@@ -348,7 +354,7 @@
         initICheck($("#divTabVideoLink"));
     };
 
-    sanPham.updateImageVisible = function(target, id) {
+    sanPham.updateImageVisible = function (target, id) {
         var visible = $(target).is(":checked");
         post(settings.updateImageVisibleUrl, {
             id: id,
@@ -359,6 +365,37 @@
             } else {
                 notify.error(res.message, $("#divNotifyEdit"));
             }
+        });
+    };
+
+    sanPham.export = function () {
+        notify.hide();
+        var data = $("#formFilter").serializeFormJSON();
+        window.location = settings.getExportFormUrl + "?" + $.param(data);
+    };
+
+    sanPham.importClick = function () {
+        $("#fileImport").click();
+    };
+
+    sanPham.initFileImport = function () {
+        $("#fileImport").change(function () {
+            var data = new FormData($("#formImport")[0]);
+
+            ajaxFormFile(settings.importProducsUrl, data, function (res) {
+                if (res.success) {
+                    notify.success(res.message, $("#divNotifyTop"));
+                    sanPham.goPage(1);
+                } else {
+                    notify.error(res.message, $("#divNotifyTop"));
+                    post(settings.getImportFormUrl, null, function (response) {
+                        $("#divImport").html(response.html);
+                        sanPham.initFileImport();
+                    }, null, true);
+                }
+
+                _scrollTop();
+            });
         });
     };
 

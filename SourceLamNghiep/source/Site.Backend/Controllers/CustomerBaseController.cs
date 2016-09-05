@@ -60,6 +60,8 @@ namespace Site.Backend.Controllers
             };
 
             PopulateVisitIndexModel(model);
+
+            PopulateCustomerServiceIndexModel(model);
             PopulateDataLogIndexModel(model);
 
             return View(editViewName, model);
@@ -101,6 +103,7 @@ namespace Site.Backend.Controllers
             model.SaturdayEndStr = model.SaturdayEnd.ToTimeString();
 
             PopulateVisitIndexModel(model);
+            PopulateCustomerServiceIndexModel(model);
             PopulateDataLogIndexModel(model);
 
             return View(editViewName, model);
@@ -513,6 +516,7 @@ namespace Site.Backend.Controllers
             model.View = true;
 
             PopulateVisitIndexModel(model);
+            PopulateCustomerServiceIndexModel(model);
             PopulateDataLogIndexModel(model);
 
             return JsonObject(true, string.Empty, new
@@ -581,6 +585,47 @@ namespace Site.Backend.Controllers
         }
 
         #endregion
+
+        #region customerservice
+
+        public ActionResult GetCustomerServices(CustomerModel model)
+        {
+            PopulateCustomerServiceIndexModel(model);
+            return JsonObject(true, string.Empty, new
+            {
+                html = PartialViewToString("BaseView/Customer/Edit/_customerService", model.CustomerServiceIndex)
+            });
+        }
+
+        public ActionResult EditCustomerService(CustomerModel model, Guid? id)
+        {
+            ModelState.Clear();
+            var customerServiceModel = new CustomerServiceModel
+            {
+                BeUserId = CurrentUserId,
+                DateCS = DateTime.Today
+
+            };
+
+            customerServiceModel.InitId();
+
+            if (id.HasValue)
+            {
+                customerServiceModel = model.CustomerServices.FirstOrDefault(i => i.Id == id.Value);
+                if (customerServiceModel == null)
+                {
+                    return JsonObject(false, BackendMessage.CannotLoadData);
+                }
+            }
+
+            return JsonObject(true, string.Empty, new
+            {
+                html = PartialViewToString("BaseView/Customer/Edit/_editVisit", customerServiceModel)
+            });
+        }
+
+        #endregion
+
 
         #region images
 
@@ -1190,10 +1235,12 @@ namespace Site.Backend.Controllers
                     model.VisitIndex.Results = model.VisitIndex.SortDirection.Value == SortDirection.Asc ?
                         model.VisitIndex.Results.OrderBy(i => i.DateVisit).ToList() :
                         model.VisitIndex.Results.OrderByDescending(i => i.DateVisit).ToList();
+                    model.VisitIndex.Pagination.TotalRecords = model.VisitIndex.Results.Count();
                 }
                 else
                 {
                     model.VisitIndex.Results = model.VisitIndex.Results.OrderBy(i => i.DateVisit).ToList();
+                    model.VisitIndex.Pagination.TotalRecords = model.VisitIndex.Results.Count();
                 }
             }
 
@@ -1201,6 +1248,46 @@ namespace Site.Backend.Controllers
             {
                 model.VisitIndex.Results =
                     model.VisitIndex.Results.Skip(pageOption.PageStartIndex).Take(pageOption.PageSize).ToList();
+            }
+        }
+
+        protected void PopulateCustomerServiceIndexModel(CustomerModel model)
+        {
+            model.CustomerServices.Where(i => i.IsNew).ForEach(i => i.InitId());
+            model.CustomerServiceIndex.Results = model.CustomerServices;
+            model.CustomerServiceIndex.InitSortInfo();
+
+            if (string.IsNullOrWhiteSpace(model.VisitIndex.SortBy))
+            {
+                model.CustomerServiceIndex.SortBy = "DateDS";
+            }
+
+            var pageOption = new PageOption
+            {
+                PageSize = model.CustomerServiceIndex.Pagination.PageSize,
+                PageNumber = model.CustomerServiceIndex.Pagination.CurrentPageIndex
+            };
+
+            if (model.CustomerServiceIndex.SortBy == "DateDS")
+            {
+                if (model.CustomerServiceIndex.SortDirection.HasValue)
+                {
+                    model.CustomerServiceIndex.Results = model.CustomerServiceIndex.SortDirection.Value == SortDirection.Asc ?
+                        model.CustomerServiceIndex.Results.OrderBy(i => i.DateCS).ToList() :
+                        model.CustomerServiceIndex.Results.OrderByDescending(i => i.DateCS).ToList();
+                    model.CustomerServiceIndex.Pagination.TotalRecords = model.CustomerServiceIndex.Results.Count();
+                }
+                else
+                {
+                    model.CustomerServiceIndex.Results = model.CustomerServiceIndex.Results.OrderBy(i => i.DateCS).ToList();
+                    model.CustomerServiceIndex.Pagination.TotalRecords = model.VisitIndex.Results.Count();
+                }
+            }
+
+            if (pageOption.IsValid)
+            {
+                model.CustomerServiceIndex.Results =
+                    model.CustomerServiceIndex.Results.Skip(pageOption.PageStartIndex).Take(pageOption.PageSize).ToList();
             }
         }
 
@@ -1225,7 +1312,8 @@ namespace Site.Backend.Controllers
                 Table = TableLog.Customer,
                 ItemId = customerModel.Id,
                 SortOption = new SortOption(new[] { new SortItem(model.SortBy, model.SortDirection.Value) }),
-                PageOption = new PageOption { PageSize = model.Pagination.PageSize, PageNumber = model.Pagination.CurrentPageIndex }
+                //PageOption = new PageOption { PageSize = model.Pagination.PageSize, PageNumber = model.Pagination.CurrentPageIndex }
+                PageOption = new PageOption { PageSize = int.MaxValue, PageNumber = model.Pagination.CurrentPageIndex }
             };
 
             var response = ServiceHelper.DataLog.ExecuteDispose(s => s.FindDataLogs(filter));

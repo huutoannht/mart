@@ -17,6 +17,8 @@ namespace Db.Interfaces
 
         BaseResponse SaveProduct(SaveRequest request);
 
+        BaseResponse SaveProducts(List<Product> products);
+
         BaseResponse DeleteProduct(Guid id);
 
         BaseResponse SaveImage(ProductImage productImage);

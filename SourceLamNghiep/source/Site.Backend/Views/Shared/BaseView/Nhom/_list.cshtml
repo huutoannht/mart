@@ -19,15 +19,15 @@
         <td>@item.Name</td>
         <td>
             <div class="btn-group btn-group-xs">
-                @if (Model.CategoryType == CategoryType.Product && sessionHelper.CanAdd(BePage.Roles))
+                @if (Model.CategoryType == CategoryType.Product && (sessionHelper.CanAdd(BePage.NhomSanPham)))
                 {
                     <button onclick="category.addNewClick('@item.Id')" class="btn btn-info">@BackendMessage.AddNewChildGroup</button>
                 }
-                @if (sessionHelper.CanUpdate(BePage.Roles))
+                @if (sessionHelper.CanUpdate(BePage.NhomSanPham))
                 {
                     <button onclick="category.editClick('@item.Id')" class="btn btn-default">@BackendMessage.Edit</button>
                 }
-                @if (!item.Childs.Any() && sessionHelper.CanDelete(BePage.Roles))
+                @if (!item.Childs.Any() && sessionHelper.CanDelete(BePage.NhomSanPham))
                 {
                     <button onclick="category.deleteClick('@item.Id')" class="btn btn-danger">@BackendMessage.Delete</button>
                 }

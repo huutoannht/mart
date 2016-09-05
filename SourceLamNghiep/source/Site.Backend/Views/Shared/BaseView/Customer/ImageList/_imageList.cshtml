@@ -32,7 +32,9 @@
                     </td>
                     <td class="vamiddle text-center">
                         <div class="btn-group btn-group-xs">
-                            @if (sessionHelper.CanDelete(BePage.Roles))
+                            @if (sessionHelper.CanDelete(BePage.Customer)
+                                || sessionHelper.CanDelete(BePage.PotentialCustomer)
+                                || sessionHelper.CanDelete(BePage.ProspectsCustomer))
                             {
                                 <button onclick="customer.deleteImage('@item.Id', '@Model.Id') " class="btn btn-red">@BackendMessage.Delete</button>
                             }

@@ -15,8 +15,8 @@
 }
 <div class="form-group">
     @Html.CustomLabelFor(m => m.AssignTo, new { @class = "col-md-2 control-label" })
-    <div class="col-md-4">
-        @Html.Raw(string.Join("<br/>", staffNames))
+    <div class="col-md-6">
+        @Html.Raw(string.Join(", ", staffNames))
     </div>
 </div>
 

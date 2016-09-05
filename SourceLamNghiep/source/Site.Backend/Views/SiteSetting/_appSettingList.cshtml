@@ -18,7 +18,7 @@
             </div>
             <div class="panel-body grid-table">
                 <div class="mbm">
-                    @if (sessionHelper.CanAdd(BePage.Roles))
+                    @if (sessionHelper.CanAdd(BePage.Appsettings))
                     {
                         <button class="btn btn-info" type="button" onclick="siteSetting.addNewClick()">
                             <span class="glyphicon glyphicon-plus"></span>
@@ -56,11 +56,11 @@
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-xs">
-                                                @if (!listExcept.Contains(item.Name) && sessionHelper.CanAdd(BePage.Roles))
+                                                @if (!listExcept.Contains(item.Name) && sessionHelper.CanAdd(BePage.Appsettings))
                                                 {
                                                     <button onclick="siteSetting.editClick('@item.Id')" class="btn btn-default" data-toggle="tooltip">@BackendMessage.Edit</button>
                                                 }
-                                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                                @if (sessionHelper.CanDelete(BePage.Appsettings))
                                                 {
                                                     <button onclick="siteSetting.deleteClick('@item.Id')" class="btn btn-danger" data-toggle="tooltip">@BackendMessage.Delete</button>
                                                 }

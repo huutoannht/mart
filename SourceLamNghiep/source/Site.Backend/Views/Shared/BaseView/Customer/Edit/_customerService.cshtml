@@ -1,13 +1,13 @@
 ﻿@using Data.DataContract.BeUserDC
 @using Share.Messages.BeScreens.CustomerRes
-@model Models.Customer.CustomerVisitIndexModel
+@model Models.Customer.CustomerServiceIndexModel
 @{
     var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
     var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
     var cache = ObjectFactory.GetInstance<ICacheHelper>();
 }
 
-<div id="divNotifyVisits">
+<div id="divNotifyCustomerService">
     @Html.Partial("EditorTemplates/_Notify")
 </div>
 
@@ -16,7 +16,7 @@
     || sessionHelper.CanAdd(BePage.PotentialCustomer)
     || sessionHelper.CanAdd(BePage.ProspectsCustomer))
     {
-        <button class="btn btn-success" type="button" onclick="customer.editVisit(null)">
+        <button class="btn btn-success" type="button" onclick="customer.editCustomerService(null)">
             <span class="glyphicon glyphicon-plus"></span>
             @BackendMessage.AddNew
         </button>
@@ -28,7 +28,7 @@
         <thead>
             <tr>
                 @Html.Partial("BaseView/Common/_cbxDeleteHead")
-                <th class="@Html.ClassSort("DateVisit", Model.SortBy, Model.SortDirection.Value) w100" onclick="customer.sortVisit(this, 'DateVisit', '@Model.SortDirection.Value')">@CustomerRes.Date</th>
+                <th class="@Html.ClassSort("DateCS", Model.SortBy, Model.SortDirection.Value) w100" onclick="customer.sortVisit(this, 'DateCS', '@Model.SortDirection.Value')">@CustomerRes.Date</th>
                 <th class="w100">@CustomerRes.Staff</th>
                 <th>@CustomerRes.Promise</th>
                 <th class="w50">@CustomerRes.Done</th>
@@ -43,7 +43,7 @@
                     var beUser = cache.GetBeUser(item.BeUserId) ?? new BeUser();
                     <tr>
                         @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
-                        <td class="text-center">@dateTimeHelper.ConvertToLocal(item.DateVisit, sessionHelper.CurrentTimeZone).ToDateString()</td>
+                        <td class="text-center">@dateTimeHelper.ConvertToLocal(item.DateCS, sessionHelper.CurrentTimeZone).ToDateString()</td>
                         <td>@beUser.FullName</td>
                         <td>@item.Promise</td>
                         <td>@item.Done.GetEnumDesRes()</td>
@@ -53,13 +53,13 @@
                                 || sessionHelper.CanUpdate(BePage.PotentialCustomer)
                                 || sessionHelper.CanUpdate(BePage.ProspectsCustomer))
                                 {
-                                    <button onclick="customer.editVisit('@item.Id')" class="btn btn-default" data-toggle="tooltip" data-original-title="@BackendMessage.Edit">@BackendMessage.Edit</button>
+                                    <button onclick="customer.editCustomerService('@item.Id')" class="btn btn-default" data-toggle="tooltip" data-original-title="@BackendMessage.Edit">@BackendMessage.Edit</button>
                                 }
-                               @if (sessionHelper.CanDelete(BePage.Customer)
+                                @if (sessionHelper.CanDelete(BePage.Customer)
                                 || sessionHelper.CanDelete(BePage.PotentialCustomer)
                                 || sessionHelper.CanDelete(BePage.ProspectsCustomer))
                                 {
-                                    <button onclick="customer.deleteVisit('@item.Id')" class="btn btn-danger" data-toggle="tooltip" data-original-title="@BackendMessage.Delete">@BackendMessage.Delete</button>
+                                    <button onclick="customer.deleteCustomerService('@item.Id')" class="btn btn-danger" data-toggle="tooltip" data-original-title="@BackendMessage.Delete">@BackendMessage.Delete</button>
                                 }
                             </div>
                         </td>
@@ -75,4 +75,4 @@
         </tbody>
     </table>
 </div>
-@Html.PaginationFor(m => m.Pagination, "customer.goPageVisit({0})", "customer.changePageSizeVisit({0})")
+@Html.PaginationFor(m => m.Pagination, "customer.goPageCustomerService({0})", "customer.changePageSizeCustomerService({0})")

@@ -269,6 +269,7 @@
     <Content Include="Content\scripts\plug-in\bootstrap-filestyle.js" />
     <Content Include="Content\scripts\plug-in\bootstrap-multiselect\bootstrap-multiselect.css" />
     <Content Include="Content\scripts\plug-in\bootstrap-multiselect\bootstrap-multiselect.js" />
+    <Content Include="Content\scripts\plug-in\bootstrap-switch.js" />
     <Content Include="Content\scripts\plug-in\chosen\chosen.css" />
     <Content Include="Content\scripts\plug-in\chosen\chosen.jquery.min.js" />
     <Content Include="Content\scripts\plug-in\chosen\images\chosen-sprite%402x.png" />
@@ -3338,6 +3339,8 @@
     <Content Include="Content\scripts\plug-in\fileman\web.config" />
     <Content Include="Content\FileTemplate\Customers.xls" />
     <Content Include="Content\FileTemplate\Customers.csv" />
+    <Content Include="Content\FileTemplate\Products.xls" />
+    <Content Include="Content\FileTemplate\Products.csv" />
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -3496,6 +3499,8 @@
     <Content Include="Views\Shared\BaseView\Customer\Inc\_dataLog.cshtml" />
     <Content Include="Views\Shared\BaseView\Customer\Inc\_map.cshtml" />
     <Content Include="Views\Shared\BaseView\Customer\_viewDetailCustomer.cshtml" />
+    <Content Include="Views\Shared\BaseView\Customer\Edit\_customerService.cshtml" />
+    <Content Include="Views\Shared\BaseView\Customer\Edit\_editCustomerService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Data.DataContract\Data.DataContract.csproj">

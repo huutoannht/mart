@@ -68,6 +68,20 @@ namespace Db.ImplementSQL.Repository
             return response;
         }
 
+        public BaseResponse SaveProducts(List<Product> products)
+        {
+            var response = new BaseResponse();
+
+            using (var db = DbContext)
+            {
+                if (products == null || !products.Any()) return response;
+
+                products.ForEach(customer => db.Products.Add(customer.Map<Product, Entity.Product>()));
+                response.Success = db.SaveChanges() > 0;
+            }
+
+            return response;
+        }
         public BaseResponse DeleteProduct(Guid id)
         {
             var response = new BaseResponse();

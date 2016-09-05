@@ -9,5 +9,7 @@ namespace Models.Product
     {
         [Display(Name = "TextSearch", ResourceType = typeof(Share.Messages.BackendMessage))]
         public string TextSearch { get; set; }
+
+        public bool IsExport { get; set; }
     }
 }

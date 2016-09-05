@@ -269,6 +269,9 @@
 .w10 {
     width: 10px !important;
 }
+.w5 {
+    width: 10px !important;
+}
 .rec-color {
     border-color: #fff;
     line-height: 26px;

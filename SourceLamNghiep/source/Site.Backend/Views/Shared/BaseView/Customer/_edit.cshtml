@@ -81,7 +81,7 @@
                                 @if (Model.CustomerType == CustomerType.Current)
                                 {
                                     <div id="divTabHistoryPurchase" class="tab-pane fade in">
-                                        @Html.Partial("BaseView/Customer/Inc/_historyPurchase")
+                                        @Html.Partial("BaseView/Customer/Edit/_customerService", Model.CustomerServiceIndex)
                                     </div>
                                 }
                                 <div id="divTabOther" class="tab-pane fade in">

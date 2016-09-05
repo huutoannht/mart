@@ -12,7 +12,7 @@
     <div class="clearfix"></div>
     <div class="form-group">
         <div class="col-md-12 mt10">
-            @if (sessionHelper.CanAdd(BePage.Roles))
+             @if (sessionHelper.CanAdd(BePage.SanPham))
             {
                 <button type="button" class="btn btn-info" onclick="sanPham.addNewImageClickOnEditProduct()"><i class="fa fa-plus"></i>@BackendMessage.AddNew</button>
             }

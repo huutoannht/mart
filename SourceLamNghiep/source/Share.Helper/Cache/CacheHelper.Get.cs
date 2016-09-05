@@ -69,6 +69,10 @@ namespace Share.Helper.Cache
         {
             return GetCategories().FirstOrDefault(i => i.Id == id);
         }
+        public Category GetCategoryByCode(string code)
+        {
+            return GetCategories().FirstOrDefault(i => i.Code == code);
+        }
 
         public List<Category> GetCategoryTreeList()
         {

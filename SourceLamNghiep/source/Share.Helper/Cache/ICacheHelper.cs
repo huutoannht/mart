@@ -92,6 +92,7 @@ namespace Share.Helper.Cache
         List<Category> GetCategories(CategoryType categoryType);
 
         Category GetCategory(Guid id);
+        Category GetCategoryByCode(string code);
 
         void ClearGetCategories();
 

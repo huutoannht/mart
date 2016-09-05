@@ -9,7 +9,7 @@
             <div class="portlet-header">
                 <div class="caption">@ProductRes.ProductImageListOf "@Model.Name"</div>
                 <div class="actions">
-                    @if (sessionHelper.CanAdd(BePage.Roles))
+                    @if (sessionHelper.CanAdd(BePage.SanPham))
                     {
                         <a href="javascript:sanPham.addNewImageClick('@Model.Id');" class="btn btn-sm btn-white">
                             <i class="fa fa-plus"></i>&nbsp;
@@ -58,14 +58,15 @@
                                                 </td>
                                                 <td class="vamiddle text-center">
                                                     <div class="checkbox-list">
-                                                        <label>
-                                                            <input onclick="sanPham.updateImageVisible(this, '@item.Id')" type="checkbox" value="true" @(item.Visible ? "checked=\"checked\"" : string.Empty) />
-                                                        </label>
+                                                        @if (sessionHelper.CanUpdate(BePage.SanPham))
+                                                        {
+                                                                <input onclick='sanPham.updateImageVisible(this, "@item.Id")' name="my-checkbox" type="checkbox" value="true" @(item.Visible ? "checked=\"checked\"" : string.Empty) />
+                                                        }
                                                     </div>
                                                 </td>
                                                 <td class="vamiddle text-center">
                                                     <div class="btn-group btn-group-xs">
-                                                        @if (sessionHelper.CanDelete(BePage.Roles))
+                                                        @if (sessionHelper.CanDelete(BePage.SanPham))
                                                         {
                                                             <button onclick="sanPham.deleteImage('@item.Id', '@Model.Id') " class="btn btn-red">@BackendMessage.Delete</button>
                                                         }

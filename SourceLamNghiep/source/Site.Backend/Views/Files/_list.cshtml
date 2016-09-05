@@ -14,7 +14,7 @@
                 @Files.FileManagement
             </div>
             <div class="panel-body grid-table">
-                @if (sessionHelper.CanAdd(BePage.Roles))
+                @if (sessionHelper.CanAdd(BePage.Files))
                 {
                     <button class="btn btn-info mbm" type="button" onclick="file.addClick()">
                         <i class="fa fa-plus"></i>
@@ -55,10 +55,10 @@
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-xs">
-                                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                                @if (sessionHelper.CanUpdate(BePage.Files))
                                                 {
                                                     <button onclick="file.editClick('@item.Id')" class="btn btn-default" data-toggle="tooltip" data-original-title="@BackendMessage.Edit">@BackendMessage.Edit</button>
-                                                } @if (sessionHelper.CanDelete(BePage.Roles))
+                                                } @if (sessionHelper.CanDelete(BePage.Files))
                                                 {
                                                     <button onclick="file.deleteClick('@item.Id')" class="btn btn-danger" data-toggle="tooltip" data-original-title="@BackendMessage.Delete">@BackendMessage.Delete</button>
                                                 }

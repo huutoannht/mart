@@ -29,7 +29,7 @@
                 <th class="@Html.ClassSort("ClinicPhone", Model.SortBy, Model.SortDirection.Value) w100" onclick="customer.sort(this, 'ClinicPhone', '@Model.SortDirection.Value')">@CustomerRes.ClinicPhone</th>
                 <th class="w100">@CustomerRes.Staff</th>
                 <th class="w100">@CustomerRes.UsingDevice</th>
-                <th class="@Html.ClassSort("CreatedDate", Model.SortBy, Model.SortDirection.Value) w100" onclick="customer.sort(this, 'CreatedDate', '@Model.SortDirection.Value')">@CustomerRes.CreatedDate</th>
+                <th class="@Html.ClassSort("CreatedDate", Model.SortBy, Model.SortDirection.Value) w120" onclick="customer.sort(this, 'CreatedDate', '@Model.SortDirection.Value')">@CustomerRes.CreatedDate</th>
             </tr>
         </thead>
         <tbody>
@@ -70,17 +70,23 @@
                         <td>
                             <div class="btn-group btn-group-xs">
                                 <button onclick="customer.viewCustomer('@item.Id')" class="btn btn-yellow">@BackendMessage.View</button>
-                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                @if (sessionHelper.CanUpdate(BePage.Customer)
+                                || sessionHelper.CanUpdate(BePage.PotentialCustomer)
+                                || sessionHelper.CanUpdate(BePage.ProspectsCustomer))
                                 {
                                     <button type="button" onclick="gotoUrl('@Url.Action("Edit", controller, new { item.Id })')" class="btn btn-blue">@BackendMessage.Edit</button>
                                 }
-                                @if (sessionHelper.CanDelete(BePage.Roles))
+                                  @if (sessionHelper.CanDelete(BePage.Customer)
+                                || sessionHelper.CanDelete(BePage.PotentialCustomer)
+                                || sessionHelper.CanDelete(BePage.ProspectsCustomer))
                                 {
                                     <button onclick="customer.deleteCustomer('@item.Id')" class="btn btn-red">@BackendMessage.Delete</button>
                                 }
-                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                 @if (sessionHelper.CanUpdate(BePage.Customer)
+                                || sessionHelper.CanUpdate(BePage.PotentialCustomer)
+                                || sessionHelper.CanUpdate(BePage.ProspectsCustomer))
                                 {
-                                <button onclick="customer.changeCustomerTypeClick('@item.Id')" class="btn btn-violet">@CustomerRes.ChangeType</button>
+                                    <button onclick="customer.changeCustomerTypeClick('@item.Id')" class="btn btn-violet">@CustomerRes.ChangeType</button>
                                 }
                                 <a href="javascript:gotoUrl('@Url.Action("EditImages", controller, new { customerId = item.Id })');" class="btn btn-orange">
                                     @BackendMessage.Images
@@ -90,13 +96,13 @@
                         <td>@item.ClinicId</td>
                         <td>@item.ClinicName</td>
                         <td>@item.DentistName</td>
-                        <td class="text-right">@age.Name</td>
+                        <td class="text-left">@age.Name</td>
                         <td>@specialization.Name</td>
                         <td>@city.Name</td>
-                        <td class="text-right">@numberOfChair.Name</td>
-                        <td class="text-right">@numberOfDentist.Name</td>
+                        <td class="text-left">@numberOfChair.Name</td>
+                        <td class="text-left">@numberOfDentist.Name</td>
                         <td>@usingRc.Name</td>
-                        <td class="text-right">@item.ClinicPhone</td>
+                        <td class="text-left">@item.ClinicPhone</td>
                         <td>@Html.Raw(string.Join("<br/>", staffNames))</td>
                         <td>@Html.Raw(string.Join("<br/>", deviceNames))</td>
                         <td class="text-center">@dateTimeHelper.ConvertToLocal(item.CreatedDate, sessionHelper.CurrentTimeZone).ToDateTimeString()</td>

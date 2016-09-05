@@ -15,11 +15,11 @@
                 <th>@ProductRes.Image</th>
                 <th class="@Html.ClassSort("Name", Model.SortBy, Model.SortDirection.Value)" onclick="sanPham.sort(this, 'Name', '@Model.SortDirection.Value')">@ProductRes.Name</th>
                 <th class="@Html.ClassSort("ProductCode", Model.SortBy, Model.SortDirection.Value) w30" onclick="sanPham.sort(this, 'ProductCode', '@Model.SortDirection.Value')">@ProductRes.ProductCode</th>
-                <th class="w20">@ProductRes.Cost</th>
-                <th>@ProductRes.Price</th>
-                <th class="w20">@ProductRes.Vat</th>
+                <th class="@Html.ClassSort("Cost", Model.SortBy, Model.SortDirection.Value) w20" onclick="sanPham.sort(this, 'Cost', '@Model.SortDirection.Value')">@ProductRes.Cost</th>
+                <th class="@Html.ClassSort("Price", Model.SortBy, Model.SortDirection.Value) " onclick="sanPham.sort(this, 'Price', '@Model.SortDirection.Value')">@ProductRes.Price</th>
+                <th class="@Html.ClassSort("Vat", Model.SortBy, Model.SortDirection.Value) w20 " onclick="sanPham.sort(this, 'Price', '@Model.SortDirection.Value')">@ProductRes.Vat</th>
                 <th class="w20">@ProductRes.UOM</th>
-                <th class="w30">@ProductRes.Status</th>
+                <th class="@Html.ClassSort("Status", Model.SortBy, Model.SortDirection.Value) w30 " onclick="sanPham.sort(this, 'Status', '@Model.SortDirection.Value')">@ProductRes.Status</th>
                 <th>@ProductRes.Category</th>
                 <th>@BackendMessage.Action</th>
             </tr>
@@ -72,11 +72,11 @@
                         </td>
                         <td>
                             <div class="btn-group btn-group-xs">
-                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                @if (sessionHelper.CanUpdate(BePage.SanPham))
                                 {
                                     <button onclick="sanPham.editProduct('@item.Id',null)" class="btn btn-blue">@BackendMessage.Edit</button>
                                 }
-                                @if (sessionHelper.CanDelete(BePage.Roles))
+                                @if (sessionHelper.CanDelete(BePage.SanPham))
                                 {
                                     <button onclick="sanPham.deleteProduct('@item.Id')" class="btn btn-red">@BackendMessage.Delete</button>
                                 }

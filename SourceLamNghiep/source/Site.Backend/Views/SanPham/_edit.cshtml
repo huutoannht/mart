@@ -9,9 +9,7 @@
             </div>
             <div class="panel-body">
 
-                <div id="divNotifyEdit">
-                    @Html.Partial("EditorTemplates/_Notify")
-                </div>
+
 
                 @using (Html.BeginForm(string.Empty, string.Empty, FormMethod.Post, new { id = "formInfo", role = "form", @class = "form-horizontal" }))
                 {
@@ -20,9 +18,12 @@
                     @Html.HiddenFor(m => m.TextSearch)
 
                     @Html.HiddenFor(m => m.VideosJsonString)
-                    
+
+                    <div id="divNotifyEdit">
+                        @Html.Partial("EditorTemplates/_Notify")
+                    </div>
                     @Html.ValidationSummary(string.Empty)
-                    
+
                     <div class="form-group">
                         <div class="col-md-12">
                             <ul class="nav nav-tabs">
@@ -42,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-actions">
                         <div class="col-md-12">
                             <button onclick="sanPham.saveClick()" class="btn btn-success" type="button">@BackendMessage.Save</button>

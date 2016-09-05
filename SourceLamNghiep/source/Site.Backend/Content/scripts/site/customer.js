@@ -522,7 +522,7 @@
         });
         return arrIds;
     };
-
+    //start Visit
     customer.goPageVisit = function (pageIndex) {
         model.VisitIndex.Pagination.CurrentPageIndex = pageIndex;
         customer.getVisits();
@@ -576,6 +576,8 @@
         });
     };
 
+   
+
     customer.cancelEditVisit = function () {
         $("#divEditVisit").hide().empty();
     };
@@ -604,7 +606,75 @@
             customer.goPageVisit(1);
         });
     };
+    //end Visit
 
+    //start CustomerService
+
+    customer.goPageCustomerService = function (pageIndex) {
+        model.VisitIndex.Pagination.CurrentPageIndex = pageIndex;
+        customer.getCustomerServices();
+    };
+
+    customer.changePageSizeCustomerService = function (pageSizeElement) {
+        model.VisitIndex.Pagination.PageSize = pageSizeElement.value;
+        model.VisitIndex.Pagination.CurrentPageIndex = 1;
+        customer.getCustomerServices();
+    };
+
+    customer.sortCustomerService = function (target, colName, direction) {
+        model.VisitIndex.SortBy = colName;
+        model.VisitIndex.SortDirection = direction;
+        model.VisitIndex.EventFiredFromSortButton = true;
+
+        customer.getCustomerServices();
+    };
+
+    customer.getCustomerServices = function () {
+        ajax(settings.getCustomerServicesUrl, model, function (res) {
+            if (res.success) {
+                $("#divTabVisit").html(res.html);
+                initICheck($("#divTabVisit"));
+                initCheckboxDeleteInList($("#divTabVisit"));
+            } else {
+                notify.error(res.message, $("#divNotifyVisits"));
+                _scrollTop();
+            }
+        });
+    };
+
+
+
+    customer.editCustomerService = function (id) {
+        ajax(settings.editCustomerServiceUrl, {
+            model: model,
+            id: id
+        }, function (res) {
+            if (res.success) {
+                $("#divEditVisit").html(res.html).show();
+                setupDatePicker($("#divEditVisit"));
+                $("#formInfoCS").submit(function () {
+                    return false;
+                });
+
+                $.validator.unobtrusive.parse($("#formInfoCS"));
+                _scrollTo($("#divEditVisit"));
+            } else {
+                notify.error(res.message, $("#divNotifyEdit"));
+                _scrollTop();
+            }
+        });
+    };
+
+    customer.deleteCustomerService = function (id) {
+        customer.cancelEditVisit();
+        jConfirm(CONFIRM_DELETE_MESSAGE, CONFIRM_DELETE_TITLE, function (r) {
+            if (!r) return;
+            model.Visits = jlinq.from(model.Visits).not().equals("Id", id).select();
+            customer.goPageVisit(1);
+        });
+    };
+    //end CustomerService
+ 
     customer.addNewImageClickOnEditCustomer = function () {
         var nextOrderNumber = $("#divImageList input[type='file']").length + 1;
 

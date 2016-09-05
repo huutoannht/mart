@@ -1,6 +1,7 @@
 ﻿@using System.Web.Script.Serialization
 @using Data.DataContract.CustomerDC
 @using Share.Messages.BeScreens.CustomerLog
+@using Data.DataContract.CategoryDC
 @model Models.DataLog.DataLogIndexModel
 @{
     var dateTimeHelper = ObjectFactory.GetInstance<IDateTimeHelper>();
@@ -8,6 +9,7 @@
     var cache = ObjectFactory.GetInstance<ICacheHelper>();
     var beUsers = cache.GetAllBeUsers();
     var jsonSerializer = new JavaScriptSerializer();
+    var cates = SiteUtils.BuildCategoryListFromTree();
 }
 
 <div class="row">
@@ -67,6 +69,39 @@
                                             <td class="text-left">ClinicName</td>
                                             <td class="text-left">@(oldData != null ? oldData.ClinicName : string.Empty)</td>
                                             <td class="text-left">@(newData != null ? newData.ClinicName : string.Empty)</td>
+                                        </tr>
+                                    }
+                                    if ((oldData != null ? oldData.AssignTo : string.Empty) != (newData != null ? newData.AssignTo : string.Empty))
+                                    {
+                                        countrow += 1;
+                                        var staffIds = oldData.AssignTo.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                        var staffNames = new List<string>();
+                                        staffIds.ForEach(id =>
+                                        {
+                                            var beUser1 = beUsers.FirstOrDefault(i => i.Id == id.ToGuid());
+                                            if (beUser1 != null)
+                                            {
+                                                staffNames.Add(beUser1.FullName);
+                                            }
+                                        });
+                                        var staffIds_n = newData.AssignTo.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                        var staffNames_n = new List<string>();
+                                        staffIds_n.ForEach(id =>
+                                        {
+                                            var beUser1 = beUsers.FirstOrDefault(i => i.Id == id.ToGuid());
+                                            if (beUser1 != null)
+                                            {
+                                                staffNames_n.Add(beUser1.FullName);
+                                            }
+                                        });
+                                        <tr>
+                                            <td class="text-left">@item.LogDate.ToDateTimeString()</td>
+                                            <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
+                                            <td class="text-left">@item.Action.GetEnumDesRes()</td>
+                                            <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
+                                            <td class="text-left">AssignTo</td>
+                                            <td class="text-left">@string.Join(", ", staffNames)</td>
+                                            <td class="text-left">@string.Join(", ", staffNames_n)</td>
                                         </tr>
                                     }
                                     if ((oldData != null ? oldData.ClinicEmail : string.Empty) != (newData != null ? newData.ClinicEmail : string.Empty))
@@ -154,46 +189,50 @@
                                             <td class="text-left">@(newData != null ? newData.Lng.ToString() : string.Empty)</td>
                                         </tr>
                                     }
+
                                     if ((oldData != null ? oldData.NumberOfDentist.ToString() : string.Empty) != (newData != null ? newData.NumberOfDentist.ToString() : string.Empty))
                                     {
                                         countrow += 1;
+                                        var numberOfDentist_old = cache.GetCategories(CategoryType.NumberOfDentist).FirstOrDefault(i => i.Id == oldData.NumberOfDentist) ?? new Category();
+                                        var numberOfDentist_new = cache.GetCategories(CategoryType.NumberOfDentist).FirstOrDefault(i => i.Id == newData.NumberOfDentist) ?? new Category();
                                         <tr>
-                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
                                             <td class="text-left">@item.LogDate.ToDateTimeString()</td>
                                             <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
                                             <td class="text-left">@item.Action.GetEnumDesRes()</td>
                                             <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
                                             <td class="text-left">NumberOfDentist</td>
-                                            <td class="text-left">@(oldData != null ? oldData.NumberOfDentist.ToString() : string.Empty)</td>
-                                            <td class="text-left">@(newData != null ? newData.NumberOfDentist.ToString() : string.Empty)</td>
+                                            <td class="text-left">@numberOfDentist_old.Name.ToStr()</td>
+                                            <td class="text-left">@numberOfDentist_new.Name.ToStr()</td>
                                         </tr>
                                     }
                                     if ((oldData != null ? oldData.NumberOfStaff.ToString() : string.Empty) != (newData != null ? newData.NumberOfStaff.ToString() : string.Empty))
                                     {
                                         countrow += 1;
+                                        var numberOfStaff_old = cache.GetCategories(CategoryType.NumberOfStaff).FirstOrDefault(i => i.Id == oldData.NumberOfStaff) ?? new Category();
+                                        var numberOfStaff_new = cache.GetCategories(CategoryType.NumberOfStaff).FirstOrDefault(i => i.Id == newData.NumberOfStaff) ?? new Category();
                                         <tr>
-                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
                                             <td class="text-left">@item.LogDate.ToDateTimeString()</td>
                                             <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
                                             <td class="text-left">@item.Action.GetEnumDesRes()</td>
                                             <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
                                             <td class="text-left">NumberOfStaff</td>
-                                            <td class="text-left">@(oldData != null ? oldData.NumberOfStaff.ToString() : string.Empty)</td>
-                                            <td class="text-left">@(newData != null ? newData.NumberOfStaff.ToString() : string.Empty)</td>
+                                            <td class="text-left">@numberOfStaff_old.Name.ToStr()</td>
+                                            <td class="text-left">@numberOfStaff_new.Name.ToStr()</td>
                                         </tr>
                                     }
                                     if ((oldData != null ? oldData.NumberOfChair.ToString() : string.Empty) != (newData != null ? newData.NumberOfChair.ToString() : string.Empty))
                                     {
                                         countrow += 1;
+                                        var numberOfChair_old = cache.GetCategories(CategoryType.NumberOfChair).FirstOrDefault(i => i.Id == oldData.NumberOfChair) ?? new Category();
+                                        var numberOfChair_new = cache.GetCategories(CategoryType.NumberOfChair).FirstOrDefault(i => i.Id == newData.NumberOfChair) ?? new Category();
                                         <tr>
-                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
                                             <td class="text-left">@item.LogDate.ToDateTimeString()</td>
                                             <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
                                             <td class="text-left">@item.Action.GetEnumDesRes()</td>
                                             <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
                                             <td class="text-left">NumberOfChair</td>
-                                            <td class="text-left">@(oldData != null ? oldData.NumberOfChair.ToString() : string.Empty)</td>
-                                            <td class="text-left">@(newData != null ? newData.NumberOfChair.ToString() : string.Empty)</td>
+                                            <td class="text-left">@numberOfChair_old.Name.ToStr()</td>
+                                            <td class="text-left">@numberOfChair_new.Name.ToStr()</td>
                                         </tr>
                                     }
                                     if ((oldData != null ? oldData.DentistName : string.Empty) != (newData != null ? newData.DentistName : string.Empty))
@@ -227,15 +266,16 @@
                                     if ((oldData != null ? oldData.Age.ToString() : string.Empty) != (newData != null ? newData.Age.ToString() : string.Empty))
                                     {
                                         countrow += 1;
+                                        var AgeDentist_old = cache.GetCategories(CategoryType.Age).FirstOrDefault(i => i.Id == oldData.Age) ?? new Category();
+                                        var AgeDentist_new = cache.GetCategories(CategoryType.Age).FirstOrDefault(i => i.Id == newData.Age) ?? new Category();
                                         <tr>
-                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
                                             <td class="text-left">@item.LogDate.ToDateTimeString()</td>
                                             <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
                                             <td class="text-left">@item.Action.GetEnumDesRes()</td>
                                             <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
-                                            <td class="text-left">ClinicPhone</td>
-                                            <td class="text-left">@(oldData != null ? oldData.Age.ToString() : string.Empty)</td>
-                                            <td class="text-left">@(newData != null ? newData.Age.ToString() : string.Empty)</td>
+                                            <td class="text-left">Age of Dentist</td>
+                                            <td class="text-left">@(oldData != null ? AgeDentist_old.Name.ToStr() : string.Empty)</td>
+                                            <td class="text-left">@(newData != null ? AgeDentist_new.Name.ToStr() : string.Empty)</td>
                                         </tr>
                                     }
                                     if ((oldData != null ? oldData.DentistPhone : string.Empty) != (newData != null ? newData.DentistPhone : string.Empty))
@@ -269,15 +309,16 @@
                                     if ((oldData != null ? oldData.Specialization.ToString() : string.Empty) != (newData != null ? newData.Specialization.ToString() : string.Empty))
                                     {
                                         countrow += 1;
+                                        var Specialization_old = cache.GetCategories(CategoryType.Specialization).FirstOrDefault(i => i.Id == oldData.Specialization) ?? new Category();
+                                        var Specialization_new = cache.GetCategories(CategoryType.Specialization).FirstOrDefault(i => i.Id == newData.Specialization) ?? new Category();
                                         <tr>
-                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
                                             <td class="text-left">@item.LogDate.ToDateTimeString()</td>
                                             <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
                                             <td class="text-left">@item.Action.GetEnumDesRes()</td>
                                             <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
                                             <td class="text-left">Specialization</td>
-                                            <td class="text-left">@(oldData != null ? oldData.Specialization.ToString() : string.Empty)</td>
-                                            <td class="text-left">@(newData != null ? newData.Specialization.ToString() : string.Empty)</td>
+                                            <td class="text-left">@Specialization_old.Name.ToStr()</td>
+                                            <td class="text-left">@Specialization_new.Name.ToStr()</td>
                                         </tr>
                                     }
                                     if ((oldData != null ? oldData.MaritalStatus.ToString() : string.Empty) != (newData != null ? newData.MaritalStatus.ToString() : string.Empty))
@@ -322,20 +363,44 @@
                                             <td class="text-left">@(newData != null ? newData.JoinedDate.ToString() : string.Empty)</td>
                                         </tr>
                                     }
-                                    if ((oldData != null ? oldData.InterestingDevice : string.Empty) != (newData != null ? newData.InterestingDevice : string.Empty))
+                                    if ((oldData != null ? oldData.UsingDevices : string.Empty) != (newData != null ? newData.UsingDevices : string.Empty))
                                     {
                                         countrow += 1;
+
+                                        oldData.UsingDevices = oldData.UsingDevices.ToStr();
+                                        var usingDeviceIds = oldData.UsingDevices.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                        var deviceNames = new List<string>();
+                                        usingDeviceIds.ForEach(id =>
+                                        {
+                                            var cate = cates.FirstOrDefault(i => i.Id == id.ToGuid());
+                                            if (cate != null)
+                                            {
+                                                deviceNames.Add(cate.Name);
+                                            }
+                                        });
+
+                                        newData.UsingDevices = newData.UsingDevices.ToStr();
+                                        var usingDeviceIds_new = newData.UsingDevices.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                                        var deviceNames_new = new List<string>();
+                                        usingDeviceIds_new.ForEach(id =>
+                                        {
+                                            var cate = cates.FirstOrDefault(i => i.Id == id.ToGuid());
+                                            if (cate != null)
+                                            {
+                                                deviceNames_new.Add(cate.Name);
+                                            }
+                                        });
                                         <tr>
-                                            @Html.Partial("BaseView/Common/_cbxDeleteRow", item.Id)
                                             <td class="text-left">@item.LogDate.ToDateTimeString()</td>
                                             <td class="text-left">@(beUser != null ? beUser.FullName.ToString() : string.Empty)</td>
                                             <td class="text-left">@item.Action.GetEnumDesRes()</td>
                                             <td class="text-left">@(oldData != null ? oldData.ClinicId.ToString() : string.Empty)</td>
-                                            <td class="text-left">InterestingDevice</td>
-                                            <td class="text-left">@(oldData != null ? oldData.InterestingDevice : string.Empty)</td>
-                                            <td class="text-left">@(newData != null ? newData.InterestingDevice : string.Empty)</td>
+                                            <td class="text-left">UsingDevices</td>
+                                            <td class="text-left">@string.Join(", ", deviceNames)</td>
+                                            <td class="text-left">@string.Join(", ", deviceNames_new)</td>
                                         </tr>
-                                    } if ((oldData != null ? oldData.LeadTime.ToString() : string.Empty) != (newData != null ? newData.LeadTime.ToString() : string.Empty))
+                                    }
+                                    if ((oldData != null ? oldData.LeadTime.ToString() : string.Empty) != (newData != null ? newData.LeadTime.ToString() : string.Empty))
                                     {
                                         countrow += 1;
                                         <tr>
@@ -659,10 +724,12 @@
                                             <td class="text-left">SaturdayEnd</td>
                                             <td class="text-left">@(oldData != null ? oldData.Remark : string.Empty)</td>
                                             <td class="text-left">@(newData != null ? newData.Remark : string.Empty)</td>
+                                            <td>@Model.Results.Count</td>
                                         </tr>
                                     }
-                                }
-                                Model.Pagination.SetValue("TotalRecords", countrow);
+                                }                                            
+                               ;
+                              //  Model.Pagination.SetValue("PageSize", 20);
                             }
                             else
                             {

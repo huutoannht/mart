@@ -133,6 +133,15 @@ namespace Share.Messages.BeScreens.ProductRes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date is required.
+        /// </summary>
+        public static string DateCustomerServiceRequired {
+            get {
+                return ResourceManager.GetString("DateCustomerServiceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discount.
         /// </summary>
         public static string Discount {
@@ -165,6 +174,78 @@ namespace Share.Messages.BeScreens.ProductRes {
         public static string EditProduct {
             get {
                 return ResourceManager.GetString("EditProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Row {0}) Category code is required.
+        /// </summary>
+        public static string ExcelCategoryCodeRequired {
+            get {
+                return ResourceManager.GetString("ExcelCategoryCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Row {0}) Cost is required.
+        /// </summary>
+        public static string ExcelCostRequired {
+            get {
+                return ResourceManager.GetString("ExcelCostRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Row {0}) Product code &quot;{1}&quot; is already existed.
+        /// </summary>
+        public static string ExcelProductCodeExisted {
+            get {
+                return ResourceManager.GetString("ExcelProductCodeExisted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Row {0}) Product code is required.
+        /// </summary>
+        public static string ExcelProductCodeRequired {
+            get {
+                return ResourceManager.GetString("ExcelProductCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Row {0}) Product name is required.
+        /// </summary>
+        public static string ExcelProductNameRequired {
+            get {
+                return ResourceManager.GetString("ExcelProductNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Row {0}) Status is required.
+        /// </summary>
+        public static string ExcelStatusRequired {
+            get {
+                return ResourceManager.GetString("ExcelStatusRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Row {0}) UOM code is required.
+        /// </summary>
+        public static string ExcelUOMRequired {
+            get {
+                return ResourceManager.GetString("ExcelUOMRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Row {0}) Vat is required.
+        /// </summary>
+        public static string ExcelVatRequired {
+            get {
+                return ResourceManager.GetString("ExcelVatRequired", resourceCulture);
             }
         }
         

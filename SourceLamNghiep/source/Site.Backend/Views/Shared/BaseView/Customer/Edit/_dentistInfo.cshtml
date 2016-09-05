@@ -60,6 +60,7 @@
             @Html.DropDownListFor(m => m.LeadTime, cache.GetCategories(CategoryType.LeadTime).ToSelectList(), BackendMessage.Select, new {@class = "form-control"})
         </div>
     }
+    @Html.HiddenFor(m => m.LeadTime)
 </div>
 
 @if (Model.CustomerType == CustomerType.Current || Model.CustomerType == CustomerType.Prospects)

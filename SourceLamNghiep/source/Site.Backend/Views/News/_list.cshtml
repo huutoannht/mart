@@ -43,11 +43,11 @@
                         <td>@item.Status.GetEnumDesRes()</td>
                         <td>
                             <div class="btn-group btn-group-xs">
-                                @if (sessionHelper.CanUpdate(BePage.Roles))
+                                @if (sessionHelper.CanUpdate(BePage.News))
                                 {
                                     <button onclick="baiViet.editArtice('@item.Id')" class="btn btn-blue">@BackendMessage.Edit</button>
                                 }
-                                @if (sessionHelper.CanDelete(BePage.Roles))
+                                @if (sessionHelper.CanDelete(BePage.News))
                                 {
                                     <button onclick="baiViet.deleteArtice('@item.Id')" class="btn btn-red">@BackendMessage.Delete</button>
                                 }

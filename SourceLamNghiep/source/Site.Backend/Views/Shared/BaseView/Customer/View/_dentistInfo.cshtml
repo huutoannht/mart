@@ -7,7 +7,7 @@
     var products = cache.GetProducts();
 }
 <div class="form-group">
-    @Html.CustomLabelFor(m => m.DentistName, new { @class = "col-md-2 control-label" })
+    @Html.CustomLabelFor(m => m.DentistName, new { @class = "col-md-2" })
     <div class="col-md-4">
         @Html.Label(Model.DentistName.ToStr(), new { @class = "control-label" })
     </div>
@@ -23,7 +23,7 @@
     </div>
     @Html.CustomLabelFor(m => m.DentistEmail, new { @class = "col-md-2 control-label" })
     <div class="col-md-4">
-        @Html.Label("", Model.DentistEmail)
+        @Html.Label("", Model.DentistEmail, new { @class = "control-label" })
     </div>
 </div>
 <div class="form-group">
@@ -92,7 +92,7 @@
                         }
                     });
                 }
-                @Html.Raw(string.Join("<br/>", listDeviceNames))
+                @Html.Raw(string.Join(", ", listDeviceNames))
             </label>
         </div>
     </div>

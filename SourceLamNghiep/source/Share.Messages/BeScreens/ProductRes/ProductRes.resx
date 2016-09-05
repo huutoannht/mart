@@ -141,6 +141,9 @@
   <data name="Date" xml:space="preserve">
     <value>Update date</value>
   </data>
+  <data name="DateCustomerServiceRequired" xml:space="preserve">
+    <value>Date is required</value>
+  </data>
   <data name="Discount" xml:space="preserve">
     <value>Discount</value>
   </data>
@@ -152,6 +155,30 @@
   </data>
   <data name="EditProduct" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="ExcelCategoryCodeRequired" xml:space="preserve">
+    <value>(Row {0}) Category code is required</value>
+  </data>
+  <data name="ExcelCostRequired" xml:space="preserve">
+    <value>(Row {0}) Cost is required</value>
+  </data>
+  <data name="ExcelProductCodeExisted" xml:space="preserve">
+    <value>(Row {0}) Product code "{1}" is already existed</value>
+  </data>
+  <data name="ExcelProductCodeRequired" xml:space="preserve">
+    <value>(Row {0}) Product code is required</value>
+  </data>
+  <data name="ExcelProductNameRequired" xml:space="preserve">
+    <value>(Row {0}) Product name is required</value>
+  </data>
+  <data name="ExcelStatusRequired" xml:space="preserve">
+    <value>(Row {0}) Status is required</value>
+  </data>
+  <data name="ExcelUOMRequired" xml:space="preserve">
+    <value>(Row {0}) UOM code is required</value>
+  </data>
+  <data name="ExcelVatRequired" xml:space="preserve">
+    <value>(Row {0}) Vat is required</value>
   </data>
   <data name="FullDescription" xml:space="preserve">
     <value>Full description</value>

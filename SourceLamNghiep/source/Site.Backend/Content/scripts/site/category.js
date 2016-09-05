@@ -122,7 +122,6 @@
     };
 
     category.saveClick = function () {
-
         if (!$("#formInfo").valid()) return;
 
         var haveImage = false;
@@ -159,6 +158,8 @@
     };
 
     category.save = function (imagePath) {
+        initICheck($("#divList"));
+
         var model = $("#formInfo").serializeFormJSON();
 
         if (typeof imagePath == "string") {
@@ -189,6 +190,8 @@
             if (res.success) {
                 category.hideEdit();
                 $("#divList").html(res.html);
+                initICheck($("#divList"));
+                initCheckboxDeleteInList();
                 category.initTreeView();
                 notify.success(res.message);
 

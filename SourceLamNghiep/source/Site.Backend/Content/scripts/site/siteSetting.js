@@ -38,7 +38,7 @@
         });
     };
 
-    siteSetting.addNewClick = function() {
+    siteSetting.addNewClick = function () {
         post(settings.addNewUrl, {
             settingType: $("#formFilter #SettingType").val()
         }, function(res) {

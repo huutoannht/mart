@@ -65,5 +65,11 @@ namespace Service.Contract
         [OperationContract]
         [FaultContract(typeof(ErrorManager))]
         BaseResponse UpdateImageInfo(ProductImageUpdateInfo info);
+
+        [OperationContract]
+        [FaultContract(typeof(ErrorManager))]
+        BaseResponse SaveProducts(List<Product> listProduct);
+
+
     }
 }

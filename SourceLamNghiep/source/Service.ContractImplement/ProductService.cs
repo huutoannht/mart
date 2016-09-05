@@ -8,6 +8,8 @@ using Db.Interfaces;
 using Service.Contract;
 using Share.Helper;
 using Share.Helper.Cache;
+using Share.Messages.ServiceMessage;
+using Share.Messages.BeScreens.ProductRes;
 
 namespace Service.ContractImplement
 {
@@ -199,7 +201,7 @@ namespace Service.ContractImplement
         {
             return Execute(_repository, r =>
             {
-                
+
                 var res = new BaseResponse();
 
                 var image = r.GetImage(id);
@@ -236,6 +238,38 @@ namespace Service.ContractImplement
                 var res = r.UpdateImageInfo(info);
 
                 _cacheHelper.ClearGetProducts();
+
+                return res;
+            });
+        }
+
+
+        public BaseResponse SaveProducts(List<Product> products)
+        {
+            return Execute(_repository, r =>
+            {
+                var res = new BaseResponse();
+
+                var rowIndex = 2;
+                products.ForEach(product =>
+                {
+                    if (r.ProductCodeExists(product.ProductCode))
+                    {
+                        res.Messages.Add(
+                            string.Format(ProductRes.ExcelProductCodeExisted,
+                            rowIndex,
+                            product.ProductCode));
+                    }
+                    ++rowIndex;
+                });
+
+                if (res.Messages.Any())
+                {
+                    res.Success = false;
+                    return res;
+                }
+
+                res = r.SaveProducts(products);
 
                 return res;
             });

@@ -305,23 +305,18 @@
                         @if (sessionHelper.CanView(BePage.CustomerLog))
                         {
                             <li>
-                                <a href="@Url.Action("Index", "CustomerLog")">
+                                <a onclick="javascript:clickmenu('@Url.Action("Index", "CustomerLog")')" href="#">
                                     <span class="submenu-title">@Menu.Log</span>
                                 </a>
                             </li>
                         }
 
-                        <li>
-                            <a href="@Url.Action("Index", "UnderConstruction")">
-                                <span class="submenu-title">@Menu.CustomerService</span>
-                            </a>
-                        </li>
+                       
                     </ul>
                 </li>
             }
 
-            <li class="@Html.IsMenuSelected("UnderConstruction", "Sales") 
-            ">
+            <li class="@Html.IsMenuSelected("UnderConstruction", "Sales")">
                 <a href="#"><i class="fa fa-user fa-fw">
                     <div class="icon-bg bg-pink"></div>
                 </i><span class="menu-title">@Menu.Sales</span><span class="fa arrow"></span></a>
@@ -377,8 +372,7 @@
             </li>
 
 
-            <li class="@Html.IsMenuSelected("UnderConstruction", "Cash") 
-            ">
+            <li class="@Html.IsMenuSelected("UnderConstruction", "Cash")">
                 <a href="#"><i class="fa fa-user fa-fw">
                     <div class="icon-bg bg-pink"></div>
                 </i><span class="menu-title">@Menu.Cash</span><span class="fa arrow"></span></a>
@@ -424,3 +418,9 @@
         </ul>
     </div>
 </nav>
+<script>
+    function clickmenu(url) {
+        document.location.href = url;
+    }
+
+</script>

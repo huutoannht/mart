@@ -50,14 +50,17 @@
                                                 </td>
                                                 <td class="vamiddle text-center">
                                                     <div class="checkbox-list">
-                                                        <label>
-                                                            <input onclick="nhomSanPham.updateImageVisible(this, '@item.Id')" type="checkbox" value="true" @(item.Visible ? "checked=\"checked\"" : string.Empty) />
-                                                        </label>
+                                                        @if (sessionHelper.CanUpdate(BePage.NhomSanPham))
+                                                        {
+                                                            <label>
+                                                                <input onclick="nhomSanPham.updateImageVisible(this, '@item.Id')" type="checkbox" value="true" @(item.Visible ? "checked=\"checked\"" : string.Empty) />
+                                                            </label>
+                                                        }
                                                     </div>
                                                 </td>
                                                 <td class="vamiddle text-center">
                                                     <div class="btn-group btn-group-xs">
-                                                        @if (sessionHelper.CanDelete(BePage.Roles))
+                                                        @if (sessionHelper.CanDelete(BePage.NhomSanPham))
                                                         {
                                                             <button onclick="nhomSanPham.deleteImage('@item.Id', '@Model.Id') " class="btn btn-red">@BackendMessage.Delete</button>
                                                         }

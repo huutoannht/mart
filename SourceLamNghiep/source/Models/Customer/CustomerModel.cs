@@ -13,6 +13,8 @@ namespace Models.Customer
         {
             Visits = new List<CustomerVisitModel>();
             VisitIndex = new CustomerVisitIndexModel();
+            CustomerServices = new List<CustomerServiceModel>();
+            CustomerServiceIndex = new CustomerServiceIndexModel();
             DataLogIndex = new DataLogIndexModel();
         }
 
@@ -157,11 +159,17 @@ namespace Models.Customer
 
         public List<CustomerVisitModel> Visits { get; set; }
 
+        public List<CustomerServiceModel> CustomerServices { get; set; }
+
         public CustomerVisitIndexModel VisitIndex { get; set; }
+
+        public CustomerServiceIndexModel CustomerServiceIndex { get; set; }
 
         public DataLogIndexModel DataLogIndex { get; set; }
 
         public string VisitJsonString { get; set; }
+
+        public string CustomerServiceJsonString { get; set; }
 
         public bool View { get; set; }
 

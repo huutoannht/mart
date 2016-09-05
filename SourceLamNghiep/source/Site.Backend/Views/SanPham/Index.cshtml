@@ -1,8 +1,9 @@
 ﻿@using Share.Messages.BeScreens.ProductRes
 @model Models.Product.ProductIndexModel
 @{
-    ViewBag.Title = ProductRes.PageTitle; 
+    ViewBag.Title = ProductRes.PageTitle;
     var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
+    var controller = ViewContext.RouteData.Values["controller"].ToStr();
 }
 
 <div id="divNotifyTop">
@@ -18,14 +19,46 @@
                 @ProductRes.ProductList
             </div>
             <div class="panel-body grid-table">
-                <div class="mbm">
-                    @if (sessionHelper.CanAdd(BePage.Roles))
-                    {
-                        <button class="btn btn-info" type="button" onclick="sanPham.editProduct(null, null)">
-                            <span class="glyphicon glyphicon-plus"></span>
-                            @BackendMessage.AddNew
+                <div class="row mbm">
+                    <div class="col-md-4">
+                        @if (sessionHelper.CanAdd(BePage.SanPham))
+                        {
+                            <button class="btn btn-info" type="button" onclick="sanPham.editProduct(null, null)">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                @BackendMessage.AddNew
+                            </button>
+                        }
+                    </div>
+                    <div class="col-md-8">
+                        @if (sessionHelper.CanExport(BePage.SanPham))
+                        {
+                            <button type="button" class="btn btn-warning pull-right ml3" onclick="sanPham.export()">
+                                <span class="fa fa-cloud-download"></span>
+                                @BackendMessage.ExportExcel
+                            </button>
+                        }
+
+                        <button type="button" class="btn btn-pink pull-right ml3" onclick="sanPham.importClick()">
+                            <span class="fa fa-cloud-upload"></span>
+                            @BackendMessage.ImportExcel
                         </button>
-                    }
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default">@BackendMessage.FileTemplates</button>
+                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul role="menu" class="dropdown-menu">
+                                <li>
+                                    <a href="@Url.Content("~/Content/FileTemplate/Products.csv")">@BackendMessage.CsvFileTemplate</a>
+
+                                </li>
+                                <li>
+                                    <a href="@Url.Content("~/Content/FileTemplate/Products.xls")">@BackendMessage.ExcelFileTemplate</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div id="divList">
                     @Html.Partial("_list")
@@ -36,7 +69,9 @@
 </div>
 
 <div id="divEdit"></div>
-
+<div id="divImport" class="hide">
+    @Html.Partial("BaseView/Customer/Inc/_formImport")
+</div>
 <div id="divModal" class="modal fade" tabindex="-1" role="dialog" style="display: none"></div>
 
 @section Head
@@ -73,7 +108,10 @@
                 discountMustSmaller100Msg: "@Html.Raw(ProductRes.DiscountMustSmaller100)",
                 quantityIsExistedMsg: "@Html.Raw(ProductRes.QuantityIsExisted)",
                 updateImageVisibleUrl: "@Url.Action("UpdateImageVisible")",
-                imageIsRequiredMsg: "@Html.Raw(ProductRes.ImageIsRequired)"
+                imageIsRequiredMsg: "@Html.Raw(ProductRes.ImageIsRequired)",
+                importProducsUrl: "@Url.Action("ImportProducts", controller)",
+                getImportFormUrl: "@Url.Action("GetImportForm", controller)",
+                getExportFormUrl: "@Url.Action("ExportProducts", controller)",
             });
         });
     </script>

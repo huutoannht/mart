@@ -456,10 +456,12 @@
     <EmbeddedResource Include="ServiceMessage\ServiceMessage.vi-VN.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ServiceMessage.vi-VN.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ServiceMessage\ServiceMessage.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ServiceMessage.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

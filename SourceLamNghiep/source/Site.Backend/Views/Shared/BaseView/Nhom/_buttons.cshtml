@@ -2,7 +2,7 @@
 @{
     var sessionHelper = ObjectFactory.GetInstance<ISessionHelper>();
 }
-@if (sessionHelper.CanAdd(BePage.Roles))
+@if (sessionHelper.CanAdd(BePage.NhomSanPham))
 {
     <button class="btn btn-info" type="button" onclick="category.addNewClick(null)">
         <span class="glyphicon glyphicon-plus"></span>

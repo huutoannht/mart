@@ -18,7 +18,7 @@
     @Html.LabelFor(m => m.UsingDevices, new { @class = "col-md-2 control-label" })
     <div class="col-md-4">
         <label class="control-label">
-            @Html.Raw(string.Join("<br/>", deviceNames))
+            @Html.Raw(string.Join(", ", deviceNames))
         </label>
     </div>
 </div>
