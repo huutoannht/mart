@@ -22,6 +22,10 @@ using Site.Backend.Library.UI;
 using WebGrease.Css.Extensions;
 using FindRequest = Data.DataContract.CustomerDC.FindRequest;
 using SaveRequest = Data.DataContract.CustomerDC.SaveRequest;
+using Share.Helper.Models;
+using StructureMap;
+using Share.Helper.Cache;
+using Data.DataContract.CategoryDC;
 
 namespace Site.Backend.Controllers
 {
@@ -34,7 +38,8 @@ namespace Site.Backend.Controllers
         protected string AddNewTitle { get; set; }
         protected string EditTitle { get; set; }
 
-        public CustomerBaseController(BePage bePage, CustomerType customerType) : base(bePage)
+        public CustomerBaseController(BePage bePage, CustomerType customerType)
+            : base(bePage)
         {
             CustomerType = customerType;
         }
@@ -250,6 +255,7 @@ namespace Site.Backend.Controllers
 
             var jsonSerializer = new JavaScriptSerializer();
             model.Visits = jsonSerializer.Deserialize<List<CustomerVisitModel>>(model.VisitJsonString);
+            model.CustomerServices = jsonSerializer.Deserialize<List<CustomerServiceModel>>(model.CustomerServiceJsonString);
 
             #endregion
 
@@ -287,12 +293,14 @@ namespace Site.Backend.Controllers
 
             var entity = model.Map<CustomerModel, Customer>();
             var oldData = new Customer();
-
+            entity.UpdatedDate = DateTime.UtcNow;
+            entity.UpdatedBy = CurrentUserId;
             if (entity.IsNew)
             {
                 entity.InitId();
                 entity.CreatedDate = DateTime.UtcNow;
                 entity.CreatedBy = CurrentUserId;
+               
             }
             else
             {
@@ -307,7 +315,7 @@ namespace Site.Backend.Controllers
             }
 
             entity.Visits.ForEach(i => i.CustomerId = entity.Id);
-
+            entity.CustomerServices.ForEach(i => i.CustomerId = entity.Id);
             var response = ServiceHelper.Customer.ExecuteDispose(s => s.SaveCustomer(new SaveRequest
             {
                 Entity = entity
@@ -404,7 +412,7 @@ namespace Site.Backend.Controllers
         [Delete]
         public ActionResult DeleteCustomers(string ids)
         {
-            var arrId = ids.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).Select(i=>i.ToGuid()).ToList();
+            var arrId = ids.ToStr().Split(new[] { "#" }, StringSplitOptions.RemoveEmptyEntries).Select(i => i.ToGuid()).ToList();
             if (!arrId.Any())
             {
                 return JsonObject(false, BackendMessage.DataInvalid);
@@ -556,6 +564,14 @@ namespace Site.Backend.Controllers
                 html = PartialViewToString("BaseView/Customer/Edit/_visit", model.VisitIndex)
             });
         }
+        public ActionResult GetViewVisits(CustomerModel model)
+        {
+            PopulateVisitIndexModel(model);
+            return JsonObject(true, string.Empty, new
+            {
+                html = PartialViewToString("BaseView/Customer/View/_visit", model.VisitIndex)
+            });
+        }
 
         public ActionResult EditVisit(CustomerModel model, Guid? id)
         {
@@ -563,7 +579,7 @@ namespace Site.Backend.Controllers
             var visitModel = new CustomerVisitModel
             {
                 BeUserId = CurrentUserId,
-                DateVisit=DateTime.Today
+                DateVisit = DateTime.Today
 
             };
 
@@ -604,11 +620,9 @@ namespace Site.Backend.Controllers
             {
                 BeUserId = CurrentUserId,
                 DateCS = DateTime.Today
-
             };
 
             customerServiceModel.InitId();
-
             if (id.HasValue)
             {
                 customerServiceModel = model.CustomerServices.FirstOrDefault(i => i.Id == id.Value);
@@ -620,7 +634,7 @@ namespace Site.Backend.Controllers
 
             return JsonObject(true, string.Empty, new
             {
-                html = PartialViewToString("BaseView/Customer/Edit/_editVisit", customerServiceModel)
+                html = PartialViewToString("BaseView/Customer/Edit/_editCustomerService", customerServiceModel)
             });
         }
 
@@ -916,14 +930,14 @@ namespace Site.Backend.Controllers
                 file.SaveAs(localFilePath);
 
                 var table = LoadExcelFile(localFilePath);
-                
+
                 if (table == null || table.Rows.Count == 0)
                 {
                     DeleteFile(localFilePath);
                     return JsonObject(false, BackendMessage.ThereIsNoDataRows);
                 }
 
-                if (table.Columns.Count != 7)
+                if (table.Columns.Count != 22)
                 {
                     DeleteFile(localFilePath);
                     return JsonObject(false, BackendMessage.ThereIsNotEnoughColumns);
@@ -1008,10 +1022,25 @@ namespace Site.Backend.Controllers
             if (!string.Equals(table.Columns[0].ColumnName, "ClinicId", StringComparison.CurrentCultureIgnoreCase)) return false;
             if (!string.Equals(table.Columns[1].ColumnName, "ClinicName", StringComparison.CurrentCultureIgnoreCase)) return false;
             if (!string.Equals(table.Columns[2].ColumnName, "ClinicEmail", StringComparison.CurrentCultureIgnoreCase)) return false;
-            if (!string.Equals(table.Columns[3].ColumnName, "ClinicPhone", StringComparison.CurrentCultureIgnoreCase)) return false;
-            if (!string.Equals(table.Columns[4].ColumnName, "DentistName", StringComparison.CurrentCultureIgnoreCase)) return false;
-            if (!string.Equals(table.Columns[5].ColumnName, "DentistEmail", StringComparison.CurrentCultureIgnoreCase)) return false;
-            if (!string.Equals(table.Columns[6].ColumnName, "DentistPhone", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[3].ColumnName, "website", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[4].ColumnName, "Clinic phone", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[5].ColumnName, "Address", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[6].ColumnName, "City/Province", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[7].ColumnName, "District", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[8].ColumnName, "Number of dentist", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[9].ColumnName, "Number of staff", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[10].ColumnName, "Number of chair", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[11].ColumnName, "Using RC", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[12].ColumnName, "Using device", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[13].ColumnName, "Dentist name", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[14].ColumnName, "Gender", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[15].ColumnName, "Dentist Phone", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[16].ColumnName, "Dentist Email", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[17].ColumnName, "Age", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[18].ColumnName, "Specialization", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[19].ColumnName, "Marital status", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[20].ColumnName, "Assign to", StringComparison.CurrentCultureIgnoreCase)) return false;
+            if (!string.Equals(table.Columns[21].ColumnName, "Remark", StringComparison.CurrentCultureIgnoreCase)) return false;
 
             return true;
         }
@@ -1075,7 +1104,7 @@ namespace Site.Backend.Controllers
             foreach (DataRow row in table.Rows)
             {
                 var clinicEmail = row[2].ToStr();
-                var dentistEmail = row[5].ToStr();
+                var dentistEmail = row[16].ToStr();
 
                 if (!string.IsNullOrWhiteSpace(clinicEmail) && !std.IsEmail(clinicEmail.Trim()))
                 {
@@ -1092,22 +1121,107 @@ namespace Site.Backend.Controllers
 
             return list;
         }
-
+        //private string GetIdCategories(List<Category> lstCategory)
+        //{
+        //    if (lstCategory == null || lstCategory.Count==0)
+        //    {
+        //        return null;
+        //    }
+        //    string id = "#";
+        //    foreach (var item in lstCategory)
+        //    {
+        //        id = id + item.Id;
+        //    }
+        //    return id; 
+        //}
+        private string GetIdCategories(IEnumerable<Category> lstCategory)
+        {
+            if (lstCategory == null || lstCategory.Count() == 0)
+            {
+                return null;
+            }
+            string id = string.Empty;
+            foreach (var item in lstCategory)
+            {
+                id = id +"#"+ item.Id;
+            }
+            return id;
+        }
         private void PopulateSaveImportData(List<Customer> listCustomer, DataTable table)
         {
+            List<EnumModel> listCity = SiteUtils.GetVietNamProvines();
+            var cache = ObjectFactory.GetInstance<ICacheHelper>();
+            var listNumberOfDentist = cache.GetCategories(CategoryType.NumberOfDentist);
+            var listNumberOfStaff = cache.GetCategories(CategoryType.NumberOfStaff);
+            var listNumberOfChair = cache.GetCategories(CategoryType.NumberOfChair);
+            var listUsingRC = cache.GetCategories(CategoryType.UsingRC);
+            var listProducts = cache.GetCategories(CategoryType.Product);
+            var age = cache.GetCategories(CategoryType.Age);
+            var specialization = cache.GetCategories(CategoryType.Specialization);
             foreach (DataRow row in table.Rows)
             {
+                EnumModel city = listCity.Find(c => c.Name == row[6].ToStr());
+                var districts = SiteUtils.GetVietNamDistricts(city.Value).Find(d => d.Name == row[7].ToStr());
+
+                var numberOfDentist = listNumberOfDentist.Find(n => n.Name == row[8].ToStr());
+
+                var numberOfStaff = listNumberOfStaff.Find(n => n.Name == row[9].ToStr());
+
+                var numberOfChair = listNumberOfChair.Find(n => n.Name == row[10].ToStr());
+                var usingRC = listUsingRC.Find(n => n.Name == row[11].ToStr());
+                string[] arr_usingDevice = row[12].ToStr().Split(';');
+                var usingDevice = new List<Category>();
+                foreach (var itemUsingDevice in arr_usingDevice)
+                {
+                    var device = listProducts.Find(n => n.Name.Contains(itemUsingDevice.Trim()));
+                    if (device != null)
+                    {
+                        usingDevice.Add(device);
+                    }
+
+                }
+
+                var v_age = age.Find(a => a.Name == row[17].ToStr());
+                string[] arr_specialization = row[18].ToStr().Split(';');
+                var usingSpecialization = new List<Category>();
+                foreach (var itemUsingDevice in arr_specialization)
+                {
+                    var n_specialization = listProducts.Find(n => n.Name.Contains(itemUsingDevice.Trim()));
+                    if (n_specialization != null)
+                    {
+                        usingSpecialization.Add(n_specialization);
+                    }
+                }
                 var item = new Customer
                 {
                     CustomerType = CustomerType,
                     ClinicId = row[0].ToStr(),
                     ClinicName = row[1].ToStr(),
                     ClinicEmail = row[2].ToStr(),
-                    ClinicPhone = row[3].ToStr(),
-                    DentistName = row[4].ToStr(),
-                    DentistEmail = row[5].ToStr(),
-                    DentistPhone = row[6].ToStr(),
-                    CreatedDate = DateTime.UtcNow
+                    Website = row[3].ToStr(),
+                    ClinicPhone = row[4].ToStr(),
+                    Address = row[5].ToStr(),
+                    City = city == null ? (short)0 : city.Value,
+                    District = districts == null ? (short)0 : districts.Value,
+                    NumberOfDentist = numberOfDentist == null ? (Guid?)null : numberOfDentist.Id,
+                    NumberOfStaff = numberOfStaff == null ? (Guid?)null : numberOfStaff.Id,
+                    NumberOfChair = numberOfChair == null ? (Guid?)null : numberOfChair.Id,
+                    UsingRC = usingRC == null ? (Guid?)null : usingRC.Id,
+                    UsingDevices = this.GetIdCategories(usingDevice),
+                    DentistName = row[13].ToStr(),
+                    Gender = row[14].ToStr() == "Male" ? Gender.Nam : row[14].ToStr() == "Female" ? Gender.Nu : (Gender?)null,
+                    DentistPhone = row[15].ToStr(),
+                    DentistEmail = row[16].ToStr(),
+                    Age = v_age == null ? (Guid?)null : v_age.Id,
+                    Specialization = this.GetIdCategories(usingSpecialization),
+                    MaritalStatus = row[19].ToStr() == "Single" ? MaritalStatus.Single : row[19].ToStr() == "Married"
+                    ? MaritalStatus.Married : MaritalStatus.Divorced,
+                    AssignTo = row[20].ToStr(),
+                    Remark = row[21].ToStr(),
+                    CreatedBy = CurrentUserId,
+                    CreatedDate = DateTime.UtcNow,
+                    UpdatedBy = CurrentUserId,
+                    UpdatedDate = DateTime.UtcNow
                 };
 
                 item.InitId();
@@ -1115,6 +1229,8 @@ namespace Site.Backend.Controllers
                 listCustomer.Add(item);
             }
         }
+
+
 
         private DataTable LoadExcelFile(string fileName)
         {
@@ -1139,7 +1255,7 @@ namespace Site.Backend.Controllers
 
             var table = new DataTable();
 
-            const int numCol = 6;
+            const int numCol = 21;
 
             for (var i = 0; i <= numCol; ++i)
             {
@@ -1255,11 +1371,13 @@ namespace Site.Backend.Controllers
         {
             model.CustomerServices.Where(i => i.IsNew).ForEach(i => i.InitId());
             model.CustomerServiceIndex.Results = model.CustomerServices;
+            model.CustomerServiceIndex.TeamViewID = model.TeamViewID;
+            model.CustomerServiceIndex.TeamViewPass = model.TeamViewPass;
             model.CustomerServiceIndex.InitSortInfo();
 
-            if (string.IsNullOrWhiteSpace(model.VisitIndex.SortBy))
+            if (string.IsNullOrWhiteSpace(model.CustomerServiceIndex.SortBy))
             {
-                model.CustomerServiceIndex.SortBy = "DateDS";
+                model.CustomerServiceIndex.SortBy = "DateCS";
             }
 
             var pageOption = new PageOption
@@ -1268,7 +1386,7 @@ namespace Site.Backend.Controllers
                 PageNumber = model.CustomerServiceIndex.Pagination.CurrentPageIndex
             };
 
-            if (model.CustomerServiceIndex.SortBy == "DateDS")
+            if (model.CustomerServiceIndex.SortBy == "DateCS")
             {
                 if (model.CustomerServiceIndex.SortDirection.HasValue)
                 {
