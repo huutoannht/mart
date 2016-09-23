@@ -1,0 +1,7 @@
+Content			StudioList	   	StudioDetail			User			Contact
+IdContent		IdStudioList									    Name
+Text		  	IdStudioList		UserName			    Email
+ShortUrl		Name		      	IdStudioDetail		Pass			Address
+Name			  Image			      Name				      Role			Phone
+Type				Image						Content
+											
